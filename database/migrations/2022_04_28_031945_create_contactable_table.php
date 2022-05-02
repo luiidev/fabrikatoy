@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 255)->nullable();
-            $table->string('ruc', 11)->nullable();
-            $table->string('address')->nullable();
-            $table->string('website')->nullable();
+        Schema::create('contactables', function (Blueprint $table) {
+            $table->foreignId('contact_id')->constrained();
+            $table->morphs('contactable');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('contactables');
     }
 };

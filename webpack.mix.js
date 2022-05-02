@@ -1,4 +1,7 @@
 const mix = require('laravel-mix');
+const del = require('del');
+
+require('laravel-mix-copy-watched');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +14,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+del('public/*.{js,css,ico,woff,woff2,txt}');
+mix.copyDirectoryWatched('resources/js/app/dist/assets', 'public/assets', {base: 'resources/js/app/dist/assets'})
+    .copyWatched('resources/js/app/dist/*.{js,css,ico,woff,woff2,txt}', 'public')
+    .copyWatched('resources/js/app/dist/index.html', 'resources/views/app/index.blade.php');

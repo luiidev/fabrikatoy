@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\GlobalScopes;
 
 class Company extends Model
 {
-    use HasFactory;
+    use HasFactory, GlobalScopes;
 
     /**
      * The attributes that are mass assignable.
@@ -33,5 +34,10 @@ class Company extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function contacts()
+    {
+        return $this->morphToMany(Contact::class, 'contactable');
     }
 }

@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('product_provider', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255)->nullable();
-            $table->string('ruc', 11)->nullable();
-            $table->string('address')->nullable();
-            $table->string('website')->nullable();
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('provider_id')->constrained();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('product_provider');
     }
 };

@@ -29,6 +29,8 @@ class AuthController extends Controller
             ]);
         }
 
+        $user->makeHidden(['address', 'email', 'dni', 'phone', 'first_name', 'last_name']);
+
         return response()->json([
             'message' => 'Login',
             'token' => $user->createToken($request->input('device_name'))->plainTextToken,

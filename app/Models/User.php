@@ -40,6 +40,7 @@ class User extends Authenticatable
         'rol',
         'password',
         'remember_token',
+        'email_verified_at',
         'created_at',
         'updated_at',
     ];
@@ -52,4 +53,57 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The attributes that should add.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'full_name',
+        'rol_name',
+    ];
+
+    public function isSuper(): bool
+    {
+        return $this->attributes['rol'] === 3;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->attributes['rol'] === 1;
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return strtoupper($this->attributes['first_name'].' '.$this->attributes['last_name']);
+    }
+
+    public function getStateNameAttribute(): string
+    {
+        return ($this->attributes['state'] === 1)? 'Activo' : 'Inactivo';
+    }
+
+    public function getRolNameAttribute():? string
+    {
+        if ($this->attributes['rol'] === 1) {
+            return 'Super';
+        } else if ($this->attributes['rol'] === 2) {
+            return 'Admin';
+        } else if ($this->attributes['rol'] === 3) {
+            return 'User';
+        }
+
+        return null;
+    }
+
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = strtoupper($value);
+    }
+
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['last_name'] = strtoupper($value);
+    }
 }

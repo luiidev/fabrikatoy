@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +18,15 @@ use App\Http\Controllers\Api\AuthController;
 */
 
 
-Route::group(['prefix' => 'v1', 'middleware' => 'api'], function ($router) {
+Route::group(['middleware' => 'api'], function ($router) {
     $router->post('login', [AuthController::class , 'login']);
 
     $router->group(['middleware' => 'auth:sanctum'], function ($router) {
         $router->post('logout', [AuthController::class , 'logout']);
-        $router->post('me', [AuthController::class , 'me']);
+        $router->get('me', [AuthController::class , 'me']);
+
+        $router->resource('products', ProductController::class)->only(['index', 'store', 'update']);
+        $router->resource('companies', CompanyController::class)->only(['index']);
+        $router->resource('providers', ProviderController::class)->only(['index']);
     });
 });
