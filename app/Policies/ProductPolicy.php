@@ -2,7 +2,9 @@
 
 namespace App\Policies;
 
+use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Provider;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -20,9 +22,9 @@ class ProductPolicy
         return $user->company_id === $product->company_id;
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     public function update(User $user, Product $product): bool

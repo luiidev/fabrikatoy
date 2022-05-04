@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-7">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Marcas</h4>
+        <span class="btn-close-2" (click)="activeModal.dismiss()" *ngIf="isModal"></span>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Listado de marcas</p>
+
+        <div class="position-relative">
+          <spinner *ngIf="isLoadingResults"></spinner>
+
+          <search (searchTerm)="tableFilter.filter.search.emit($event)" [createButton]="true" (create)="createOrEdit()"></search>
+
+          <div class="table-responsive">
+            <table cdk-table [dataSource]="brands" class="table table-hover"
+                   matSort
+                   matSortActive="name"
+                   matSortDisableClear
+                   matSortDirection="asc"
+                   multiTemplateDataRows>
+
+              <ng-container cdkColumnDef="name">
+                <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Names</th>
+                <td cdk-cell *cdkCellDef="let brand" class="line-height-1">
+                  {{ brand.name }}
+                  <h6 class="d-block mb-0 mt-1" *ngIf="brand.company">{{ brand.company.name }}</h6>
+                </td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="state_name">
+                <th cdk-header-cell *cdkHeaderCellDef class="text-center w100">Estado</th>
+                <td cdk-cell *cdkCellDef="let brand" class="text-center">{{ brand.state_name }}</td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="actions">
+                <th cdk-header-cell *cdkHeaderCellDef class="text-center w100">Acciones</th>
+                <td cdk-cell *cdkCellDef="let brand" class="text-center">
+                  <span class="text-info pointer" (click)="createOrEdit(brand)" *ngIf="!isModal">Editar</span>
+                  <span class="text-success pointer" (click)="add(brand)" *ngIf="isModal">Agregar</span>
+                </td>
+              </ng-container>
+
+              <tr cdk-header-row *cdkHeaderRowDef="displayedColumns" class="bg-light"></tr>
+              <tr cdk-row *cdkRowDef="let product; columns: displayedColumns;" class="row-border-bottom-0"></tr>
+            </table>
+            <div class="text-center mb-2" *ngIf="brands.length === 0">No se encontraron resultados.</div>
+          </div>
+          <mat-paginator [length]="resultsLength" [pageSize]="10" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\GlobalScopes;
+use App\Models\Base\Model;
 
 class Company extends Model
 {
@@ -28,7 +28,7 @@ class Company extends Model
      */
     protected $hidden = [
         'created_at',
-        'update_at',
+        'updated_at',
     ];
 
     public function users()
@@ -36,8 +36,28 @@ class Company extends Model
         return $this->hasMany(User::class);
     }
 
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
+
     public function contacts()
     {
         return $this->morphToMany(Contact::class, 'contactable');
+    }
+
+    public function provider()
+    {
+        return $this->hasMany(Provider::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function brands()
+    {
+        return $this->hasMany(Brand::class);
     }
 }

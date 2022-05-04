@@ -66,12 +66,12 @@ class User extends Authenticatable
 
     public function isSuper(): bool
     {
-        return $this->attributes['rol'] === 3;
+        return $this->attributes['rol'] === 1;
     }
 
     public function isAdmin(): bool
     {
-        return $this->attributes['rol'] === 1;
+        return $this->attributes['rol'] === 2;
     }
 
     public function getFullNameAttribute(): string
@@ -105,5 +105,10 @@ class User extends Authenticatable
     public function setLastNameAttribute($value)
     {
         $this->attributes['last_name'] = strtoupper($value);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

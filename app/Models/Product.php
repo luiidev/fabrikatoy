@@ -3,10 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Base\Model;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Traits\GlobalScopes;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
+use App\Models\Base\Model;
 
 class Product extends Model
 {
@@ -18,6 +17,8 @@ class Product extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'company_id',
+        'brand_id',
         'code',
         'name',
         'state',
@@ -44,9 +45,36 @@ class Product extends Model
         'state_name'
     ];
 
+
+    public function getStateNameAttribute(): string
+    {
+        return $this->attributes['state'] ? 'Activo' : 'Inactivo';
+    }
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // auto-sets values on creation
+        static::creating(function ($model) {
+            if (!$model->company_id) $model->company_id = Auth::user()->company_id;
+            if (!$model->unit_id) $model->unit_id = Unit::where('company_id', Auth::user()->company_id)->first()->id;
+        });
+    }
+
     public function unit()
     {
         return $this->belongsTo(Unit::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     public function providers()
@@ -56,11 +84,6 @@ class Product extends Model
 
     public function brand()
     {
-        return $this->belongsToMany(Brand::class);
-    }
-
-    public function getStateNameAttribute(): string
-    {
-        return $this->attributes['state'] ? 'Activo' : 'Inactivo';
+        return $this->belongsTo(Brand::class);
     }
 }

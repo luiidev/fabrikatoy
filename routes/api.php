@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
@@ -28,5 +29,10 @@ Route::group(['middleware' => 'api'], function ($router) {
         $router->resource('products', ProductController::class)->only(['index', 'store', 'update']);
         $router->resource('companies', CompanyController::class)->only(['index']);
         $router->resource('providers', ProviderController::class)->only(['index']);
+        $router->resource('brands', BrandController::class)->only(['index']);
     });
+});
+
+Route::get('test', function () {
+   return request()->input('providers')->count();
 });

@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\GlobalScopes;
+use App\Models\Base\Model;
 
 class Provider extends Model
 {
@@ -29,6 +29,11 @@ class Provider extends Model
     protected $appends = [
         'state_name'
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 
     public function products()
     {

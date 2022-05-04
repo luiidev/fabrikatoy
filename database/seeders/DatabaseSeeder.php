@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Provider;
 use App\Models\Unit;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Company;
@@ -19,30 +21,58 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Company::factory()
-            ->hasContacts(1)
-            ->hasUsers(1, [
+        $companies = Company::factory()
+            ->has(
+                User::factory()
+            )
+//            ->has(
+//                Provider::factory()->count(10)
+//                    ->has(
+//                        Contact::factory()
+//                    )
+//            )
+            ->has(
+                Unit::factory()
+            )
+            ->has(
+                Brand::factory()->count(10)
+            )
+            ->count(2)
+            ->create();
+
+        foreach ($companies as $company) {
+            Provider::factory()->count(10)
+                ->for($company)
+                ->has(
+                    Contact::factory()
+                )
+                ->has(
+//                    dd($company->brands->get(array_rand($company->brands->toArray())))
+                    Product::factory()
+                        ->count(10)
+                        ->for($company->brands->get(array_rand($company->brands->toArray())))
+                        ->for($company)
+                        ->for($company->units->first())
+                )
+                ->create();
+//            foreach ($company->brands as $brand) {
+//
+//            }
+        }
+
+        Company::find(1)
+            ->update([
+                'name' => 'Fabrika Toy',
+                'ruc' => '20607395552',
+            ]);
+
+        User::find(1)
+            ->update([
                 'nick' => 'admin',
                 'password' => bcrypt('password'),
                 'first_name' => 'Fabrika Toy',
                 'last_name' => 'Administrador',
                 'rol' => 1
-            ])
-            ->create([
-                'name' => 'Fabrika Toy',
-                'ruc' => '20607395552',
             ]);
-
-        Unit::query()->insert([
-            'company_id' => 1,
-            'name' => 'UND',
-            'conversion_factor' => 1,
-        ]);
-
-        Provider::factory()
-            ->hasProducts(10)
-            ->hasContacts(1)
-            ->count(10)
-            ->create();
     }
 }

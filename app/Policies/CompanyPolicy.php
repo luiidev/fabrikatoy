@@ -21,9 +21,9 @@ class CompanyPolicy
         return false;
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     public function update(User $user, Company $company): bool

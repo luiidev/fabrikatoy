@@ -19,14 +19,13 @@ class ProductFactory extends Factory
         $price = $this->faker->randomFloat(2, 9, 80);
 
         return [
-            'company_id' => 1,
             'code' => $this->faker->isbn10(),
             'name' => $this->faker->sentence(3),
             'quantity' => $this->faker->randomNumber(4),
             'unit_id' => 1,
-            'unit_price' => $price,
+            'price' => $price,
             'higher_price' => $price * 0.8,
-            'average_purchase_price' => $price * 0.5,
+            'average_price' => $price * 0.5,
         ];
     }
 }

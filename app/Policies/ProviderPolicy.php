@@ -20,9 +20,9 @@ class ProviderPolicy
         return $user->company_id === $provider->company_id;
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     public function update(User $user, Provider $provider): bool

@@ -17,7 +17,6 @@ class ProviderFactory extends Factory
     public function definition()
     {
         return [
-            'company_id'  => 1,
             'name'  => $this->faker->company(),
             'ruc'   => $this->faker->numerify('20#########'),
             'address' => $this->faker->address()

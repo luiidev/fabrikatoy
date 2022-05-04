@@ -9,6 +9,11 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Company::class);
+    }
+
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
         $products = Company::query()

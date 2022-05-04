@@ -13,7 +13,7 @@ trait GlobalScopes {
             return $user->isSuper() ? $query : $query->where('id', $user->company_id);
         }
 
-        return $user->isSuper() ? $query : $query->where('company_id', $user->company_id);
+        return $user->isSuper() ? $query->with('company') : $query->where('company_id', $user->company_id);
     }
 
     public function scopeWhereLike($query, $column, $value)
@@ -30,7 +30,7 @@ trait GlobalScopes {
         });
     }
 
-    public function scopeApiPaginate($query, $perPage = 10, $columns = ['*'], $pageName = 'page', $page = null): array
+    public function scopeApiPaginate($query, $perPage = 10, $columns = ['*'], $pageName = 'page', $page = null)
     {
         $request = request();
 

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginationRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use Illuminate\Http\Request;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -19,7 +18,7 @@ class ProductController extends Controller
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
         $products = Product::query()
-            ->with(['unit', 'providers'])
+            ->with(['unit', 'providers', 'brand'])
             ->own()
             ->whereLike('name', $request->input('search'))
             ->apiPaginate();
@@ -29,7 +28,7 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request): \Illuminate\Http\JsonResponse
     {
-        $product = Product::create($request->only(['company_id', 'code', 'name', 'state']));
+        $product = Product::create($request->only(['company_id', 'brand_id', 'code', 'name', 'state']));
 
         return response()->json(['message' => 'Se registro el producto.', 'data' => $product]);
     }
@@ -41,7 +40,8 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, Product $product): \Illuminate\Http\JsonResponse
     {
-        $product->update($request->only(['company_id', 'code', 'name', 'state']));
+        $product->update($request->only(['company_id', 'brand_id', 'code', 'name', 'state']));
+        $product->providers()->sync($request->input('providers'));
 
         return response()->json(['message' => 'Se actualizo el producto.', 'data' => $product]);
     }
