@@ -9,5 +9,5 @@ export interface User {
     address: string;
     phone: string;
     email: string;
-    email_verified_at: string;
+    role_name: string;
 }

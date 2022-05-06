@@ -3,31 +3,23 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PaginationRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    public function authorize(): bool
     {
-        return true;
+        return Auth::check() && Auth::user()->isAdmin();
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'search' => 'nullable|string|max:6',
+            'search' => 'nullable|string|max:255',
             'sort' => 'nullable|string|in:name,quantity',
             'direction' => 'nullable|string|in:asc,desc',
             'page' => 'nullable|numeric',
+            'per_page' => 'nullable|numeric|in:5,10,25',
         ];
     }
 }

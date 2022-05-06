@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
         address: '',
         phone: '',
         email: '',
-        email_verified_at: ''
+        role_name: ''
     };
 
     constructor(private profileService: ProfileService) { }

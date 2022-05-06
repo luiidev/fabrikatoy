@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, mergeMap, pipe, Subject, tap, zip } from 'rxjs';
+import { Router } from '@angular/router';
+import { zip } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/login.model';
 
@@ -10,7 +11,8 @@ import { User } from '../models/login.model';
 export class AuthService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   login(user: User) {
@@ -18,6 +20,16 @@ export class AuthService {
       this.http.get<void>(`${environment.API_URL}/csrf-cookie`),
       this.http.post<any>(`${environment.API_URL}/login`, user)
     )
+  }
+
+  logout() {
+    this.http.post<void>(`${environment.API_URL}/logout`, {})
+      .subscribe(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+
+        this.router.navigate(['/login']);
+      })
   }
 
   setUser(user: string) {

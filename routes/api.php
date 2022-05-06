@@ -27,9 +27,9 @@ Route::group(['middleware' => 'api'], function ($router) {
         $router->get('me', [AuthController::class , 'me']);
 
         $router->resource('products', ProductController::class)->only(['index', 'store', 'update']);
-        $router->resource('companies', CompanyController::class)->only(['index']);
-        $router->resource('providers', ProviderController::class)->only(['index']);
-        $router->resource('brands', BrandController::class)->only(['index']);
+        $router->resource('companies', CompanyController::class)->only(['index', 'store', 'update']);
+        $router->resource('providers', ProviderController::class)->only(['index', 'store', 'update']);
+        $router->resource('brands', BrandController::class)->only(['index', 'store', 'update']);
     });
 });
 

@@ -5,7 +5,6 @@
   id="main-wrapper"
   [ngClass]="{ 'show-sidebar': showMobileMenu }"
   dir="ltr"
-  data-theme="light"
   data-layout="vertical"
   [attr.data-sidebartype]="sidebartype"
   data-sidebar-position="fixed"
@@ -97,7 +96,10 @@
         [ngbCollapse]="!isCollapsed"
       >
         <app-navigation
+          [sidebartype]="sidebartype"
+          [sidebartheme]="sidebartheme"
           (toggleSidebar)="toggleSidebarType()"
+          (toggleTheme)="toggleThemeType()"
           class="w-100"
         ></app-navigation>
       </div>

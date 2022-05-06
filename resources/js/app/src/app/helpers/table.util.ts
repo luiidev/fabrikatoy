@@ -20,7 +20,7 @@ export class TableFilter {
     };
 
     this.filter.search.subscribe(term => {
-      if (term) {
+      if (term !== undefined) {
         this.filter.term = term;
       }
     })
@@ -36,6 +36,7 @@ export class TableFilter {
       .set('search', this.filter.term)
       .set('sort', this.sort.active)
       .set('direction', this.sort.direction)
-      .set('page', this.paginator.pageIndex);
+      .set('page', this.paginator.pageIndex)
+      .set('per_page', this.paginator.pageSize);
   }
 }

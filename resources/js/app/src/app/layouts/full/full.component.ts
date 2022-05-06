@@ -10,7 +10,10 @@ import { NavigationEnd, Router } from "@angular/router";
 })
 export class FullComponent implements OnInit {
 
-  constructor(public router: Router) {
+
+  constructor(
+    public router: Router
+  ) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.showHeaderAndAside = event.url !== '/login';
@@ -25,6 +28,7 @@ export class FullComponent implements OnInit {
   public showMobileMenu = false;
   public expandLogo = false;
   public sidebartype = "full";
+  public sidebartheme = "dark";
 
   Logo() {
     this.expandLogo = !this.expandLogo;
@@ -64,5 +68,21 @@ export class FullComponent implements OnInit {
 
       default:
     }
+  }
+
+  toggleThemeType() {
+    switch (this.sidebartheme) {
+      case "dark":
+        this.sidebartheme = "";
+        break;
+
+      case "":
+        this.sidebartheme = "dark";
+        break;
+
+      default:
+    }
+
+    document.body.dataset['theme'] = this.sidebartheme;
   }
 }

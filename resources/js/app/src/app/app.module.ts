@@ -15,7 +15,7 @@ import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FullComponent } from './layouts/full/full.component';
 
 import { NavigationComponent } from './shared/header/navigation.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { MenuEventService, SidebarComponent } from './shared/sidebar/sidebar.component';
 
 import { AppRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,8 +33,9 @@ import { SearchComponent } from './admin/search/search.component';
 import { LoginComponent } from './admin/login/login.component';
 import { ProductsComponent, ProductStoreOrUpdateComponent } from './admin/products/products.component';
 import { ProvidersComponent, ProviderStoreOrUpdateComponent } from './admin/providers/providers.component';
-import { CompaniesComponent, SearchComponent as CompanySearchComponent } from './admin/companies/companies.component'
-import { BrandsComponent } from './admin/brands/brands.component';
+import { CompaniesComponent, SearchComponent as CompanySearchComponent, CompaniesStoreOrUpdateComponent } from './admin/companies/companies.component'
+import { BrandsComponent, BrandsStoreOrUpdateComponent } from './admin/brands/brands.component';
+import { RoleuserInterceptor } from './interceptors/roleuser.interceptor';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -58,7 +59,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProviderStoreOrUpdateComponent,
     CompanySearchComponent,
     CompaniesComponent,
+    CompaniesStoreOrUpdateComponent,
     BrandsComponent,
+    BrandsStoreOrUpdateComponent,
   ],
   imports: [
     CommonModule,
@@ -86,6 +89,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       multi: true
     },
     {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RoleuserInterceptor,
+      multi: true
+    },
+    {
       provide: LocationStrategy,
       useClass: PathLocationStrategy
     },
@@ -95,6 +103,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     {
       provide: NgbActiveModal
+    },
+    {
+      provide: MenuEventService
     }
   ],
   bootstrap: [AppComponent]

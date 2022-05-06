@@ -17,7 +17,7 @@
 
 .page-wrapper > .container-fluid {
   padding: 20px;
-  min-height: calc(100vh - 180px);
+  min-height: calc(100vh - 110px);
   max-width: $page-wrapper-max-width;
   margin: initial;
 }
@@ -378,6 +378,27 @@
   .cal-week-view .cal-time-events,
   .cal-week-view .cal-day-column {
     border-color: #fff3!important;
+  }
+}
+
+[data-theme=dark] {
+  .dropdown-item:hover,
+  .dropdown-item:focus,
+  .picker__button--today,
+  .picker__button--clear,
+  .picker__button--close,
+  .rdtCounter .rdtBtn:hover,
+  td.rdtMonth:hover,
+  td.rdtYear:hover,
+  .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default,
+  .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default,
+  .rdtPicker td.rdtDay:hover,
+  .rdtPicker td.rdtHour:hover,
+  .rdtPicker td.rdtMinute:hover,
+  .rdtPicker td.rdtSecond:hover,
+  .rdtPicker .rdtTimeToggle:hover,
+  .customizer {
+    background: #272b34;
   }
 }
 

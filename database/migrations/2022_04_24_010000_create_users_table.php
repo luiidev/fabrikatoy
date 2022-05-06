@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('phone', 15)->nullable();
             $table->tinyInteger('state')->default(1);
-            $table->tinyInteger('rol')->default(3);
+            $table->tinyInteger('role')->default(3);
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

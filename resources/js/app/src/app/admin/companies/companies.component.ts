@@ -62,19 +62,19 @@ export class CompaniesComponent {
       .subscribe(data => (this.companies = data));
   }
 
-  createOrEdit(provider?: Company) {
-    // const modalRef = this.ngbModal.open(companiesStoreOrUpdateComponent);
+  createOrEdit(company?: Company) {
+    const modalRef = this.ngbModal.open(CompaniesStoreOrUpdateComponent);
 
-    // if (provider) {
-    //   modalRef.componentInstance.provider = Object.assign({}, provider);
-    // }
+    if (company) {
+      modalRef.componentInstance.company = Object.assign({}, company);
+    }
 
-    // modalRef.result
-    //   .then(() => this.tableFilter.filter.search.emit(), Utils.none);
+    modalRef.result
+      .then(() => this.tableFilter.filter.search.emit(), Utils.none);
   }
 
-  add(provider: Company) {
-    this.activeModal.close(provider)
+  add(company: Company) {
+    this.activeModal.close(company)
   }
 }
 
@@ -125,4 +125,105 @@ export class SearchComponent {
         return response.data.items;
       })
     )
+}
+
+@Component({
+  selector: 'app-card-warn',
+  template: `
+    <spinner *ngIf="isLoadingResults"></spinner>
+    <div class="card m-0">
+      <div class="card-header bg-light">
+        <h4 class="card-title">
+          <span *ngIf="!company.id">Creación de nuevo</span>
+          <span *ngIf="company.id">Edición de </span>
+          proveedor
+        </h4>
+        <span class="btn-close-2" (click)="activeModal.dismiss()"></span>
+      </div>
+      <div class="card-body">
+        <div class="form-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="name">Nombre</label>
+                <input type="text" name="name" class="form-control" placeholder="Nombre" [(ngModel)]="company.name">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="address">Dirección</label>
+                <input type="text" name="address" class="form-control" placeholder="Dirección" [(ngModel)]="company.address">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="code" class="control-label">RUC</label>
+                <input type="text" name="code" class="form-control" placeholder="Código" [(ngModel)]="company.ruc">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <div class="mb-3"><label class="control-label">Estado</label>
+                  <div class="form-check">
+                    <input type="radio" name="stateRadio" class="form-check-input" [value]="1" [(ngModel)]="company.state">
+                    <label for="state-active" class="form-check-label">Activo</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" name="stateRadio" class="form-check-input" [value]="0" [(ngModel)]="company.state">
+                    <label for="state-inactive" class="form-check-label">Inactivo</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="website">Sitio web</label>
+                <input type="text" name="website" class="form-control" placeholder="Sitio web" [(ngModel)]="company.website">
+              </div>
+            </div>
+          </div>
+          <hr>
+          <span class="btn btn-info" (click)="save()">Guardar</span>
+        </div>
+      </div>
+    </div>
+  `
+})
+export class CompaniesStoreOrUpdateComponent {
+  @Input() company: Company = {
+    ruc: '',
+    name: '',
+    address: '',
+    website: '',
+    state: 1
+  };
+
+  isLoadingResults: boolean = false;
+
+  constructor(
+    public activeModal: NgbActiveModal,
+    private companyService: CompanyService,
+    private ngbModal: NgbModal
+  ) {}
+
+  save() {
+    this.isLoadingResults = true;
+    const service = !this.company.id ? this.companyService.store(this.company) : this.companyService.update(this.company);
+
+    service
+      .subscribe(response => {
+        const modalRef  = this.ngbModal.open(SuccsessModalComponent, { centered: true });
+        modalRef.componentInstance.message = response.message;
+
+        this.isLoadingResults = true;
+
+        this.activeModal.close();
+      }, () =>  this.isLoadingResults = false);
+  }
 }

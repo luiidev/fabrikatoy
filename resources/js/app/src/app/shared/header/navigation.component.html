@@ -3,37 +3,16 @@
 <!-- ============================================================== -->
 <ul class="navbar-nav float-start me-auto">
   <li class="nav-item d-none d-md-block">
-    <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" (click)="toggle()">
-      <i class="bi bi-arrow-left-circle"></i>
+    <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" (click)="toggleSidebarType()">
+      <i class="bi" [class.bi-arrow-left-circle]="sidebartype == 'full'" [class.bi-arrow-right-circle]="sidebartype == 'mini-sidebar'"></i>
     </a>
   </li>
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link waves-effect waves-dark" href="/dashboard"> Starter </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link waves-effect waves-dark" href="/about"> About </a>
-  </li>
+  </li> -->
   <!-- ============================================================== -->
   <!-- create new -->
   <!-- ============================================================== -->
-  <li class="nav-item d-none d-md-block" ngbDropdown placement="bottom-end">
-    <a
-      ngbDropdownToggle
-      class="nav-link waves-effect waves-dark"
-      href="javascript:void(0)"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      <span>Create New</span>
-    </a>
-    <div ngbDropdownMenu>
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-  </li>
 </ul>
 <!-- ============================================================== -->
 <!-- Right side toggle and nav items -->
@@ -52,22 +31,38 @@
       aria-expanded="false"
     >
       <img
-        src="assets/images/users/user1.jpg"
+        src="assets/images/logos/logo-icon-regular.png"
         alt="user"
         class="rounded-circle"
         width="31"
       />
-      <span class="ms-2">Steve Jobs</span>
+      <span class="ms-2">{{ user?.full_name }}</span>
     </a>
-    <div class="dropdown-menu-right" ngbDropdownMenu>
-      <a class="dropdown-item" href="javascript:void(0)"> My Profile</a>
-      <a class="dropdown-item" href="javascript:void(0)"> My Balance</a>
-      <a class="dropdown-item" href="javascript:void(0)"> Inbox</a>
+    <div ngbDropdownMenu class="dropdown-menu-end user-dd dropdown-menu-animate-up dropdown-menu">
+      <div class="d-flex no-block align-items-center p-3 bg-info text-white m-b-10">
+        <div>
+           <img src="assets/images/logos/logo-icon-regular.png" alt="user" width="60" class="rounded-circle">
+        </div>
+        <div class="ms-2">
+          <h4 class="mb-0 text-white">{{ user?.full_name }}</h4>
+          <p class="mb-0">{{ user?.email }}</p>
+        </div>
+      </div>
+      <a href="javascript:void(0)" class="dropdown-item" [routerLink]="'/perfil'">
+        <i class="fa fa-user-alt mx-1"></i> Mi Perfil
+      </a>
+      <a href="javascript:void(0)" class="dropdown-item" (click)="toggleThemeType()">
+        <i class="fa fa-moon mx-1"
+          [class.fa-moon]="sidebartheme == ''"
+          [class.fa-sun]="sidebartheme == 'dark'">
+        </i>
+        {{ sidebartheme == 'dark' ? 'Modo Claro' : 'Modo Oscuro' }}
+      </a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="javascript:void(0)"> Account Setting</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="javascript:void(0)"> Logout</a>
-    </div>
+      <a href="javascript:void(0)" class="dropdown-item" (click)="logout()">
+        <i class="fa fa-power-off mx-1"></i> Cerrar Sesión
+      </a>
+   </div>
   </li>
   <!-- ============================================================== -->
   <!-- User profile and search -->

@@ -16,9 +16,11 @@ class Company extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'ruc',
+        'name',
+        'address',
         'website',
+        'state',
     ];
 
     /**
@@ -30,6 +32,20 @@ class Company extends Model
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * The attributes that should add.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'state_name'
+    ];
+
+    public function getStateNameAttribute(): string
+    {
+        return $this->attributes['state'] ? 'Activo' : 'Inactivo';
+    }
 
     public function users()
     {

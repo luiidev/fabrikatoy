@@ -1,9 +1,7 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ROUTES } from './menu-items';
 import { RouteInfo } from './sidebar.metadata';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-//declare var $: any;
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,13 +22,24 @@ export class SidebarComponent implements OnInit {
   }
 
   constructor(
-    private modalService: NgbModal,
-    private router: Router,
-    private route: ActivatedRoute
+    private menuEventService: MenuEventService
   ) {}
 
   // End open close
   ngOnInit() {
-    this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    this.menuEventService.events.subscribe((isSuper: boolean) => {
+      this.sidebarnavItems = isSuper ? ROUTES : ROUTES.filter(item => item.super === false);
+    });
+
+    this.sidebarnavItems = ROUTES.filter(item => item.super === false);
+  }
+}
+
+export class MenuEventService {
+  protected _eventSubject = new Subject<boolean>();
+  public events = this._eventSubject.asObservable();
+
+  dispathEvent(isSuper: boolean) {
+     this._eventSubject.next(isSuper);
   }
 }

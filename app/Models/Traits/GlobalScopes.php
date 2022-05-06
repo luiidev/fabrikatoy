@@ -38,6 +38,10 @@ trait GlobalScopes {
             $query->orderBy($request->input('sort'), $request->input('direction'));
         }
 
+        if ($request->has('per_page')) {
+            $perPage = $request->input('per_page');
+        }
+
         $paginator = $query->paginate($perPage, $columns, $pageName, $page)->toArray();
 
         return [

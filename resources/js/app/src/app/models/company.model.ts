@@ -1,7 +1,9 @@
 export interface Company {
-  id: number,
-  ruc: string,
-  name: string,
-  address: string,
-  website?: string,
+  id?: number;
+  state: number;
+  ruc: string;
+  name: string;
+  address: string;
+  website?: string;
+  state_nane?: string;
 }

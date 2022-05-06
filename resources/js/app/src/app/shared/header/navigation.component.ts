@@ -1,43 +1,44 @@
-import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, AfterViewInit, EventEmitter, Output, Input } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
-declare var $: any;
+import { AuthService } from 'src/app/services/auth.service.';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements AfterViewInit {
+  @Input() sidebartype:string = '';
+  @Input() sidebartheme:string = '';
   @Output() toggleSidebar = new EventEmitter<void>();
+  @Output() toggleTheme = new EventEmitter<void>();
 
   public config: PerfectScrollbarConfigInterface = {};
+  public user:any;
 
-  constructor(private modalService: NgbModal) {
-  }
+  constructor(
+    private authService: AuthService
+  ) {}
 
   public selectedLanguage: any = {
-    language: 'English',
-    code: 'en',
-    type: 'US',
-    icon: 'us'
-  }
-
-  public languages: any[] = [{
-    language: 'English',
-    code: 'en',
-    type: 'US',
-    icon: 'us'
-  },
-  {
     language: 'Español',
     code: 'es',
+    type: 'ES',
     icon: 'es'
-  }]
+  }
 
-  toggle() {
+  toggleSidebarType() {
     this.toggleSidebar.emit();
   }
 
-  ngAfterViewInit() { }
+  toggleThemeType() {
+    this.toggleTheme.emit();
+  }
+
+  ngAfterViewInit() {
+    this.user = JSON.parse(this.authService.getUser() || '{}');
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }

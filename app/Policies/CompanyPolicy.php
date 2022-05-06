@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Models\Company;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CompanyPolicy
 {
@@ -23,7 +23,7 @@ class CompanyPolicy
 
     public function create(User $user): bool
     {
-        return true;
+        return false;
     }
 
     public function update(User $user, Company $company): bool
@@ -36,13 +36,13 @@ class CompanyPolicy
         return false;
     }
 
-    public function restore(User $user, Company $company)
+    public function restore(User $user, Company $company): bool
     {
-        //
+        return false;
     }
 
-    public function forceDelete(User $user, Company $company)
+    public function forceDelete(User $user, Company $company): bool
     {
-        //
+        return false;
     }
 }

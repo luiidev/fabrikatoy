@@ -20,7 +20,7 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'state' => 1,
-            'rol' => 3,
+            'role' => 3,
             'dni' => $this->faker->numerify('########'),
             'address' => $this->faker->address(),
             'phone' => $this->faker->numerify('+519########'),
@@ -48,7 +48,7 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'rol' => 1,
+                'role' => 1,
             ];
         });
     }
@@ -57,7 +57,7 @@ class UserFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'rol' => 2,
+                'role' => 2,
             ];
         });
     }

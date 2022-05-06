@@ -25,13 +25,16 @@ export interface Product {
 export default class ProductRequest {
   static data(product: Product) {
     let data:any = {
-      company_id: product.company_id,
       brand_id: product.brand_id,
       code: product.code,
       name: product.name,
       state: product.state,
       providers: product.providers.map((p) => p.id),
     };
+
+    if (product.company_id) {
+      data.company_id = product.company_id;
+    }
 
     if (product.id) {
       data.id = product.id;

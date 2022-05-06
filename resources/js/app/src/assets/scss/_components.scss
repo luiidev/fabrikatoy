@@ -123,7 +123,6 @@
   padding: 0;
   transition: background 0s ease-out 0s;
   height: calc(2.25rem + 2px);
-  border-bottom: 1px solid #e9ecef!important;
 }
 
 .form-material .form-control.focus, .form-material .form-control:focus {
@@ -139,4 +138,10 @@
   box-shadow: none!important;
   float: none;
   background-position: bottom;
+}
+
+
+// Menu right
+.topbar .user-dd, .topbar .mailbox {
+  min-width: 280px;
 }

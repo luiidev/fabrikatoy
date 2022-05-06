@@ -10,7 +10,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import HttpUtils from 'src/app/helpers/http.util';
 import Utils from 'src/app/helpers/utils';
-import * as Global from 'src/app/helpers/utils';
 import { SuccsessModalComponent } from '../modals/modals.component';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
@@ -86,6 +85,8 @@ export class ProductsComponent {
 
     modalRef.result.then(() => this.tableFilter.filter.search.emit(), Utils.none);
   }
+
+  applyFilter(event: any) {}
 }
 
 @Component({
@@ -238,7 +239,7 @@ export class ProductStoreOrUpdateComponent {
   }
 
   searchBrand() {
-    const modalRef  = this.ngbModal.open(BrandsComponent, { size: 'xl' });
+    const modalRef  = this.ngbModal.open(BrandsComponent, { size: 'lg' });
     modalRef.componentInstance.isModal = true;
 
     modalRef.result.then((brand: Brand) => {

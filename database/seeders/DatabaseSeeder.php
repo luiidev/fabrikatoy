@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'),
                 'first_name' => 'Fabrika Toy',
                 'last_name' => 'Administrador',
-                'rol' => 1
+                'role' => 1
             ]);
     }
 }

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginationRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 
 class CompanyController extends Controller
@@ -24,9 +25,11 @@ class CompanyController extends Controller
         return response()->json(['message' => '', 'data' => $products]);
     }
 
-    public function store(Request $request)
+    public function store(StoreCompanyRequest $request): \Illuminate\Http\JsonResponse
     {
-        //
+        $company = Company::create($request->only(['ruc', 'name', 'address', 'website', 'state']));
+
+        return response()->json(['message' => 'Se registro la empresa.', 'data' => $company]);
     }
 
     public function show(Company $company)
@@ -34,9 +37,11 @@ class CompanyController extends Controller
         //
     }
 
-    public function update(Request $request, Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company): \Illuminate\Http\JsonResponse
     {
-        //
+        $company->update($request->only(['ruc', 'name', 'address', 'website', 'state']));
+
+        return response()->json(['message' => 'Se actualizo la empresa.', 'data' => $company]);
     }
 
     public function destroy(Company $company)

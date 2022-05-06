@@ -11,7 +11,10 @@ import HttpUtils from 'src/app/helpers/http.util';
 import Utils from 'src/app/helpers/utils';
 import { ProviderService } from 'src/app/services/provider.service';
 import { SuccsessModalComponent } from '../modals/modals.component';
-import { Provider } from 'src/app/models/provider.model';
+import ProviderRequest, { Provider } from 'src/app/models/provider.model';
+import { CompaniesComponent } from '../companies/companies.component';
+import { Company } from 'src/app/models/company.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-providers',
@@ -92,6 +95,15 @@ export class ProvidersComponent {
       </div>
       <div class="card-body">
         <div class="form-body">
+          <div class="row" *ngIf="isSuper">
+            <div class="col-12">
+              <div class="mb-3">
+                <label>Empresa <span class="text-sm font-medium text-muted pointer ml-15" (click)="searchCompany()">Cambiar</span></label>
+                <label class="d-block">{{ provider.company?.name }}</label>
+                <label class="d-block" *ngIf="!provider.company">-Empresa autenticada-</label>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-12">
               <div class="mb-3">
@@ -103,7 +115,7 @@ export class ProvidersComponent {
           <div class="row">
             <div class="col-12">
               <div class="mb-3">
-                <label for="name">Dirección</label>
+                <label for="address">Dirección</label>
                 <input type="text" name="address" class="form-control" placeholder="Dirección" [(ngModel)]="provider.address">
               </div>
             </div>
@@ -130,6 +142,14 @@ export class ProvidersComponent {
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="website">Sitio web</label>
+                <input type="text" name="website" class="form-control" placeholder="Sitio web" [(ngModel)]="provider.website">
+              </div>
+            </div>
+          </div>
           <hr>
           <span class="btn btn-info" (click)="save()">Guardar</span>
         </div>
@@ -146,6 +166,7 @@ export class ProviderStoreOrUpdateComponent {
   };
 
   isLoadingResults: boolean = false;
+  isSuper = environment.isSuper;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -155,7 +176,8 @@ export class ProviderStoreOrUpdateComponent {
 
   save() {
     this.isLoadingResults = true;
-    const service = !this.provider.id ? this.providerService.store(this.provider) : this.providerService.update(this.provider);
+    const data = ProviderRequest.data(this.provider);
+    const service = !this.provider.id ? this.providerService.store(data) : this.providerService.update(data);
 
     service
       .subscribe(response => {
@@ -166,5 +188,15 @@ export class ProviderStoreOrUpdateComponent {
 
         this.activeModal.close();
       }, () =>  this.isLoadingResults = false);
+  }
+
+  searchCompany() {
+    const modalRef  = this.ngbModal.open(CompaniesComponent, { size: 'xl' });
+    modalRef.componentInstance.isModal = true;
+
+    modalRef.result.then((company: Company) => {
+      this.provider.company = company;
+      this.provider.company_id = company.id;
+    }, Utils.none);
   }
 }

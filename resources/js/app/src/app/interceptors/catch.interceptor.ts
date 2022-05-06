@@ -22,7 +22,7 @@ export class CatchInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((err: any) => {
-            if(err instanceof HttpErrorResponse) {
+            if(err instanceof HttpErrorResponse && !err.url?.includes('/login')) {
               const modalRef = this.ngbModal.open(WarnModalComponent, { centered: true, backdropClass: 'bg-light z-index-backdrop-warn', windowClass: 'z-index-window-warn' });
               modalRef.componentInstance.message = err.error.message;
             }

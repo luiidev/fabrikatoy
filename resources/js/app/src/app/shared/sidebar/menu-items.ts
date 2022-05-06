@@ -1,37 +1,23 @@
 import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
-  {
-    path: '/login',
-    title: 'Login',
-    icon: 'bi bi-lock',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
-  {
-    path: '/dashboard',
-    title: 'Dashboard',
-    icon: 'bi bi-bar-chart',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
-  {
-    path: '/perfil',
-    title: 'Perfil',
-    icon: 'bi bi-person',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
+  // {
+  //   path: '/dashboard',
+  //   title: 'Dashboard',
+  //   icon: 'bi bi-bar-chart',
+  //   class: '',
+  //   extralink: false,
+  //   submenu: [],
+  //   super: false
+  // },
   {
     path: '/empresas',
     title: 'Empresas',
     icon: 'bi bi-shop-window',
     class: '',
     extralink: false,
-    submenu: []
+    submenu: [],
+    super: true
   },
   {
     path: '/proveedores',
@@ -39,7 +25,8 @@ export const ROUTES: RouteInfo[] = [
     icon: 'bi bi-box2',
     class: '',
     extralink: false,
-    submenu: []
+    submenu: [],
+    super: false
   },
   {
     path: '/productos',
@@ -47,7 +34,8 @@ export const ROUTES: RouteInfo[] = [
     icon: 'bi bi-bag',
     class: '',
     extralink: false,
-    submenu: []
+    submenu: [],
+    super: false
   },
   {
     path: '/marcas',
@@ -55,6 +43,7 @@ export const ROUTES: RouteInfo[] = [
     icon: 'bi bi-spellcheck',
     class: '',
     extralink: false,
-    submenu: []
+    submenu: [],
+    super: false
   },
 ];

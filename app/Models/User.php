@@ -26,7 +26,7 @@ class User extends Authenticatable
         'dni',
         'phone',
         'state',
-        'rol',
+        'role',
         'email',
     ];
 
@@ -37,7 +37,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'state',
-        'rol',
+        'role',
         'password',
         'remember_token',
         'email_verified_at',
@@ -61,22 +61,22 @@ class User extends Authenticatable
      */
     protected $appends = [
         'full_name',
-        'rol_name',
+        'role_name',
     ];
 
     public function isSuper(): bool
     {
-        return $this->attributes['rol'] === 1;
+        return $this->attributes['role'] === 1;
     }
 
     public function isAdmin(): bool
     {
-        return $this->attributes['rol'] === 2;
+        return in_array($this->attributes['role'], [1, 2]);
     }
 
     public function getFullNameAttribute(): string
     {
-        return strtoupper($this->attributes['first_name'].' '.$this->attributes['last_name']);
+        return ucwords(strtolower($this->attributes['first_name'].' '.$this->attributes['last_name']));
     }
 
     public function getStateNameAttribute(): string
@@ -84,14 +84,14 @@ class User extends Authenticatable
         return ($this->attributes['state'] === 1)? 'Activo' : 'Inactivo';
     }
 
-    public function getRolNameAttribute():? string
+    public function getRoleNameAttribute():? string
     {
-        if ($this->attributes['rol'] === 1) {
+        if ($this->attributes['role'] === 1) {
             return 'Super';
-        } else if ($this->attributes['rol'] === 2) {
-            return 'Admin';
-        } else if ($this->attributes['rol'] === 3) {
-            return 'User';
+        } else if ($this->attributes['role'] === 2) {
+            return 'Administrador';
+        } else if ($this->attributes['role'] === 3) {
+            return 'Usuario';
         }
 
         return null;

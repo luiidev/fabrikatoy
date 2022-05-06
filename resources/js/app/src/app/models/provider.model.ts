@@ -10,3 +10,25 @@ export interface Provider {
   state: number;
   company?: Company;
 }
+
+export default class ProviderRequest {
+  static data(provider: Provider) {
+    let data:any = {
+      ruc: provider.ruc,
+      name: provider.name,
+      address: provider.address,
+      website: provider.website,
+      state: provider.state,
+    };
+
+    if (provider.company_id) {
+      data.company_id = provider.company_id;
+    }
+
+    if (provider.id) {
+      data.id = provider.id;
+    }
+
+    return data;
+  }
+}
