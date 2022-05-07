@@ -230,7 +230,7 @@ export class ProductStoreOrUpdateComponent {
   }
 
   searchProvider() {
-    const modalRef  = this.ngbModal.open(ProvidersComponent, { size: 'xl' });
+    const modalRef  = this.ngbModal.open(ProvidersComponent, { size: 'xl', backdropClass: 'z-index-backdrop-level-2', windowClass: 'z-index-window-level-2' });
     modalRef.componentInstance.isModal = true;
 
     modalRef.result.then((provider: Provider) => {
@@ -239,7 +239,7 @@ export class ProductStoreOrUpdateComponent {
   }
 
   searchBrand() {
-    const modalRef  = this.ngbModal.open(BrandsComponent, { size: 'lg' });
+    const modalRef  = this.ngbModal.open(BrandsComponent, { size: 'lg', backdropClass: 'z-index-backdrop-level-2', windowClass: 'z-index-window-level-2' });
     modalRef.componentInstance.isModal = true;
 
     modalRef.result.then((brand: Brand) => {
@@ -249,7 +249,7 @@ export class ProductStoreOrUpdateComponent {
   }
 
   searchCompany() {
-    const modalRef  = this.ngbModal.open(CompaniesComponent, { size: 'xl' });
+    const modalRef  = this.ngbModal.open(CompaniesComponent, { size: 'xl', backdropClass: 'z-index-backdrop-level-2', windowClass: 'z-index-window-level-2' });
     modalRef.componentInstance.isModal = true;
 
     modalRef.result.then((company: Company) => {

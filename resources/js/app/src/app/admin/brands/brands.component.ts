@@ -66,7 +66,7 @@ export class BrandsComponent {
   }
 
   createOrEdit(brand?: Brand) {
-    const modalRef = this.ngbModal.open(BrandsStoreOrUpdateComponent);
+    const modalRef = this.ngbModal.open(BrandsStoreOrUpdateComponent, { backdropClass: 'z-index-backdrop-level-3', windowClass: 'z-index-window-level-3' });
 
     if (brand) {
       modalRef.componentInstance.brand = Object.assign({}, brand);
@@ -168,7 +168,7 @@ export class BrandsStoreOrUpdateComponent {
   }
 
   searchCompany() {
-    const modalRef  = this.ngbModal.open(CompaniesComponent, { size: 'xl' });
+    const modalRef  = this.ngbModal.open(CompaniesComponent, { size: 'xl', backdropClass: 'z-index-backdrop-level-2', windowClass: 'z-index-window-level-2' });
     modalRef.componentInstance.isModal = true;
 
     modalRef.result.then((company: Company) => {

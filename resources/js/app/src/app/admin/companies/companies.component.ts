@@ -63,7 +63,7 @@ export class CompaniesComponent {
   }
 
   createOrEdit(company?: Company) {
-    const modalRef = this.ngbModal.open(CompaniesStoreOrUpdateComponent);
+    const modalRef = this.ngbModal.open(CompaniesStoreOrUpdateComponent, { backdropClass: 'z-index-backdrop-level-3', windowClass: 'z-index-window-level-3' });
 
     if (company) {
       modalRef.componentInstance.company = Object.assign({}, company);

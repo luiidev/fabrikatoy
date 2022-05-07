@@ -65,7 +65,7 @@ export class ProvidersComponent {
   }
 
   createOrEdit(provider?: Provider) {
-    const modalRef = this.ngbModal.open(ProviderStoreOrUpdateComponent);
+    const modalRef = this.ngbModal.open(ProviderStoreOrUpdateComponent, { backdropClass: 'z-index-backdrop-level-3', windowClass: 'z-index-window-level-3' });
 
     if (provider) {
       modalRef.componentInstance.provider = Object.assign({}, provider);
@@ -191,7 +191,7 @@ export class ProviderStoreOrUpdateComponent {
   }
 
   searchCompany() {
-    const modalRef  = this.ngbModal.open(CompaniesComponent, { size: 'xl' });
+    const modalRef  = this.ngbModal.open(CompaniesComponent, { size: 'xl', backdropClass: 'z-index-backdrop-level-2', windowClass: 'z-index-window-level-2' });
     modalRef.componentInstance.isModal = true;
 
     modalRef.result.then((company: Company) => {

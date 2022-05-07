@@ -12,8 +12,8 @@ import { environment } from 'src/environments/environment';
 export class LoginComponent implements OnInit {
 
   user: User = {
-    nick: "admin",
-    password: "password",
+    nick: "",
+    password: "",
     device_name: "web-app"
   };
 

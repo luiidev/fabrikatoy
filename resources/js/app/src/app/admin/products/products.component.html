@@ -13,7 +13,7 @@
           <search (searchTerm)="tableFilter.filter.search.emit($event)" [createButton]="true" (create)="createOrEdit()"></search>
 
           <div class="table-responsive">
-            <table cdk-table [dataSource]="products" class="table table-hover"
+            <table cdk-table [dataSource]="products" class="table table-hover mb-0"
                    matSort
                    matSortActive="name"
                    matSortDisableClear
@@ -90,7 +90,7 @@
                 (click)="expandedElement = expandedElement === product ? null : product"></tr>
               <tr cdk-row *cdkRowDef="let product; columns: ['expandedDetail']"></tr>
             </table>
-            <div class="text-center mb-2" *ngIf="products.length === 0">No se encontraron resultados.</div>
+            <div class="text-center my-3" *ngIf="products.length === 0">No se encontraron resultados.</div>
           </div>
           <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
         </div>

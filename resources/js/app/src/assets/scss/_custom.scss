@@ -106,11 +106,27 @@
 }
 
 .z-index-backdrop-warn {
-  z-index: 1600 !important;
+  z-index: 1500 !important;
 }
 
 .z-index-window-warn {
-  z-index: 1650 !important;
+  z-index: 1550 !important;
+}
+
+.z-index-backdrop-level-2 {
+  z-index: 1200 !important;
+}
+
+.z-index-window-level-2 {
+  z-index: 1250 !important;
+}
+
+.z-index-backdrop-level-3 {
+  z-index: 1300 !important;
+}
+
+.z-index-window-level-3 {
+  z-index: 1350 !important;
 }
 
 .pointer {

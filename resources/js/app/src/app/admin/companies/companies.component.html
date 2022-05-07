@@ -14,7 +14,7 @@
           <search (searchTerm)="tableFilter.filter.search.emit($event)" [createButton]="true" (create)="createOrEdit()"></search>
 
           <div class="table-responsive">
-            <table cdk-table [dataSource]="companies" class="table table-hover"
+            <table cdk-table [dataSource]="companies" class="table table-hover mb-0"
                    matSort
                    matSortActive="name"
                    matSortDisableClear
@@ -54,7 +54,7 @@
               <tr cdk-header-row *cdkHeaderRowDef="displayedColumns" class="bg-light"></tr>
               <tr cdk-row *cdkRowDef="let product; columns: displayedColumns;" class="row-border-bottom-0"></tr>
             </table>
-            <div class="text-center mb-2" *ngIf="companies.length === 0">No se encontraron resultados.</div>
+            <div class="text-center my-3" *ngIf="companies.length === 0">No se encontraron resultados.</div>
           </div>
           <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
         </div>
