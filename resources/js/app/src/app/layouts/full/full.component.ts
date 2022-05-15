@@ -1,5 +1,7 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
+import { AuthService } from "src/app/services/auth.service.";
+import { User } from '../../models/user.model';
 
 //declare var $: any;
 
@@ -10,17 +12,6 @@ import { NavigationEnd, Router } from "@angular/router";
 })
 export class FullComponent implements OnInit {
 
-
-  constructor(
-    public router: Router
-  ) {
-    router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.showHeaderAndAside = event.url !== '/login';
-      }
-    });
-  }
-
   public showHeaderAndAside: boolean = true;
   public isCollapsed = false;
   public innerWidth: number = 0;
@@ -29,6 +20,30 @@ export class FullComponent implements OnInit {
   public expandLogo = false;
   public sidebartype = "full";
   public sidebartheme = "dark";
+  public user: User = {
+    nick: '',
+    full_name: '',
+    email: '',
+    phone: '',
+    image: '',
+    role_name: '',
+    company: {
+      name: '',
+      logo: 'https://fabrikatoy.s3.amazonaws.com/images/logo/logo-chunka-light.png',
+      short_logo: 'https://fabrikatoy.s3.amazonaws.com/images/logo/short-logo-chunka-light-1.png',
+    }
+  };
+
+  constructor(
+    public router: Router,
+    private authService: AuthService
+  ) {
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showHeaderAndAside = event.url !== '/login';
+      }
+    });
+  }
 
   Logo() {
     this.expandLogo = !this.expandLogo;
@@ -84,5 +99,12 @@ export class FullComponent implements OnInit {
     }
 
     document.body.dataset['theme'] = this.sidebartheme;
+  }
+
+  ngAfterViewInit() {
+    const user = this.authService.getUser();
+    if (user) {
+      this.user = JSON.parse(user);
+    }
   }
 }

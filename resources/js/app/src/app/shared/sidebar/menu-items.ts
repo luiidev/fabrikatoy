@@ -46,4 +46,13 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
     super: false
   },
+  {
+    path: '/punto-de-venta',
+    title: 'Punto de venta',
+    icon: 'fa fa-credit-card',
+    class: '',
+    extralink: false,
+    submenu: [],
+    super: false
+  },
 ];

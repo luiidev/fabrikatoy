@@ -15,14 +15,11 @@ export class ProfileComponent implements OnInit {
         id: null,
         company_id: null,
         nick: '',
-        first_name: '',
-        last_name: '',
         full_name: '',
-        dni: '',
-        address: '',
         phone: '',
         email: '',
-        role_name: ''
+        role_name: '',
+        image: '',
     };
 
     constructor(private profileService: ProfileService) { }

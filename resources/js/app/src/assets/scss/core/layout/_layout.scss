@@ -1,8 +1,8 @@
 // App
 
 /*==============================================================
- For all pages
- ============================================================== */
+For all pages
+============================================================== */
 
 #main-wrapper {
   width: 100%;
@@ -403,6 +403,121 @@
 }
 
 [data-theme=dark] {
+  .bootstrap-switch,
+  .rdtPicker,
+  .rdtPicker th,
+  .border-bottom,
+  .border-top,
+  .border-start,
+  .border-end,
+  .border,
+  .dropdown-menu,
+  .form-control,
+  .custom-select,
+  .table th,
+  .table td,
+  .modal-header,
+  .modal-footer,
+  blockquote,
+  pre[class*=language-],
+  .card-group .card,
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs,
+  .nav-tabs .nav-link:hover,
+  .nav-tabs .nav-link:focus,
+  .list-group-item,
+  .custom-file-label,
+  .input-group-text,
+  .custom-file-label:after,
+  .left-part,
+  .right-sale,
+  .page-link,
+  .profiletimeline,
+  .mailbox .message-center .message-item,
+  .mailbox .nav-link,
+  .dropdown-divider,
+  .table-bordered,
+  .table-bordered td,
+  .table-bordered th,
+  .rbc-month-view,
+  .rbc-day-bg+.rbc-day-bg,
+  .rbc-month-row+.rbc-month-row,
+  .rbc-header,
+  .rbc-time-content>*+*>*,
+  .rbc-time-view,
+  .rbc-day-slot .rbc-time-slot+.rbc-time-slot,
+  .rbc-timeslot-group,
+  .rbc-time-content,
+  .rbc-agenda-view table.rbc-agenda-table tbody>tr>td+td,
+  .rbc-agenda-view table.rbc-agenda-table,
+  .rbc-agenda-view table.rbc-agenda-table tbody>tr+tr,
+  .rdtPicker,
+  .rdtPicker th,
+  .rdtPicker tfoot,
+  .css-1ajl57w-control,
+  .css-bg1rzq-control,
+  .react-tagsinput,
+  ol.progtrckr li.progtrckr-doing,
+  ol.progtrckr li.progtrckr-todo,
+  .steamline .sl-item,
+  .steamline,
+  hr,
+  .right-left-part,
+  .react-tagsinput-tag,
+  .form-check-label:before,
+  .custom-select,
+  .input-group-text,
+  .ReactTable .rt-thead.-filters input,
+  .ReactTable .rt-thead.-filters select,
+  .rbc-time-header-content,
+  .toast-header,
+  .react-tagsinput,
+  .btn-outline-secondary,
+  .comment-widgets .comment-row,
+  .cal-month-view .cal-day-cell:not(:last-child),
+  .cal-month-view .cal-days .cal-cell-row,
+  .cal-month-view .cal-days,
+  .cal-week-view .cal-day-headers,
+  .cal-week-view,
+  .ql-container.ql-snow,
+  .ql-toolbar.ql-snow,
+  .popover-header,
+  .multiselect-dropdown .dropdown-btn,
+  .dropdown-list,
+  .dropdown-list .filter-textbox,
+  .dropdown-list li,
+  .r-separator .form-group,
+  .b-form .row,
+  ngb-datepicker,
+  .btn-light:not(:disabled):not(.disabled):active,
+  .btn-light:not(:disabled):not(.disabled).active,
+  .show>.btn-light.dropdown-toggle,
+  .btn-light:hover .wizard-navbar li .round-tabs,
+  .wizard-navbar li .round-tabs,
+  .ngx-datatable.material,
+  .ngx-datatable.material .datatable-header .resize-handle,
+  .timeline>.timeline-item>.timeline-panel,
+  .cal-week-view .cal-day-headers .cal-header:not(:last-child),
+  .cal-week-view .cal-day-headers .cal-header:not(:last-child),
+  .cal-week-view .cal-hour:not(:last-child) .cal-hour-segment,
+  .cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment,
+  .cal-week-view .cal-time-events,
+  .cal-week-view .cal-day-column {
+    border-color: #fff3!important;
+  }
+}
+
+.btn:focus,
+.btn:active {
+  box-shadow: none !important;
+}
+
+[data-theme=dark] .bg-white {
+  background-color: $bg-dark !important;
+}
+
+[data-theme=dark] {
   .form-control:focus
   {
     border-color: #fff6 !important;
@@ -553,5 +668,17 @@ Vertical responsive layout
         }
       }
     }
+  }
+}
+
+@media (min-width: 992px) {
+  #main-wrapper[data-layout=vertical][data-sidebar-position=fixed][data-sidebartype=mini-sidebar]
+  .topbar
+  .top-navbar
+  .navbar-collapse,
+  #main-wrapper[data-layout=vertical][data-sidebartype=mini-sidebar]
+  .page-wrapper
+  {
+    margin-left: 65px;
   }
 }

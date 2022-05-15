@@ -8,6 +8,7 @@ import { ProductsComponent } from './admin/products/products.component';
 import { ProvidersComponent } from './admin/providers/providers.component';
 import { CompaniesComponent } from './admin/companies/companies.component';
 import { BrandsComponent } from './admin/brands/brands.component';
+import { PointOfSaleComponent } from './admin/sales/sales.component';
 
 export const AppRoutes: Routes = [
   {
@@ -42,6 +43,10 @@ export const AppRoutes: Routes = [
       {
 				path: 'marcas',
 				component: BrandsComponent
+			},
+      {
+				path: 'punto-de-venta',
+				component: PointOfSaleComponent
 			},
     ]
   },

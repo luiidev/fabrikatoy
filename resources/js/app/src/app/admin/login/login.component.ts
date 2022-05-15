@@ -14,10 +14,12 @@ export class LoginComponent implements OnInit {
   user: User = {
     nick: "",
     password: "",
-    device_name: "web-app"
+    device_name: "web-app",
+    remenber: false,
   };
 
   errorMessage: string = '';
+  isLoadingResults = false;
 
   constructor(
     private router: Router,
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.errorMessage = '';
+    this.isLoadingResults = true;
     this.authService.login(this.user)
       .subscribe(response => {
         const [CsrfResponse, AuthResponse] = response;
@@ -34,6 +37,7 @@ export class LoginComponent implements OnInit {
 
         this.router.navigate(['/productos']);
       }, response => {
+        this.isLoadingResults = false;
         this.errorMessage = response.error.message;
       });
   }

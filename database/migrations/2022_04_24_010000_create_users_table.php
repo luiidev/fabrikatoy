@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('first_name', 25)->nullable();
             $table->string('last_name', 50)->nullable();
-            $table->string('dni', 11)->nullable();
+            $table->string('image')->nullable();
+            $table->string('dni', 8)->nullable();
             $table->string('address')->nullable();
             $table->string('phone', 15)->nullable();
             $table->tinyInteger('state')->default(1);

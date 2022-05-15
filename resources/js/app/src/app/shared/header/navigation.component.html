@@ -31,17 +31,17 @@
       aria-expanded="false"
     >
       <img
-        src="assets/images/logos/logo-icon-regular.png"
+        [src]="user?.image"
         alt="user"
         class="rounded-circle"
-        width="31"
+        width="35"
       />
       <span class="ms-2">{{ user?.full_name }}</span>
     </a>
-    <div ngbDropdownMenu class="dropdown-menu-end user-dd dropdown-menu-animate-up dropdown-menu">
-      <div class="d-flex no-block align-items-center p-3 bg-info text-white m-b-10">
+    <div ngbDropdownMenu class="dropdown-menu-end user-dd dropdown-menu-animate-up dropdown-menu pb-0 shadow">
+      <div class="d-flex no-block align-items-center p-3 bg-info text-white">
         <div>
-           <img src="assets/images/logos/logo-icon-regular.png" alt="user" width="60" class="rounded-circle">
+           <img [src]="user?.image" alt="user" width="60" class="rounded-circle">
         </div>
         <div class="ms-2">
           <h4 class="mb-0 text-white">{{ user?.full_name }}</h4>
@@ -58,7 +58,7 @@
         </i>
         {{ sidebartheme == 'dark' ? 'Modo Claro' : 'Modo Oscuro' }}
       </a>
-      <div class="dropdown-divider"></div>
+      <div class="dropdown-divider m-0"></div>
       <a href="javascript:void(0)" class="dropdown-item" (click)="logout()">
         <i class="fa fa-power-off mx-1"></i> Cerrar Sesión
       </a>

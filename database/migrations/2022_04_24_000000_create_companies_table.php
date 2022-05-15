@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('ruc', 11)->nullable();
             $table->string('address')->nullable();
             $table->string('website')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('short_logo')->nullable();
             $table->boolean('state')->default(1);
             $table->timestamps();
         });

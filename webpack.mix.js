@@ -15,6 +15,5 @@ require('laravel-mix-copy-watched');
  */
 
 del('public/*.{js,css,ico,woff,woff2,txt}');
-mix.copy('resources/js/app/dist/assets/images', 'public/assets/images')
-    .copyWatched('resources/js/app/dist/*.{js,css,ico,woff,woff2,txt}', 'public')
+mix.copyWatched('resources/js/app/dist/*.{js,css,ico,woff,woff2,txt}', 'public')
     .copyWatched('resources/js/app/dist/index.html', 'resources/views/app/index.blade.php');

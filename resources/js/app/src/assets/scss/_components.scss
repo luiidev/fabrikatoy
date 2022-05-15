@@ -37,7 +37,7 @@
 .btn-outline-danger:hover,
 .btn-outline-success:hover,
 .btn-outline-warning:hover{
-    color: $white;
+  color: $white;
 }
 
 .btn-circle {
@@ -53,10 +53,10 @@
 //
 
 .badge {
-    &.badge-pill {
-      padding: 0.2em 0.6em;
-    }
+  &.badge-pill {
+    padding: 0.2em 0.6em;
   }
+}
 
 //
 // Card
@@ -144,4 +144,107 @@
 // Menu right
 .topbar .user-dd, .topbar .mailbox {
   min-width: 280px;
+}
+
+// Part
+.main-part {
+  display: flex;
+  height: calc(100vh - 178px);
+  align-items: strech;
+}
+
+.left-part {
+  width: 100%;
+  overflow: auto;
+}
+
+.right-part {
+  width: 260px;
+  border-right: 1px solid #e9ecef;
+  flex-shrink: 0;
+}
+
+// Sale
+.main-sale {
+  display: flex;
+  height: calc(100vh - 180px);
+  align-items: strech;
+}
+
+.left-sale {
+  width: 100%;
+  overflow: auto;
+}
+
+.right-sale {
+  width: 360px;
+  border-left: 1px solid #e9ecef;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1023px)  {
+  .left-part {
+    left: -260px;
+    background: #f2f7f8;
+    z-index: 1;
+    position: absolute;
+    height: calc(100vh - 175px);
+    transition: .1s ease-in;
+  }
+
+  .left-part.show-panel {
+    left: 0px;
+  }
+
+  .right-part {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .right-sale {
+    left: -360px;
+    background: #f2f7f8;
+    z-index: 1;
+    position: absolute;
+    height: calc(100vh - 175px);
+    transition: .1s ease-in;
+  }
+
+  .left-sale {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .right-sale.show-panel {
+    left: 0px;
+    width: 100%;
+    border-left: 0;
+  }
+}
+
+ul.list-style-none {
+  margin: 0;
+  padding: 0;
+}
+
+ul.list-style-none li {
+  list-style: none;
+}
+
+
+.el-element-overlay .el-card-item .el-overlay-1 img {
+  display: block;
+  position: relative;
+  transition: all .4s linear;
+  width: 100%;
+  height: auto;
+}
+
+.el-element-overlay .el-card-item .el-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background-color: #000000b3;
+  transition: all .4s ease-in-out;
 }

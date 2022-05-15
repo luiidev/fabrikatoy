@@ -1,13 +1,14 @@
+import { Company } from "./company.model";
+
 export interface User {
-    id: number | null;
-    company_id: number | null;
+    id?: number | null;
+    company_id?: number | null;
     nick: string;
-    first_name: string;
-    last_name: string;
     full_name: string;
-    dni: string;
-    address: string;
-    phone: string;
     email: string;
+    address?: string;
+    phone?: string;
+    image?: string;
     role_name: string;
+    company?: Company;
 }

@@ -32,37 +32,37 @@
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" [routerLink]="'/punto-de-venta'">
           <!-- Logo icon -->
-          <b class="logo-icon">
+          <b class="logo-icon" *ngIf="user?.company?.short_logo">
             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
             <!-- Dark Logo icon -->
             <img
-            src="assets/images/logos/logo-icon.png"
-            alt="homepage"
+            [src]="user?.company?.short_logo"
+            alt=""
             class="dark-logo"
             />
             <!-- Light Logo icon -->
             <img
-              src="assets/images/logos/logo-light-icon.png"
-              alt="homepage"
+              [src]="user?.company?.short_logo"
+              alt=""
               class="dark-light"
             />
           </b>
           <!--End Logo icon -->
           <!-- Logo text -->
-          <span class="logo-text">
+          <span class="logo-text" *ngIf="user?.company?.logo">
             <!-- Dark Logo icon -->
             <img
-            src="assets/images/logos/logo-text.png"
+            [src]="user?.company?.logo"
             class="dark-logo"
-            alt="homepage"
+            alt=""
             />
             <!-- Light Logo text -->
             <img
-              src="assets/images/logos/logo-light-text.png"
+              [src]="user?.company?.logo"
               class="light-logo"
-              alt="homepage"
+              alt=""
             />
           </span>
         </a>

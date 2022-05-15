@@ -22,7 +22,7 @@ class AuthController extends Controller
             'device_name' => 'required|string|max:32',
         ]);
 
-        $user = User::where('nick', $request->input('nick'))->first();
+        $user = User::with('company')->where('nick', $request->input('nick'))->first();
 
         if (! $user || ! Hash::check($request->input('password'), $user->password)) {
             throw ValidationException::withMessages([

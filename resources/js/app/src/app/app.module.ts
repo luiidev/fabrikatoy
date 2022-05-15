@@ -36,6 +36,7 @@ import { ProvidersComponent, ProviderStoreOrUpdateComponent } from './admin/prov
 import { CompaniesComponent, SearchComponent as CompanySearchComponent, CompaniesStoreOrUpdateComponent } from './admin/companies/companies.component'
 import { BrandsComponent, BrandsStoreOrUpdateComponent } from './admin/brands/brands.component';
 import { RoleuserInterceptor } from './interceptors/roleuser.interceptor';
+import { PointOfSaleComponent } from './admin/sales/sales.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -62,6 +63,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompaniesStoreOrUpdateComponent,
     BrandsComponent,
     BrandsStoreOrUpdateComponent,
+    PointOfSaleComponent
   ],
   imports: [
     CommonModule,

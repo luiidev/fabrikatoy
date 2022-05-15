@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-12">
+    <a href="javascript:void(0)" class="btn btn-lg mb-3 text-white show-left-part d-block d-md-none fa fa-list" [class.fa-close]="showPanel" (click)="showPanelToggle()"></a>
+    <div class="main-sale">
+      <div class="left-sale bg-white fixed-left-sale">
+        <div class="card d-flex flex-column mb-0">
+          <nav class="navbar navbar-dark navbar-expand-md p-0">
+            <div class="navbar-collapse collapse">
+              <ul class="navbar-nav">
+                <li class="nav-item py-2 px-2 bg-success"><a class="nav-link pointer">Todo</a></li>
+                <li class="nav-item py-2 px-2"><a class="nav-link pointer">Familia</a></li>
+                <li class="nav-item py-2 px-2"><a class="nav-link pointer">Fiesta</a></li>
+                <li class="nav-item py-2 px-2"><a class="nav-link pointer">Ninos</a></li>
+              </ul>
+            </div>
+          </nav>
+          <div class="p-3 flex-grow-1">
+            <input type="text" placeholder="Buscar Producto" class="form-control mb-3">
+            <div class="row el-element-overlay">
+              <div class="col-lg-3 col-6" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+                <div class="card">
+                  <div class="el-card-item pointer">
+                    <div class="el-overlay-1 mb-3">
+                      <img src="https://www.master-malaga.com/wp-content/uploads/2019/11/kisspng-computer-icons-price-pricing-shopping-price-tag-5abdce23f3af96.3531375415223885159982.png" alt="user">
+                    </div>
+                    <div class="px-2">
+                      <h4 class="mb-0">Rounded Chair</h4>
+                      <span class="text-muted">globe type chair for rest</span>
+                      <button type="button" class="btn btn-dark btn-circle d-block">$15</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-sale bg-white" [class.show-panel]="showPanel">
+        <div class="d-flex flex-column h-100 position-relative">
+          <div class="p-3 d-flex align-items-center border-bottom">
+            <input type="text" placeholder="Search Contact" class="form-control ng-untouched ng-pristine ng-valid">
+          </div>
+          <ul class="contact-list list-style-none flex-grow-1 overflow-auto">
+            <li class="contact-item border-bottom p-3" *ngFor="let i of [1,2,3,4]">
+              <img height="40" width="40" class="rounded-circle" src="https://www.master-malaga.com/wp-content/uploads/2019/11/kisspng-computer-icons-price-pricing-shopping-price-tag-5abdce23f3af96.3531375415223885159982.png">
+              <span class="ms-3 font-medium">Sudoku Madera Colorido</span>
+            </li>
+          </ul>
+          <div class="p-3">
+            <p class="mb-1">Subtotal: <span class="float-end">S/13.00</span></p>
+            <p class="mb-1">Descuento: <span class="float-end">S/0.00</span></p>
+            <p class="mb-1">IGV (18%): <span class="float-end">S/18.00</span></p>
+            <hr>
+            <h3><b>Total :</b><span class="float-end">S/139.00</span></h3>
+            <hr>
+            <button class="btn btn-info w-100">Vender</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
