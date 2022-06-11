@@ -111,4 +111,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function branch_office()
+    {
+        return $this->belongsTo(BranchOffice::class);
+    }
 }

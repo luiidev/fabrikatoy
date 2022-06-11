@@ -11,6 +11,20 @@ class Customer extends Model
     use HasFactory, GlobalScopes;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'document_type',
+        'document_number',
+        'name',
+        'address',
+        'email',
+        'phone',
+    ];
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>

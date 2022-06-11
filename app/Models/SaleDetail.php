@@ -20,8 +20,8 @@ class SaleDetail extends Model
         'updated_at',
     ];
 
-    public function detail()
+    public function sale()
     {
-        return $this->hasMany(SaleDetail::class);
+        return $this->belongsTo(Sale::class);
     }
 }

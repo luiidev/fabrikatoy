@@ -10,7 +10,7 @@ class BrandPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -25,12 +25,12 @@ class BrandPolicy
         return true;
     }
 
-    public function update(User $user, Brand $brand)
+    public function update(User $user, Brand $brand): bool
     {
         return $user->company_id === $brand->company_id;
     }
 
-    public function delete(User $user, Brand $brand)
+    public function delete(User $user, Brand $brand): bool
     {
         return $user->company_id === $brand->company_id;
     }

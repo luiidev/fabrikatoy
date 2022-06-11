@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginationRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -24,6 +26,31 @@ class ProductController extends Controller
             ->apiPaginate();
 
         return response()->json(['message' => '', 'data' => $products]);
+    }
+
+    public function listForSale(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $user = Auth::user();
+
+        $query = Product::query()
+            ->with(['unit', 'brand'])
+            ->ownCompany()
+            ->whereLike('name', $request->input('search'))
+            ->active()
+            ->limit(24);
+
+        if ($request->filled('category_id')){
+            $query->whereHas('categories', fn($q) => $q->where('category_id', $request->input('category_id')));
+        }
+
+        $products = $query->get();
+
+        $data = [
+            'items' => $products,
+            'taxes_included' => $user->company->taxes_included
+        ];
+
+        return response()->json(['message' => '', 'data' => $data]);
     }
 
     public function store(StoreProductRequest $request): \Illuminate\Http\JsonResponse

@@ -16,6 +16,11 @@ trait GlobalScopes {
         return $user->isSuper() ? $query->with('company') : $query->where('company_id', $user->company_id);
     }
 
+    public function scopeOwnCompany($query)
+    {
+        return $query->where('company_id', Auth::user()->company_id);
+    }
+
     public function scopeWhereLike($query, $column, $value)
     {
         return $query->when($value, function ($query, $value) use ($column) {
@@ -28,6 +33,11 @@ trait GlobalScopes {
         return $query->when($value, function ($query, $value) use ($column) {
             $query->orWhere($column, 'like', '%'.$value.'%');
         });
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('state', 1);
     }
 
     public function scopeApiPaginate($query, $perPage = 10, $columns = ['*'], $pageName = 'page', $page = null)

@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained();
+            $table->foreignId('branch_office_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('customer_id')->constrained();
-            $table->enum('type', ['BOLETA', 'FACTURA', 'OTRO']);
-            $table->string('number', 25);
+            $table->foreignId('customer_id')->nullable()->constrained();
+            $table->enum('type', ['BOLETA', 'FACTURA'])->nullable();
+            $table->string('number', 25)->nullable();
             $table->string('document')->nullable();
             $table->timestamp('date');
             $table->decimal('subtotal');

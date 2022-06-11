@@ -132,11 +132,11 @@ export class ProductsComponent {
               <div class="mb-3">
                 <div class="mb-3"><label class="control-label">Estado</label>
                   <div class="form-check">
-                    <input type="radio" name="stateRadio" class="form-check-input" [value]="1" [(ngModel)]="product.state">
+                    <input type="radio" name="product-state" class="form-check-input" [value]="1" [(ngModel)]="product.state">
                     <label for="state-active" class="form-check-label">Activo</label>
                   </div>
                   <div class="form-check">
-                    <input type="radio" name="stateRadio" class="form-check-input" [value]="0" [(ngModel)]="product.state">
+                    <input type="radio" name="product-state" class="form-check-input" [value]="0" [(ngModel)]="product.state">
                     <label for="state-inactive" class="form-check-label">Inactivo</label>
                   </div>
                 </div>

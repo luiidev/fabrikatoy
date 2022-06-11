@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('unit_id')->constrained();
             $table->string('code', 30)->nullable();
             $table->string('name');
+            $table->string('image');
             $table->integer('quantity')->default(0);
             $table->decimal('price')->default(0.00);
             $table->decimal('higher_price')->default(0.00);

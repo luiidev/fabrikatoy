@@ -167,7 +167,6 @@ return [
         'number' => 'número',
         'document' => 'documento',
         'date' => 'fecha',
-        'number' => 'número',
         'conversion_factor' => 'factor de conversión',
         'product_id' => 'producto',
         'unit_id' => 'unidad',
@@ -176,6 +175,11 @@ return [
         'purchase_id' => 'compra',
         'sale_id' => 'venta',
         'user_id' => 'usuario',
+        'customer.document_type' => 'documento de cliente (DNI, RUC)',
+        'customer.document_number' => 'número de documento',
+        'products' => 'productos (ingrese al menos 1 producto)',
+        'products.*.quantity_sale' => 'cantidad',
+        'products.*.price_sale' => 'precio',
     ],
 
 ];

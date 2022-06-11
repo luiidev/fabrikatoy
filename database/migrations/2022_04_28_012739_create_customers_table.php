@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained();
-            $table->string('ruc')->nullable();
+            $table->enum('document_type', ['DNI', 'RUC'])->nullable();
+            $table->string('document_number', 12)->nullable();
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('email')->nullable();

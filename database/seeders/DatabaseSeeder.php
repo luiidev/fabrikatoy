@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\BranchOffice;
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Provider;
 use App\Models\Unit;
@@ -31,6 +34,15 @@ class DatabaseSeeder extends Seeder
             ->has(
                 Brand::factory()->count(10)
             )
+            ->has(
+                Category::factory()->count(4)
+            )
+            ->has(
+                Customer::factory()->count(50)
+            )
+            ->has(
+                BranchOffice::factory()
+            )
             ->count(2)
             ->create();
 
@@ -43,11 +55,21 @@ class DatabaseSeeder extends Seeder
                 ->has(
                     Product::factory()
                         ->count(10)
-                        ->for($company->brands->get(array_rand($company->brands->toArray())))
+                        ->for($company->brands->random())
                         ->for($company)
                         ->for($company->units->first())
                 )
                 ->create();
+
+            foreach ($company->products as $product) {
+                $product->categories()->save($company->categories->random());
+            }
+
+            foreach ($company->users as $user) {
+                $user->update([
+                    'branch_office_id' => $company->branchOffices->random()->id
+                ]);
+            }
         }
 
         Company::find(1)

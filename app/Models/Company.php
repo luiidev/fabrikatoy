@@ -47,6 +47,11 @@ class Company extends Model
         return $this->attributes['state'] ? 'Activo' : 'Inactivo';
     }
 
+    public function branchOffices()
+    {
+        return $this->hasMany(BranchOffice::class);
+    }
+
     public function users()
     {
         return $this->hasMany(User::class);
@@ -62,6 +67,11 @@ class Company extends Model
         return $this->morphToMany(Contact::class, 'contactable');
     }
 
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
     public function provider()
     {
         return $this->hasMany(Provider::class);
@@ -75,5 +85,10 @@ class Company extends Model
     public function brands()
     {
         return $this->hasMany(Brand::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
     }
 }

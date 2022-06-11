@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->string('logo')->nullable();
             $table->string('short_logo')->nullable();
+            $table->boolean('taxes_included')->default(1);
             $table->boolean('state')->default(1);
             $table->timestamps();
         });

@@ -8,7 +8,9 @@ export interface Product {
   brand_id?: number;
   code: string;
   name: string;
+  image?: string;
   quantity?: number;
+  quantity_sale?: number;
   price?: string;
   higher_price?: string;
   average_price?: string;

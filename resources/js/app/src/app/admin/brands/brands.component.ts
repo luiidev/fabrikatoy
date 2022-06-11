@@ -118,11 +118,11 @@ export class BrandsComponent {
               <div class="mb-3">
                 <div class="mb-3"><label class="control-label">Estado</label>
                   <div class="form-check">
-                    <input type="radio" name="stateRadio" class="form-check-input" [value]="1" [(ngModel)]="brand.state">
+                    <input type="radio" name="brand-state" class="form-check-input" [value]="1" [(ngModel)]="brand.state">
                     <label for="state-active" class="form-check-label">Activo</label>
                   </div>
                   <div class="form-check">
-                    <input type="radio" name="stateRadio" class="form-check-input" [value]="0" [(ngModel)]="brand.state">
+                    <input type="radio" name="brand-state" class="form-check-input" [value]="0" [(ngModel)]="brand.state">
                     <label for="state-inactive" class="form-check-label">Inactivo</label>
                   </div>
                 </div>
