@@ -10,7 +10,7 @@ import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
       </span>
         <input type="text" class="form-control" [ngModel]='term' (ngModelChange)='changed($event)' placeholder="Buscar">
         <div class="btn btn-success" *ngIf="createButton" (click)="create.emit()">
-          <i class="bi bi-plus-lg mr-5"></i>
+          <i class="fa fa-plus mr-5"></i>
           <span>Nuevo</span>
         </div>
     </div>

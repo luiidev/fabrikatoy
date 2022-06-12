@@ -65,7 +65,7 @@ class SaleController extends Controller
                 if (isset($product['price_sale']) && !$user->isAdmin()) {
                     DB::rollBack();
 
-                    return response()->json(['error' => 'No tienes permiso para alterar el precio.'], 422);
+                    return response()->json(['message' => 'No tienes permiso para alterar el precio.'], 422);
                 }
 
                 $saleDetail = new SaleDetail();
@@ -80,11 +80,11 @@ class SaleController extends Controller
             }
 
             if ($taxes_included) {
-                $sale->total = array_reduce($details, fn($t, $d) => $t + $d['total'], 0);
+                $sale->total = array_reduce($details, fn ($t, $d) => $t + $d['total'], 0);
                 $sale->igv = $sale->total * 0.18;
                 $sale->subtotal = $sale->total * 0.82;
             } else {
-                $sale->subtotal = array_reduce($details, fn($t, $d) => $t + $d['total'], 0);
+                $sale->subtotal = array_reduce($details, fn ($t, $d) => $t + $d['total'], 0);
                 $sale->igv = $sale->total * 0.18;
                 $sale->total = $sale->subtotal + $sale->igv;
             }

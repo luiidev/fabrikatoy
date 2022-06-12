@@ -295,6 +295,7 @@ export class CustomerVoucherComponent {
       this.removeCustomer();
     } else {
       this.customer.type = type;
+      this.customer.document_type = type === 'BOLETA' ? 'DNI' : 'RUC';
     }
   }
 

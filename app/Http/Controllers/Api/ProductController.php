@@ -40,7 +40,7 @@ class ProductController extends Controller
             ->limit(24);
 
         if ($request->filled('category_id')){
-            $query->whereHas('categories', fn($q) => $q->where('category_id', $request->input('category_id')));
+            $query->whereHas('categories', fn ($q) => $q->where('category_id', $request->input('category_id')));
         }
 
         $products = $query->get();
