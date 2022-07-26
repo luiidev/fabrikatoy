@@ -1,0 +1,718 @@
+// App
+
+/*==============================================================
+For all pages
+============================================================== */
+
+#main-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.page-wrapper {
+  background: $body-bg;
+  position: relative;
+  transition: 0.2s ease-in;
+}
+
+.page-wrapper > .container-fluid {
+  padding: 20px;
+  min-height: calc(100vh - 110px);
+  max-width: $page-wrapper-max-width;
+  margin: initial;
+}
+
+[data-theme=dark] {
+  color: $text-dark;
+  background: $bg-dark-2!important;
+}
+
+[data-theme=dark] {
+  #main-wrapper,
+  .bg-light,
+  .bg-white,
+  .chat-list .chat-item .chat-content .box.bg-light-info,
+  .cke_toolbar_separator,
+  .custom-file-label::after,
+  .customizer,
+  .daterangepicker .ranges li:hover,
+  .daterangepicker td.available:hover,
+  .daterangepicker th.available:hover,
+  .dropdown-menu,
+  .form-select,
+  .icon-hover:hover,
+  .input-group-text,
+  .jumbotron,
+  .list-group-item.active,
+  .mce-panel,
+  .myadmin-dd .dd-list .dd-item .dd-handle,
+  .myadmin-dd-empty .dd-list .dd3-content,
+  .myadmin-dd-empty .dd-list .dd3-handle,
+  .note-modal-content,
+  .note-toolbar,
+  .offcanvas,
+  .page-wrapper,
+  .progress,
+  .ql-snow .ql-picker-options,
+  .select2-container--classic .select2-search--dropdown .select2-search__field,
+  .select2-container--classic .select2-selection--single,
+  .select2-container--default .select2-results__option[aria-selected=true],
+  .select2-container--default .select2-search--dropdown .select2-search__field,
+  .select2-container--default .select2-selection--multiple,
+  .select2-container--default .select2-selection--single,
+  .select2-dropdown,
+  .table .thead-light th,
+  .table-hover tbody tr:hover,
+  .toast-header,
+  .wizard-content .wizard>.actions>ul>li>a[href="#previous"],
+  .wizard-content .wizard>.steps .step,
+  .wizard:not(.wizard-circle)>.actions .disabled a,
+  .wizard:not(.wizard-circle)>.actions .disabled a:active,
+  .wizard:not(.wizard-circle)>.actions .disabled a:hover,
+  .wizard:not(.wizard-circle)>.content,
+  .wizard:not(.wizard-circle)>.steps .disabled a,
+  .wizard:not(.wizard-circle)>.steps .disabled a:active,
+  .wizard:not(.wizard-circle)>.steps .disabled a:hover,
+  pre[class*=language-]	#main-wrapper,
+  .breadcrumb,
+  .css-juf2xh-control,
+  .css-kj6f9i-menu,
+  .css-1szy77t-control,
+  ol.progtrckr li.progtrckr-doing:before,
+  ol.progtrckr li.progtrckr-todo:before,
+  .css-es53b3-multiValue,
+  .bootstrap-switch .bootstrap-switch-label,
+  .css-bar>i,
+  .rdtPicker,
+  .f-icon:hover,
+  .t-icon:hover,
+  .w-icon:hover,
+  .sl-icon:hover,
+  .if-icon:hover,
+  .m-icon:hover,
+  .app-drawer .list-group .list-group-item.bg-light,
+  .app-drawer .list-group .list-group-item .list-group-item-action:hover,
+  .app-drawer .list-group .list-group-item .list-group-item-action.active,
+  .form-check-label:before,
+  .chat-list .chat-item .chat-content .box,
+  .rbc-today,
+  .popover,
+  .popover-header,
+  .toast,
+  .custom-file-label:after,
+  .react-tagsinput,
+  .feed-widget .feed-body .feed-item:hover,
+  .comment-widgets .comment-row:hover,
+  .comment-widgets .comment-row.active,
+  .feeds li:hover,
+  .tasklist .task-item.active,
+  .mailbox .message-center .message-item:hover,
+  .notes-item.selected,
+  .cal-month-view .cal-cell-row .cal-cell:hover,
+  .cal-month-view .cal-cell.cal-has-events.cal-open,
+  .cal-month-view .cal-cell-row:hover,
+  .dropdown-list,
+  .filter-textbox input,
+  .striped-rows .row:nth-child(odd),
+  .ngb-dp-header,
+  .ngb-dp-month-name,
+  .custom-day,
+  .wizard-navbar li .round-tabs,
+  .ngx-datatable.material .datatable-header .datatable-header-cell,
+  .ngx-datatable.material,
+  .timeline:before,
+  .contact-list .contact-item.active,
+  .cal-week-view .cal-hour-odd {
+    background-color: $bg-dark-2 !important;
+  }
+}
+
+[data-theme=dark] {
+  .accordion-button,
+  .breadcrumb-item.active,
+  .chat-list .chat-item .chat-content .box,
+  .chat-list .chat-item .chat-content .box.bg-light,
+  .cke_reset_all,
+  .cke_reset_all *,
+  .cke_reset_all a,
+  .cke_reset_all textarea,
+  .custom-file-label::after,
+  .daterangepicker select.ampmselect,
+  .daterangepicker select.hourselect,
+  .daterangepicker select.minuteselect,
+  .daterangepicker select.monthselect,
+  .daterangepicker select.secondselect,
+  .daterangepicker select.yearselect,
+  .dropdown-item,
+  .dropdown-menu,
+  .dtp .dtp-picker-time>a,
+  .dtp table.dtp-picker-days tr>td>a,
+  .email-app .list-group .list-group-item .list-group-item-action,
+  .form-control,
+  .form-select,
+  .input-group-text,
+  .list-group-item-action,
+  .lobilists .btn-link,
+  .lobilists .lobilist-item-title,
+  .mailbox .message-center .message-item .message-title,
+  .mce-container,
+  .mce-container *,
+  .mce-ico,
+  .mce-menubar .mce-menubtn button span,
+  .mce-reset,
+  .mce-widget,
+  .mce-widget *,
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-link:focus,
+  .nav-tabs .nav-link:hover,
+  .noUi-tooltip,
+  .note-btn,
+  .note-editor.note-frame .note-editing-area .note-editable,
+  .page-titles .breadcrumb .breadcrumb-item+.breadcrumb-item::before,
+  .page-wrapper,
+  .picker,
+  .popover-body,
+  .ql-formats button,
+  .ql-snow .ql-picker.ql-header .ql-picker-item::before,
+  .ql-snow .ql-picker.ql-header .ql-picker-label::before,
+  .select2-container--classic .select2-selection--single,
+  .select2-container--default .select2-search--dropdown .select2-search__field,
+  .select2-container--default .select2-selection--multiple,
+  .select2-container--default .select2-selection--single,
+  .select2-container--default .select2-selection--single .select2-selection__arrow,
+  .select2-container--default .select2-selection--single .select2-selection__rendered,
+  .swal2-input,
+  .swal2-popup .swal2-content,
+  .swal2-popup .swal2-title,
+  .table,
+  .table .thead-light th,
+  .table-hover tbody tr:hover,
+  .table-light,
+  .table-striped>tbody>tr:nth-of-type(odd),
+  .text-bodycolor,
+  .toast-header,
+  a.link,
+  button.list-group-item,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul.list-style-none li a {
+    color: $text-dark;
+  }
+}
+
+[data-theme=dark] {
+  .accordion-button:not(.collapsed),
+  .card,
+  .card-footer,
+  .css-bar:after,
+  .dtp>.dtp-content,
+  .form-control,
+  .form-select,
+  .jsgrid-header-row>.jsgrid-header-cell,
+  .jsgrid-row>.jsgrid-cell,
+  .jvectormap-container,
+  .left-part,
+  .list-group-item,
+  .list-group-item-action:active,
+  .lobilists .lobilist,
+  .modal-content,
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs .nav-link.active,
+  .note-editor.note-frame .note-editing-area .note-editable,
+  .note-editor.note-frame .note-statusbar,
+  .page-item.disabled .page-link,
+  .page-link,
+  .popover,
+  .popover-header,
+  .right-part.mail-compose,
+  .right-part.mail-details,
+  .right-part.mail-list,
+  .select2-container--classic .select2-selection--single,
+  .select2-container--default .select2-selection--multiple,
+  .select2-container--default .select2-selection--single,
+  .select2-dropdown,
+  .typeahead.form-control {
+    background-color: $bg-dark !important;
+  }
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-info:hover,
+.btn-default:hover,
+.btn-warning:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-outline-primary:hover:hover,
+.btn-check:checked+.btn-outline-primary:hover,
+.btn-check:checked+.btn-outline-warning:hover,
+.btn-check:checked+.btn-outline-success:hover,
+.btn-check:checked+.btn-outline-danger:hover,
+.btn-outline-warning:hover:hover,
+.btn-outline-danger:hover:hover,
+.btn-outline-info:hover:hover,
+.btn-outline-success:hover:hover,
+.btn-primary.active:hover,
+.btn-info.active:hover,
+.btn-info:focus:hover,
+.btn-info:disabled:hover,
+.btn-success:disabled:hover,
+.btn-primary:disabled:hover,
+.btn-danger.active:hover,
+.btn-success.active:hover,
+.btn-success:focus:hover,
+.btn-danger:focus:hover,
+.btn-primary:focus:hover,
+.show>.btn-danger.dropdown-toggle:hover,
+.show>.btn-primary.dropdown-toggle:hover,
+.show>.btn-info.dropdown-toggle:hover,
+.show>.btn-success.dropdown-toggle:hover,
+.show>.btn-warning.dropdown-toggle:hover {
+  color: $white;
+}
+
+[data-theme=dark] {
+  .bootstrap-switch,
+  .rdtPicker,
+  .rdtPicker th,
+  .border-bottom,
+  .border-top,
+  .border-start,
+  .border-end,
+  .border,
+  .dropdown-menu,
+  .form-control,
+  .custom-select,
+  .table th,
+  .table td,
+  .modal-header,
+  .modal-footer,
+  blockquote,
+  pre[class*=language-],
+  .card-group .card,
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs,
+  .nav-tabs .nav-link:hover,
+  .nav-tabs .nav-link:focus,
+  .list-group-item,
+  .custom-file-label,
+  .input-group-text,
+  .custom-file-label:after,
+  .left-part,
+  .page-link,
+  .profiletimeline,
+  .mailbox .message-center .message-item,
+  .mailbox .nav-link,
+  .dropdown-divider,
+  .table-bordered,
+  .table-bordered td,
+  .table-bordered th,
+  .rbc-month-view,
+  .rbc-day-bg+.rbc-day-bg,
+  .rbc-month-row+.rbc-month-row,
+  .rbc-header,
+  .rbc-time-content>*+*>*,
+  .rbc-time-view,
+  .rbc-day-slot .rbc-time-slot+.rbc-time-slot,
+  .rbc-timeslot-group,
+  .rbc-time-content,
+  .rbc-agenda-view table.rbc-agenda-table tbody>tr>td+td,
+  .rbc-agenda-view table.rbc-agenda-table,
+  .rbc-agenda-view table.rbc-agenda-table tbody>tr+tr,
+  .rdtPicker,
+  .rdtPicker th,
+  .rdtPicker tfoot,
+  .css-1ajl57w-control,
+  .css-bg1rzq-control,
+  .react-tagsinput,
+  ol.progtrckr li.progtrckr-doing,
+  ol.progtrckr li.progtrckr-todo,
+  .steamline .sl-item,
+  .steamline,
+  hr,
+  .right-left-part,
+  .react-tagsinput-tag,
+  .form-check-label:before,
+  .custom-select,
+  .input-group-text,
+  .ReactTable .rt-thead.-filters input,
+  .ReactTable .rt-thead.-filters select,
+  .rbc-time-header-content,
+  .toast-header,
+  .react-tagsinput,
+  .btn-outline-secondary,
+  .comment-widgets .comment-row,
+  .cal-month-view .cal-day-cell:not(:last-child),
+  .cal-month-view .cal-days .cal-cell-row,
+  .cal-month-view .cal-days,
+  .cal-week-view .cal-day-headers,
+  .cal-week-view,
+  .ql-container.ql-snow,
+  .ql-toolbar.ql-snow,
+  .popover-header,
+  .multiselect-dropdown .dropdown-btn,
+  .dropdown-list,
+  .dropdown-list .filter-textbox,
+  .dropdown-list li,
+  .r-separator .form-group,
+  .b-form .row,
+  ngb-datepicker,
+  .btn-light:not(:disabled):not(.disabled):active,
+  .btn-light:not(:disabled):not(.disabled).active,
+  .show>.btn-light.dropdown-toggle,
+  .btn-light:hover .wizard-navbar li .round-tabs,
+  .wizard-navbar li .round-tabs,
+  .ngx-datatable.material,
+  .ngx-datatable.material .datatable-header .resize-handle,
+  .timeline>.timeline-item>.timeline-panel,
+  .cal-week-view .cal-day-headers .cal-header:not(:last-child),
+  .cal-week-view .cal-day-headers .cal-header:not(:last-child),
+  .cal-week-view .cal-hour:not(:last-child) .cal-hour-segment,
+  .cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment,
+  .cal-week-view .cal-time-events,
+  .cal-week-view .cal-day-column {
+    border-color: #fff3!important;
+  }
+}
+
+[data-theme=dark] {
+  .dropdown-item:hover,
+  .dropdown-item:focus,
+  .picker__button--today,
+  .picker__button--clear,
+  .picker__button--close,
+  .rdtCounter .rdtBtn:hover,
+  td.rdtMonth:hover,
+  td.rdtYear:hover,
+  .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default,
+  .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default,
+  .rdtPicker td.rdtDay:hover,
+  .rdtPicker td.rdtHour:hover,
+  .rdtPicker td.rdtMinute:hover,
+  .rdtPicker td.rdtSecond:hover,
+  .rdtPicker .rdtTimeToggle:hover,
+  .customizer {
+    background: #272b34;
+  }
+}
+
+[data-theme=dark] {
+  .bootstrap-switch,
+  .rdtPicker,
+  .rdtPicker th,
+  .border-bottom,
+  .border-top,
+  .border-start,
+  .border-end,
+  .border,
+  .dropdown-menu,
+  .form-control,
+  .custom-select,
+  .table th,
+  .table td,
+  .modal-header,
+  .modal-footer,
+  blockquote,
+  pre[class*=language-],
+  .card-group .card,
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs,
+  .nav-tabs .nav-link:hover,
+  .nav-tabs .nav-link:focus,
+  .list-group-item,
+  .custom-file-label,
+  .input-group-text,
+  .custom-file-label:after,
+  .left-part,
+  .right-sale,
+  .page-link,
+  .profiletimeline,
+  .mailbox .message-center .message-item,
+  .mailbox .nav-link,
+  .dropdown-divider,
+  .table-bordered,
+  .table-bordered td,
+  .table-bordered th,
+  .rbc-month-view,
+  .rbc-day-bg+.rbc-day-bg,
+  .rbc-month-row+.rbc-month-row,
+  .rbc-header,
+  .rbc-time-content>*+*>*,
+  .rbc-time-view,
+  .rbc-day-slot .rbc-time-slot+.rbc-time-slot,
+  .rbc-timeslot-group,
+  .rbc-time-content,
+  .rbc-agenda-view table.rbc-agenda-table tbody>tr>td+td,
+  .rbc-agenda-view table.rbc-agenda-table,
+  .rbc-agenda-view table.rbc-agenda-table tbody>tr+tr,
+  .rdtPicker,
+  .rdtPicker th,
+  .rdtPicker tfoot,
+  .css-1ajl57w-control,
+  .css-bg1rzq-control,
+  .react-tagsinput,
+  ol.progtrckr li.progtrckr-doing,
+  ol.progtrckr li.progtrckr-todo,
+  .steamline .sl-item,
+  .steamline,
+  hr,
+  .right-left-part,
+  .react-tagsinput-tag,
+  .form-check-label:before,
+  .custom-select,
+  .input-group-text,
+  .ReactTable .rt-thead.-filters input,
+  .ReactTable .rt-thead.-filters select,
+  .rbc-time-header-content,
+  .toast-header,
+  .react-tagsinput,
+  .btn-outline-secondary,
+  .comment-widgets .comment-row,
+  .cal-month-view .cal-day-cell:not(:last-child),
+  .cal-month-view .cal-days .cal-cell-row,
+  .cal-month-view .cal-days,
+  .cal-week-view .cal-day-headers,
+  .cal-week-view,
+  .ql-container.ql-snow,
+  .ql-toolbar.ql-snow,
+  .popover-header,
+  .multiselect-dropdown .dropdown-btn,
+  .dropdown-list,
+  .dropdown-list .filter-textbox,
+  .dropdown-list li,
+  .r-separator .form-group,
+  .b-form .row,
+  ngb-datepicker,
+  .btn-light:not(:disabled):not(.disabled):active,
+  .btn-light:not(:disabled):not(.disabled).active,
+  .show>.btn-light.dropdown-toggle,
+  .btn-light:hover .wizard-navbar li .round-tabs,
+  .wizard-navbar li .round-tabs,
+  .ngx-datatable.material,
+  .ngx-datatable.material .datatable-header .resize-handle,
+  .timeline>.timeline-item>.timeline-panel,
+  .cal-week-view .cal-day-headers .cal-header:not(:last-child),
+  .cal-week-view .cal-day-headers .cal-header:not(:last-child),
+  .cal-week-view .cal-hour:not(:last-child) .cal-hour-segment,
+  .cal-week-view .cal-hour:last-child :not(:last-child) .cal-hour-segment,
+  .cal-week-view .cal-time-events,
+  .cal-week-view .cal-day-column {
+    border-color: #fff3!important;
+  }
+}
+
+.btn:focus,
+.btn:active {
+  box-shadow: none !important;
+}
+
+[data-theme=dark] .bg-white {
+  background-color: $bg-dark !important;
+}
+
+[data-theme=dark] {
+  .form-control:focus
+  {
+    border-color: #fff6 !important;
+  }
+}
+
+[data-theme=dark] {
+  input:focus,
+  select:focus
+  {
+    box-shadow: none;
+  }
+}
+
+/*******************
+Footer
+*******************/
+
+.footer {
+  padding: 15px 20px;
+}
+
+/*******************
+Vertical layout
+*******************/
+
+#main-wrapper[data-layout="vertical"] {
+  /*Vertical*/
+  .topbar .top-navbar .navbar-header {
+    //width: $sidebar-width-full;
+    transition: 0.2s ease-in;
+  }
+
+  /*sidebar type*/
+  &[data-sidebartype="full"] {
+    .page-wrapper {
+      margin-left: $sidebar-width-full;
+    }
+  }
+}
+
+/*******************
+Vertical responsive layout
+*******************/
+
+@include media-breakpoint-up(md) {
+  #main-wrapper[data-layout="vertical"] {
+    /*Vertical*/
+    &[data-sidebartype="full"] {
+      .topbar .top-navbar .navbar-header {
+        width: $sidebar-width-full;
+      }
+    }
+    /*Sidebar position*/
+    &[data-sidebar-position="fixed"] {
+      .topbar .top-navbar .navbar-header {
+        position: fixed;
+        z-index: 10;
+      }
+      .left-sidebar {
+        position: fixed;
+      }
+    }
+    /*Header position*/
+    &[data-header-position="fixed"] {
+      .topbar {
+        position: fixed;
+        width: 100%;
+      }
+      .page-wrapper {
+        padding-top: 70px;
+      }
+    }
+    &[data-sidebar-position="fixed"][data-sidebartype="full"] {
+      .topbar .top-navbar .navbar-collapse {
+        margin-left: $sidebar-width-full;
+      }
+    }
+    &[data-sidebar-position="fixed"][data-sidebartype="mini-sidebar"] {
+      .topbar .top-navbar .navbar-collapse {
+        margin-left: $sidebar-width-mini;
+      }
+      .left-sidebar {
+        width: 65px;
+      }
+      .left-sidebar:hover {
+        width: 250px;
+      }
+      .left-sidebar:hover .sidebar-nav .hide-menu,
+      .left-sidebar:hover .sidebar-nav .has-arrow:after {
+        display: block;
+      }
+      .sidebar-nav .hide-menu,
+      .sidebar-nav .has-arrow:after {
+        display: none;
+      }
+    }
+    /*Vertical with mini-sidebar*/
+    &[data-sidebartype="mini-sidebar"] {
+      .topbar .top-navbar .navbar-header {
+        width: $sidebar-width-mini;
+        .logo-text {
+          display: none;
+        }
+        &.expand-logo {
+          width: $sidebar-width-full;
+          .logo-text {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  #main-wrapper {
+    &[data-layout="vertical"][data-sidebartype="full"] {
+      .page-wrapper {
+        margin-left: 0;
+      }
+    }
+
+    &[data-sidebartype="full"] {
+      .left-sidebar {
+        left: -$sidebar-width-full;
+      }
+    }
+    &.show-sidebar {
+      .left-sidebar {
+        left: 0;
+      }
+    }
+    &[data-layout="vertical"][data-sidebar-position="fixed"] {
+      .topbar .top-navbar {
+        .navbar-collapse {
+          position: relative;
+          top: $topbar-height;
+        }
+      }
+    }
+    /*Header position*/
+    &[data-layout="vertical"][data-header-position="fixed"][data-sidebar-position="fixed"] {
+      .topbar .top-navbar {
+        .navbar-collapse {
+          position: relative;
+          top: $topbar-height;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  #main-wrapper[data-layout=vertical][data-sidebar-position=fixed][data-sidebartype=mini-sidebar]
+  .topbar
+  .top-navbar
+  .navbar-collapse,
+  #main-wrapper[data-layout=vertical][data-sidebartype=mini-sidebar]
+  .page-wrapper
+  {
+    margin-left: 65px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #b2b9bf;
+  border: 0px none #b2b9bf;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b2b9bf;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #b2b9bf;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

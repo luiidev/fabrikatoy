@@ -1,0 +1,50 @@
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center">
+  <div class="auth-box">
+    <div class="card m-0">
+      <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f" alt="Card" class="card-img-top img-responsive">
+      <!-- Form -->
+      <div class="card-body form-material">
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <input class="form-control" type="text" name="nick" required="" placeholder="Username" [(ngModel)]="user.nick">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <input class="form-control" type="password" name="password" required="" placeholder="Password" [(ngModel)]="user.password" (enter)="login()">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <label class="checkbox-group">
+                <input type="checkbox" [checked]="user.remenber">
+                <div class="checkmark"></div>
+                <span>Recordarme</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-2">
+              <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="errorMessage">{{ errorMessage }}</ngb-alert>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <span class=" btn btn-info d-block w-100 waves-effect waves-light" (click)="login()" [class.not-events]="isLoadingResults">
+              Log In
+              </span>
+          </div>
+        </div>
+      </div>
+      <!-- End Form -->
+    </div>
+  </div>
+</div>

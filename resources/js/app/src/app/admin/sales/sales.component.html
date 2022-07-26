@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-12">
+    <spinner *ngIf="isLoadingResults"></spinner>
+    <a href="javascript:void(0)" class="btn btn-lg mb-3 text-white show-left-part d-block d-md-none fa fa-list" [class.fa-close]="showPanel" (click)="showPanelToggle()"></a>
+    <div class="main-sale">
+      <div class="left-sale bg-white fixed-left-sale d-flex flex-column">
+        <nav class="navbar navbar-dark navbar-expand-md p-0 border-bottom">
+          <div class="navbar-collapse collapse overflow-auto">
+            <ul class="navbar-nav">
+              <li class="nav-item p-2 d-flex align-items-center" [class.bg-info]="category.selected" (click)="categorySelected(category)" *ngFor="let category of categories; let i = index">
+                <a class="nav-link text-nowrap pointer">{{ category.name }}</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="pt-3 px-3">
+          <search (searchTerm)="searchProduct($event)"></search>
+        </div>
+        <div class="px-3 flex-grow-1 overflow-auto">
+          <div class="row el-element-overlay">
+            <div class="col-lg-3 col-6" *ngFor="let product of products">
+              <div class="card">
+                <div class="el-card-item pointer" (click)="add(product)">
+                  <div class="el-overlay-1 mb-3">
+                    <img width="100%" height="auto" [src]="product.image" alt="user">
+                  </div>
+                  <div class="px-2">
+                    <h5 class="mb-0">{{ product.name }}</h5>
+                    <span class="text-muted text-sm line-height-1 mt-1 d-block">{{ product.brand?.name }}</span>
+                    <span class="d-block mt-1">S/{{ product.price }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-sale bg-white" [class.show-panel]="showPanel">
+        <div class="d-flex flex-column h-100 position-relative">
+          <div class="d-flex align-items-center p-3 border-bottom">
+            <div class="flex-grow-1 pointer" (click)="voucher('ticket')" *ngIf="!sale.customer.document_number"><i class="fa fa-user mr-10"></i>Agregar cliente</div>
+            <!-- <div class="flex-grow-1 pointer" (click)="voucher('ticket')" *ngIf="sale.customer.document_number"><i class="fa fa-user mr-10"></i>{{ sale.customer.name }}</div> -->
+            <a href="javascript:void(0)" class="flex-grow-1" *ngIf="sale.customer.document_number">
+              <h5 class="message-title">{{ sale.customer.name }}</h5>
+              <span class="d-block fs-3 text-muted">{{ sale.customer.document_number }}</span>
+              <span class="fs-2 d-block text-muted" *ngIf="sale.customer.document_type === 'RUC'">{{ sale.customer.address }}</span>
+            </a>
+            <span class="font-medium ml-15" (click)="removeCustomer()" *ngIf="sale.customer.document_number"><i class="fa fa-trash pointer"></i></span>
+          </div>
+          <ul class="contact-list list-style-none flex-grow-1 overflow-auto">
+            <li class="contact-item border-bottom px-3 py-2 d-flex gap-3 align-items-center" *ngFor="let product of sale.products">
+              <img height="35" width="35" class="rounded-circle" [src]="product.image">
+              <div class="line-height-1 flex-grow-1">
+                <span class="font-medium">{{ product.name }}</span>
+                <span class="text-muted text-sm my-1 d-block">{{ product.brand?.name }}</span>
+                <span class="text-secondary text-sm d-block">{{ product.quantity_sale }} x 1 {{ product.unit?.name }} {{ product.price | currency:'S/' }}</span>
+                <span class="text-secondary text-sm d-block">{{ product.subtotal | currency:'S/' }}</span>
+              </div>
+              <div class="font-medium d-flex gap-2 justify-content-between">
+                <i class="fa fa-minus pointer" (click)="minus(product)"></i>
+                <span>{{ product.quantity_sale }}</span>
+                <i class="fa fa-plus pointer" (click)="sum(product)"></i>
+              </div>
+              <span class="font-medium ml-15" (click)="remove(product)"><i class="fa fa-trash pointer"></i></span>
+            </li>
+          </ul>
+          <div class="p-3">
+            <p class="mb-1">Subtotal: <span class="float-end">{{ sale.subtotal | currency:'S/' }}</span></p>
+            <p class="mb-1">IGV (18%): <span class="float-end">{{ sale.igv | currency:'S/' }}</span></p>
+            <hr>
+            <h3><b>Total :</b><span class="float-end">{{ sale.total | currency:'S/' }}</span></h3>
+            <hr>
+            <button type="button" class="btn btn-info w-100" (click)="save()" [disabled]="!sale.products.length">Vender</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
