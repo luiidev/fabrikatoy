@@ -76,8 +76,8 @@ class DatabaseSeeder extends Seeder
             ->update([
                 'name' => 'Fabrika Toy',
                 'ruc' => '20607395552',
-                'logo' => 'https://fabrikatoy.s3.amazonaws.com/images/logo/1/fabrikatoy.png',
-                'short_logo' => 'https://fabrikatoy.s3.amazonaws.com/images/logo/1/short-fabrikatoy.png',
+                'logo' => null,
+                'short_logo' => null,
             ]);
 
         User::find(1)
@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
                 'first_name' => 'Fabrika Toy',
                 'last_name' => 'Administrador',
                 'role' => 1,
-                'image' => 'https://fabrikatoy.s3.amazonaws.com/images/user/1/oaZy5wtZipgcuRQpFkaXTHBVU3XB7GaPAS5e.png',
+                'image' => null,
             ]);
     }
 }

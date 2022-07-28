@@ -24,14 +24,6 @@ export class FullComponent implements OnInit {
     nick: '',
     full_name: '',
     email: '',
-    phone: '',
-    image: '',
-    role_name: '',
-    company: {
-      name: '',
-      logo: 'https://fabrikatoy.s3.amazonaws.com/images/logo/logo-chunka-light.png',
-      short_logo: 'https://fabrikatoy.s3.amazonaws.com/images/logo/short-logo-chunka-light-1.png',
-    }
   };
 
   constructor(

@@ -18,12 +18,6 @@ export class NavigationComponent implements AfterViewInit {
     nick: '',
     full_name: '',
     email: '',
-    phone: '',
-    image: '',
-    role_name: '',
-    company: {
-      name: ''
-    }
   };
 
   constructor(

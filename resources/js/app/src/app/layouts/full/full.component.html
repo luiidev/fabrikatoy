@@ -34,17 +34,17 @@
         <!-- ============================================================== -->
         <a class="navbar-brand" [routerLink]="'/punto-de-venta'">
           <!-- Logo icon -->
-          <b class="logo-icon" *ngIf="user?.company?.short_logo">
+          <b class="logo-icon">
             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
             <!-- Dark Logo icon -->
             <img
-            [src]="user?.company?.short_logo"
+            [src]="user.company?.short_logo ?? 'assets/img/logo/logo-min.png'"
             alt=""
             class="dark-logo"
             />
             <!-- Light Logo icon -->
             <img
-              [src]="user?.company?.short_logo"
+              [src]="user.company?.short_logo ?? 'assets/img/logo/logo-min.png'"
               alt=""
               class="dark-light"
             />
@@ -54,13 +54,13 @@
           <span class="logo-text" *ngIf="user?.company?.logo">
             <!-- Dark Logo icon -->
             <img
-            [src]="user?.company?.logo"
+            [src]="user.company?.logo ?? 'assets/img/logo/logo-min.png'"
             class="dark-logo"
             alt=""
             />
             <!-- Light Logo text -->
             <img
-              [src]="user?.company?.logo"
+              [src]="user.company?.logo ?? 'assets/img/logo/logo-min.png'"
               class="light-logo"
               alt=""
             />

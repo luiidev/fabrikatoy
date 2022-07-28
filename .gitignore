@@ -7,6 +7,7 @@
 /public/*.woff2
 /public/*.txt
 /public/mix-manifest.json
+/resources/views/app
 /storage/*.key
 /vendor
 .env
@@ -18,3 +19,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+**/.DS_Store

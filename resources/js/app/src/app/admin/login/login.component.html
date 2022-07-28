@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-12">
             <div class="mb-3">
-              <input class="form-control" type="password" name="password" required="" placeholder="Password" [(ngModel)]="user.password" (enter)="login()">
+              <input class="form-control" type="password" name="password" required="" placeholder="Password" [(ngModel)]="user.password" (keydown.enter)="login()">
             </div>
           </div>
         </div>

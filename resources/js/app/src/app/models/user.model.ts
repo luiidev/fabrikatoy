@@ -9,6 +9,6 @@ export interface User {
     address?: string;
     phone?: string;
     image?: string;
-    role_name: string;
+    role_name?: string;
     company?: Company;
 }
