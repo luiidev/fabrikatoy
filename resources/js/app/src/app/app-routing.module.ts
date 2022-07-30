@@ -9,6 +9,7 @@ import { ProvidersComponent } from './admin/providers/providers.component';
 import { CompaniesComponent } from './admin/companies/companies.component';
 import { BrandsComponent } from './admin/brands/brands.component';
 import { PointOfSaleComponent } from './admin/sales/sales.component';
+import { UsersComponent } from './admin/users/users.component';
 
 export const AppRoutes: Routes = [
   {
@@ -27,6 +28,10 @@ export const AppRoutes: Routes = [
       {
 				path: 'perfil',
 				component: ProfileComponent
+			},
+      {
+				path: 'usuarios',
+				component: UsersComponent
 			},
       {
 				path: 'productos',

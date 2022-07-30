@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs';
-import { SuccsessModalComponent, WarnModalComponent } from 'src/app//admin/modals/modals.component';
+import { SuccsessModalComponent, WarnModalComponent } from 'src/app/helpers/modals/modals.component';
 import Utils from 'src/app/helpers/utils';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';

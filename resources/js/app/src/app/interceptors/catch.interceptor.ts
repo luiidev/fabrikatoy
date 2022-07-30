@@ -9,7 +9,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { WarnModalComponent } from '../admin/modals/modals.component';
+import { WarnModalComponent } from '../helpers/modals/modals.component';
 import { Router } from '@angular/router';
 
 @Injectable()

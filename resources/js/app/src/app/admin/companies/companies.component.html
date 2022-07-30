@@ -26,7 +26,7 @@
               </ng-container>
 
               <ng-container cdkColumnDef="name">
-                <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Names</th>
+                <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Nombre</th>
                 <td cdk-cell *cdkCellDef="let provider">
                   {{ provider.name }}
                   <h6 class="d-block mb-0 mt-1" *ngIf="provider.company">{{ provider.company.name }}</h6>

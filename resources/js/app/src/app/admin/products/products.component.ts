@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import HttpUtils from 'src/app/helpers/http.util';
 import Utils from 'src/app/helpers/utils';
-import { SuccsessModalComponent } from '../modals/modals.component';
+import { SuccsessModalComponent } from '../../helpers/modals/modals.component';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import ProductRequest from 'src/app/models/product.model';
@@ -109,7 +109,7 @@ export class ProductsComponent {
               <div class="mb-3">
                 <label>Empresa <span class="text-sm font-medium text-muted pointer ml-15" (click)="searchCompany()">Cambiar</span></label>
                 <label class="d-block">{{ product.company?.name }}</label>
-                <label class="d-block" *ngIf="!product.company">-Empresa autenticada-</label>
+                <label class="d-block text-secondary" *ngIf="!product.company">-</label>
               </div>
             </div>
           </div>
@@ -132,12 +132,12 @@ export class ProductsComponent {
               <div class="mb-3">
                 <div class="mb-3"><label class="control-label">Estado</label>
                   <div class="form-check">
-                    <input type="radio" name="product-state" class="form-check-input" [value]="1" [(ngModel)]="product.state">
-                    <label for="state-active" class="form-check-label">Activo</label>
+                    <input type="radio" id="product-active" name="product-state" class="form-check-input" [value]="1" [(ngModel)]="product.state">
+                    <label for="product-active" class="form-check-label">Activo</label>
                   </div>
                   <div class="form-check">
-                    <input type="radio" name="product-state" class="form-check-input" [value]="0" [(ngModel)]="product.state">
-                    <label for="state-inactive" class="form-check-label">Inactivo</label>
+                    <input type="radio" id="product-inactive" name="product-state" class="form-check-input" [value]="0" [(ngModel)]="product.state">
+                    <label for="product-inactive" class="form-check-label">Inactivo</label>
                   </div>
                 </div>
               </div>
@@ -148,7 +148,7 @@ export class ProductsComponent {
               <div class="mb-3">
                 <label class="control-label">Marca <span class="text-sm font-medium text-muted pointer ml-15" (click)="searchBrand()">Cambiar</span></label>
                 <label class="d-block">{{ product.brand?.name }}</label>
-                <label class="d-block" *ngIf="!product.brand">-No asignado-</label>
+                <label class="d-block text-secondary" *ngIf="!product.brand">-</label>
               </div>
             </div>
           </div>

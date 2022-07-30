@@ -10,7 +10,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import HttpUtils from 'src/app/helpers/http.util';
 import Utils from 'src/app/helpers/utils';
 import { ProviderService } from 'src/app/services/provider.service';
-import { SuccsessModalComponent } from '../modals/modals.component';
+import { SuccsessModalComponent } from '../../helpers/modals/modals.component';
 import ProviderRequest, { Provider } from 'src/app/models/provider.model';
 import { CompaniesComponent } from '../companies/companies.component';
 import { Company } from 'src/app/models/company.model';
@@ -65,7 +65,7 @@ export class ProvidersComponent {
   }
 
   createOrEdit(provider?: Provider) {
-    const modalRef = this.ngbModal.open(ProviderStoreOrUpdateComponent, { backdropClass: 'z-index-backdrop-level-3', windowClass: 'z-index-window-level-3' });
+    const modalRef = this.ngbModal.open(ProviderStoreOrUpdateComponent, this.isModal ? Utils.modalIndex3 : {});
 
     if (provider) {
       modalRef.componentInstance.provider = Object.assign({}, provider);
@@ -100,7 +100,7 @@ export class ProvidersComponent {
               <div class="mb-3">
                 <label>Empresa <span class="text-sm font-medium text-muted pointer ml-15" (click)="searchCompany()">Cambiar</span></label>
                 <label class="d-block">{{ provider.company?.name }}</label>
-                <label class="d-block" *ngIf="!provider.company">-Empresa autenticada-</label>
+                <label class="d-block text-secondary" *ngIf="!provider.company">-</label>
               </div>
             </div>
           </div>
@@ -131,12 +131,12 @@ export class ProvidersComponent {
               <div class="mb-3">
                 <div class="mb-3"><label class="control-label">Estado</label>
                   <div class="form-check">
-                    <input type="radio" name="provider-state" class="form-check-input" [value]="1" [(ngModel)]="provider.state">
-                    <label for="state-active" class="form-check-label">Activo</label>
+                    <input type="radio" id="provider-active" name="provider-state" class="form-check-input" [value]="1" [(ngModel)]="provider.state">
+                    <label for="provider-active" class="form-check-label">Activo</label>
                   </div>
                   <div class="form-check">
-                    <input type="radio" name="provider-state" class="form-check-input" [value]="0" [(ngModel)]="provider.state">
-                    <label for="state-inactive" class="form-check-label">Inactivo</label>
+                    <input type="radio" id="provider-inactive" name="provider-state" class="form-check-input" [value]="0" [(ngModel)]="provider.state">
+                    <label for="provider-inactive" class="form-check-label">Inactivo</label>
                   </div>
                 </div>
               </div>

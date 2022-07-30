@@ -11,7 +11,7 @@ import HttpUtils from 'src/app/helpers/http.util';
 import Utils from 'src/app/helpers/utils';
 import { Company } from 'src/app/models/company.model';
 import { CompanyService } from 'src/app/services/company.service';
-import { SuccsessModalComponent } from '../modals/modals.component';
+import { SuccsessModalComponent } from '../../helpers/modals/modals.component';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
@@ -169,12 +169,12 @@ export class SearchComponent {
               <div class="mb-3">
                 <div class="mb-3"><label class="control-label">Estado</label>
                   <div class="form-check">
-                    <input type="radio" name="company-state" class="form-check-input" [value]="1" [(ngModel)]="company.state">
-                    <label for="state-active" class="form-check-label">Activo</label>
+                    <input type="radio" id="company-active" name="company-state" class="form-check-input" [value]="1" [(ngModel)]="company.state">
+                    <label for="company-active" class="form-check-label">Activo</label>
                   </div>
                   <div class="form-check">
-                    <input type="radio" name="company-state" class="form-check-input" [value]="0" [(ngModel)]="company.state">
-                    <label for="state-inactive" class="form-check-label">Inactivo</label>
+                    <input type="radio" id="company-inactive" name="company-state" class="form-check-input" [value]="0" [(ngModel)]="company.state">
+                    <label for="company-inactive" class="form-check-label">Inactivo</label>
                   </div>
                 </div>
               </div>

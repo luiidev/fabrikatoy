@@ -29,12 +29,13 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { CatchInterceptor } from './interceptors/catch.interceptor';
 
-import { SearchComponent } from './admin/search/search.component';
+import { SearchComponent } from './helpers/search/search.component';
 import { LoginComponent } from './admin/login/login.component';
 import { ProductsComponent, ProductStoreOrUpdateComponent } from './admin/products/products.component';
 import { ProvidersComponent, ProviderStoreOrUpdateComponent } from './admin/providers/providers.component';
 import { CompaniesComponent, SearchComponent as CompanySearchComponent, CompaniesStoreOrUpdateComponent } from './admin/companies/companies.component'
 import { BrandsComponent, BrandsStoreOrUpdateComponent } from './admin/brands/brands.component';
+import { UsersComponent, UsersStoreOrUpdateComponent } from './admin/users/users.component';
 import { RoleuserInterceptor } from './interceptors/roleuser.interceptor';
 import { CustomerVoucherComponent, PointOfSaleComponent } from './admin/sales/sales.component';
 
@@ -64,7 +65,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrandsComponent,
     BrandsStoreOrUpdateComponent,
     PointOfSaleComponent,
-    CustomerVoucherComponent
+    CustomerVoucherComponent,
+    UsersComponent,
+    UsersStoreOrUpdateComponent,
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,8 @@
-import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { merge, Observable, OperatorFunction } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, switchMap, startWith } from 'rxjs/operators';
+import { merge } from 'rxjs';
+import { catchError, map, switchMap, startWith } from 'rxjs/operators';
 import { Pagination } from 'src/app/models/pagination.model';
 import { TableFilter } from 'src/app/helpers/table.util';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,8 +11,7 @@ import HttpUtils from 'src/app/helpers/http.util';
 import Utils from 'src/app/helpers/utils';
 import BrandRequest, { Brand } from 'src/app/models/brand.model';
 import { BrandService } from 'src/app/services/brand.service';
-import { SuccsessModalComponent } from '../modals/modals.component';
-import { HttpParams } from '@angular/common/http';
+import { SuccsessModalComponent } from '../../helpers/modals/modals.component';
 import { CompaniesComponent } from '../companies/companies.component';
 import { Company } from 'src/app/models/company.model';
 import { environment } from 'src/environments/environment';
@@ -66,7 +65,7 @@ export class BrandsComponent {
   }
 
   createOrEdit(brand?: Brand) {
-    const modalRef = this.ngbModal.open(BrandsStoreOrUpdateComponent, { backdropClass: 'z-index-backdrop-level-3', windowClass: 'z-index-window-level-3' });
+    const modalRef = this.ngbModal.open(BrandsStoreOrUpdateComponent, this.isModal ? Utils.modalIndex3 : {});
 
     if (brand) {
       modalRef.componentInstance.brand = Object.assign({}, brand);
@@ -101,7 +100,7 @@ export class BrandsComponent {
               <div class="mb-3">
                 <label>Empresa <span class="text-sm font-medium text-muted pointer ml-15" (click)="searchCompany()">Cambiar</span></label>
                 <label class="d-block">{{ brand.company?.name }}</label>
-                <label class="d-block" *ngIf="!brand.company">-Empresa autenticada-</label>
+                <label class="d-block text-secondary" *ngIf="!brand.company">-</label>
               </div>
             </div>
           </div>
@@ -118,12 +117,12 @@ export class BrandsComponent {
               <div class="mb-3">
                 <div class="mb-3"><label class="control-label">Estado</label>
                   <div class="form-check">
-                    <input type="radio" name="brand-state" class="form-check-input" [value]="1" [(ngModel)]="brand.state">
-                    <label for="state-active" class="form-check-label">Activo</label>
+                    <input type="radio" id="brand-active" name="brand-state" class="form-check-input" [value]="1" [(ngModel)]="brand.state">
+                    <label for="brand-active" class="form-check-label">Activo</label>
                   </div>
                   <div class="form-check">
-                    <input type="radio" name="brand-state" class="form-check-input" [value]="0" [(ngModel)]="brand.state">
-                    <label for="state-inactive" class="form-check-label">Inactivo</label>
+                    <input type="radio" id="brand-inactive" name="brand-state" class="form-check-input" [value]="0" [(ngModel)]="brand.state">
+                    <label for="brand-inactive" class="form-check-label">Inactivo</label>
                   </div>
                 </div>
               </div>
