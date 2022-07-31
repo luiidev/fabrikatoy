@@ -19,6 +19,10 @@ class ProductController extends Controller
 
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
+        $request->validate([
+            'sort' => 'in:name,quantity'
+        ]);
+
         $products = Product::query()
             ->with(['unit', 'providers', 'brand'])
             ->own()

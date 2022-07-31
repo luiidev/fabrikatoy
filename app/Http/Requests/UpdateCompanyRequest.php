@@ -18,7 +18,8 @@ class UpdateCompanyRequest extends FormRequest
             'name' => 'required|string|max:255',
             'ruc' => 'nullable|string|digits:11',
             'address' => 'nullable|string|max:255',
-            'website' => 'nullable|string|max:255'
+            'website' => 'nullable|string|max:255',
+            'state' => 'required|in:0,1',
         ];
     }
 }

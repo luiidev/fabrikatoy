@@ -23,6 +23,7 @@ class StoreBrandRequest extends FormRequest
                     Rule::exists('companies', 'id')
                         ->where('id', request()->user()->company_id) : null
             ],
+            'state' => 'required|in:0,1',
         ];
     }
 }

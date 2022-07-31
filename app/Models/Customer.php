@@ -12,11 +12,6 @@ class Customer extends Model
 {
     use HasFactory, GlobalScopes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'document_type',
         'document_number',
@@ -24,16 +19,16 @@ class Customer extends Model
         'address',
         'email',
         'phone',
+        'state',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'created_at',
         'updated_at',
+    ];
+
+    protected $appends = [
+        'state_name'
     ];
 
     public function name(): Attribute
@@ -43,12 +38,17 @@ class Customer extends Model
         );
     }
 
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
+    protected function stateName(): Attribute
+    {
+        return Attribute::get(fn($value, $attributes) => $attributes['state'] === 1 ? 'Activo' : 'Inactivo');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    protected static function boot(): void
     {
         parent::boot();
 

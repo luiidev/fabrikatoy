@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\GlobalScopes;
 use App\Models\Base\Model;
@@ -11,11 +12,6 @@ class Provider extends Model
 {
     use HasFactory, GlobalScopes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'company_id',
         'ruc',
@@ -25,25 +21,20 @@ class Provider extends Model
         'state',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'created_at',
         'updated_at',
         'pivot'
     ];
 
-    /**
-     * The attributes that should add.
-     *
-     * @var array<int, string>
-     */
     protected $appends = [
         'state_name'
     ];
+
+    protected function stateName(): Attribute
+    {
+        return Attribute::get(fn($value, $attributes) => $attributes['state'] === 1 ? 'Activo' : 'Inactivo');
+    }
 
     public function company()
     {
@@ -60,17 +51,7 @@ class Provider extends Model
         return $this->morphToMany(Contact::class, 'contactable');
     }
 
-    public function getStateNameAttribute(): string
-    {
-        return $this->attributes['state'] ? 'Activo' : 'Inactivo';
-    }
-
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Traits\GlobalScopes;
@@ -11,11 +12,6 @@ class Product extends Model
 {
     use HasFactory, GlobalScopes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'company_id',
         'brand_id',
@@ -24,11 +20,6 @@ class Product extends Model
         'state',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'created_at',
         'updated_at',
@@ -36,19 +27,14 @@ class Product extends Model
         'pivot',
     ];
 
-    /**
-     * The attributes that should add.
-     *
-     * @var array<int, string>
-     */
     protected $appends = [
         'state_name'
     ];
 
 
-    public function getStateNameAttribute(): string
+    protected function stateName(): Attribute
     {
-        return $this->attributes['state'] ? 'Activo' : 'Inactivo';
+        return Attribute::get(fn($value, $attributes) => $attributes['state'] === 1 ? 'Activo' : 'Inactivo');
     }
 
     public function unit()
@@ -76,12 +62,7 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
 

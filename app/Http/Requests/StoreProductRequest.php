@@ -26,16 +26,14 @@ class StoreProductRequest extends FormRequest
                     ->where('id', request()->user()->company_id) : null
             ],
             'brand_id' => [
-                'required',
-                !Auth::user()->isSuper() ?
+                'nullable',
                 Rule::exists('brands', 'id')
-                    ->where('company_id', request()->user()->company_id) : null
+                    ->where('company_id', request()->user()->company_id)
             ],
             'provider' => 'array',
             'provider.*' => [
-                !Auth::user()->isSuper() ?
                 Rule::exists('providers', 'id')
-                    ->where('company_id', request()->user()->company_id) : null
+                    ->where('company_id', request()->user()->company_id)
             ]
         ];
     }

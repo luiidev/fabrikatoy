@@ -17,6 +17,10 @@ class BrandController extends Controller
 
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
+        $request->validate([
+            'sort' => 'in:name'
+        ]);
+
         $products = Brand::query()
             ->own()
             ->whereLike('name', $request->input('search'))
@@ -37,7 +41,7 @@ class BrandController extends Controller
         //
     }
 
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(UpdateBrandRequest $request, Brand $brand): \Illuminate\Http\JsonResponse
     {
         $brand->update($request->only(['company_id', 'name', 'state']));
 

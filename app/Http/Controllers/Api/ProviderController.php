@@ -18,6 +18,10 @@ class ProviderController extends Controller
 
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
+        $request->validate([
+            'sort' => 'in:name'
+        ]);
+
         $products = Provider::query()
             ->own()
             ->whereLike('name', $request->input('search'))

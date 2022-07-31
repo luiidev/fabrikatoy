@@ -16,7 +16,7 @@ class PaginationRequest extends FormRequest
     {
         return [
             'search' => 'nullable|string|max:255',
-            'sort' => 'nullable|string|in:name,quantity',
+            'sort' => 'nullable|string',
             'direction' => 'nullable|string|in:asc,desc',
             'page' => 'nullable|numeric',
             'per_page' => 'nullable|numeric|in:5,10,25',

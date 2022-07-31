@@ -17,6 +17,10 @@ class CompanyController extends Controller
 
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
+        $request->validate([
+            'sort' => 'in:name'
+        ]);
+
         $products = Company::query()
             ->own()
             ->whereLike('name', $request->input('search'))

@@ -35,13 +35,13 @@ class CategoryPolicy
         return $user->company_id === $brand->company_id;
     }
 
-    public function restore(User $user, Category $brand)
+    public function restore(User $user, Category $brand): bool
     {
-        //
+        return false;
     }
 
-    public function forceDelete(User $user, Category $brand)
+    public function forceDelete(User $user, Category $brand): bool
     {
-        //
+        return false;
     }
 }

@@ -35,13 +35,13 @@ class ProviderPolicy
         return $user->company_id === $provider->company_id;
     }
 
-    public function restore(User $user, Provider $provider)
+    public function restore(User $user, Provider $provider): bool
     {
-        //
+        return false;
     }
 
-    public function forceDelete(User $user, Provider $provider)
+    public function forceDelete(User $user, Provider $provider): bool
     {
-        //
+        return false;
     }
 }

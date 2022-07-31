@@ -3,14 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Base\User as Authenticatable;
+use App\Models\Traits\GlobalScopes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, GlobalScopes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,15 +22,17 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'company_id',
+        'branch_office_id',
         'nick',
         'password',
         'first_name',
         'last_name',
         'dni',
         'phone',
-        'state',
+        'address',
         'role',
         'email',
+        'state',
     ];
 
     /**
@@ -36,8 +41,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'state',
-        'role',
         'password',
         'remember_token',
         'email_verified_at',
@@ -62,6 +65,7 @@ class User extends Authenticatable
     protected $appends = [
         'full_name',
         'role_name',
+        'state_name',
     ];
 
     public function isSuper(): bool
@@ -74,37 +78,53 @@ class User extends Authenticatable
         return in_array($this->attributes['role'], [1, 2]);
     }
 
-    public function getFullNameAttribute(): string
+    protected function firstName(): Attribute
     {
-        return ucwords(strtolower($this->attributes['first_name'].' '.$this->attributes['last_name']));
+        return Attribute::make(
+            get: fn($value) => ucwords(strtolower($value)),
+            set: fn($value) => strtolower($value),
+        );
     }
 
-    public function getStateNameAttribute(): string
+    protected function lastName(): Attribute
     {
-        return ($this->attributes['state'] === 1)? 'Activo' : 'Inactivo';
+        return Attribute::make(
+            get: fn($value) => ucwords(strtolower($value)),
+            set: fn($value) => strtolower($value),
+        );
     }
 
-    public function getRoleNameAttribute():? string
+    protected function password(): Attribute
     {
-        if ($this->attributes['role'] === 1) {
-            return 'Super';
-        } else if ($this->attributes['role'] === 2) {
-            return 'Administrador';
-        } else if ($this->attributes['role'] === 3) {
-            return 'Usuario';
-        }
-
-        return null;
+        return Attribute::set(fn($value) => bcrypt($value));
     }
 
-    public function setFirstNameAttribute($value)
+    protected function fullName(): Attribute
     {
-        $this->attributes['first_name'] = strtoupper($value);
+        return Attribute::get(
+            fn($value, $attributes) => ucwords(
+                strtolower(
+                    ($attributes['first_name'] ?? null).' '.($attributes['last_name'] ?? null)
+                )
+            )
+        );
     }
 
-    public function setLastNameAttribute($value)
+    protected function stateName(): Attribute
     {
-        $this->attributes['last_name'] = strtoupper($value);
+        return Attribute::get(fn($value, $attributes) => $attributes['state'] === 1 ? 'Activo' : 'Inactivo');
+    }
+
+    protected function roleName(): Attribute
+    {
+        return Attribute::get(function($value, $attributes) {
+            return match ($attributes['role']) {
+                1 => 'Super',
+                2 => 'Administrador',
+                3 => 'Usuario',
+                default => null,
+            };
+        });
     }
 
     public function company()
@@ -115,5 +135,20 @@ class User extends Authenticatable
     public function branch_office()
     {
         return $this->belongsTo(BranchOffice::class);
+    }
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // auto-sets values on creation
+        static::creating(function ($model) {
+            if (!$model->company_id) $model->company_id = Auth::user()->company_id;
+        });
     }
 }

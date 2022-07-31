@@ -147,9 +147,12 @@ return [
     */
 
     'attributes' => [
+        'sort' => 'ordenamiento',
+        'direction' => 'dirección de ordenamiento',
         'name' => 'nombre',
         'first_name' => 'nombres',
         'last_name' => 'apellidos',
+        'password' => 'contraseña',
         'state' => 'estado',
         'phone' => 'celular',
         'title' => 'título',
@@ -166,6 +169,8 @@ return [
         'type' => 'tipo',
         'number' => 'número',
         'document' => 'documento',
+        'document_type' => 'tipo de documento',
+        'document_number' => 'número de documento',
         'date' => 'fecha',
         'conversion_factor' => 'factor de conversión',
         'product_id' => 'producto',

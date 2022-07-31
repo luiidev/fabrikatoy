@@ -22,20 +22,20 @@ class UpdateProductRequest extends FormRequest
             'company_id' => [
                 'required',
                 !Auth::user()->isSuper() ?
-                Rule::exists('companies', 'id')
-                    ->where('id', request()->user()->company_id) : null
+                    Rule::exists('companies', 'id')
+                        ->where('id', request()->user()->company_id) : null
             ],
             'brand_id' => [
                 'required',
                 !Auth::user()->isSuper() ?
-                Rule::exists('brands', 'id')
-                    ->where('company_id', request()->user()->company_id) : null
+                    Rule::exists('brands', 'id')
+                        ->where('company_id', request()->user()->company_id) : null
             ],
             'provider' => 'nullable|array',
             'provider.*' => [
                 !Auth::user()->isSuper() ?
-                Rule::exists('providers', 'id')
-                    ->where('company_id', request()->user()->company_id) : null
+                    Rule::exists('providers', 'id')
+                        ->where('company_id', request()->user()->company_id) : null
             ]
         ];
     }

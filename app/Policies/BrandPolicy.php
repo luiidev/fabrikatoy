@@ -35,13 +35,13 @@ class BrandPolicy
         return $user->company_id === $brand->company_id;
     }
 
-    public function restore(User $user, Brand $brand)
+    public function restore(User $user, Brand $brand): bool
     {
-        //
+        return false;
     }
 
-    public function forceDelete(User $user, Brand $brand)
+    public function forceDelete(User $user, Brand $brand): bool
     {
-        //
+        return false;
     }
 }

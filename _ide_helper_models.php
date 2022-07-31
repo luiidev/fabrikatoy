@@ -22,6 +22,54 @@ namespace App\Models\Base{
 	class Model extends \Eloquent {}
 }
 
+namespace App\Models\Base{
+/**
+ * App\Models\Base\User
+ *
+ * @property int $id
+ * @property int|null $company_id
+ * @property int|null $branch_office_id
+ * @property string|null $nick
+ * @property string $password
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property string|null $image
+ * @property string|null $dni
+ * @property string|null $address
+ * @property string|null $phone
+ * @property int $state
+ * @property int $role
+ * @property string|null $email
+ * @property string|null $email_verified_at
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \App\Models\Base\Builder|User forPage($page, $perPage = 15)
+ * @method static \App\Models\Base\Builder|User newModelQuery()
+ * @method static \App\Models\Base\Builder|User newQuery()
+ * @method static \App\Models\Base\Builder|User query()
+ * @method static \App\Models\Base\Builder|User whereAddress($value)
+ * @method static \App\Models\Base\Builder|User whereBranchOfficeId($value)
+ * @method static \App\Models\Base\Builder|User whereCompanyId($value)
+ * @method static \App\Models\Base\Builder|User whereCreatedAt($value)
+ * @method static \App\Models\Base\Builder|User whereDni($value)
+ * @method static \App\Models\Base\Builder|User whereEmail($value)
+ * @method static \App\Models\Base\Builder|User whereEmailVerifiedAt($value)
+ * @method static \App\Models\Base\Builder|User whereFirstName($value)
+ * @method static \App\Models\Base\Builder|User whereId($value)
+ * @method static \App\Models\Base\Builder|User whereImage($value)
+ * @method static \App\Models\Base\Builder|User whereLastName($value)
+ * @method static \App\Models\Base\Builder|User whereNick($value)
+ * @method static \App\Models\Base\Builder|User wherePassword($value)
+ * @method static \App\Models\Base\Builder|User wherePhone($value)
+ * @method static \App\Models\Base\Builder|User whereRememberToken($value)
+ * @method static \App\Models\Base\Builder|User whereRole($value)
+ * @method static \App\Models\Base\Builder|User whereState($value)
+ * @method static \App\Models\Base\Builder|User whereUpdatedAt($value)
+ */
+	class User extends \Eloquent implements \Illuminate\Contracts\Auth\Authenticatable, \Illuminate\Contracts\Auth\Access\Authorizable, \Illuminate\Contracts\Auth\CanResetPassword {}
+}
+
 namespace App\Models{
 /**
  * App\Models\BranchOffice
@@ -32,13 +80,20 @@ namespace App\Models{
  * @property int $state
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string $state_name
+ * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice active()
+ * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice apiPaginate($perPage = 10, $columns = [], $pageName = 'page', $page = null)
  * @method static \Database\Factories\BranchOfficeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice orWhereLike($column, $value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice own()
+ * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice ownCompany()
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice query()
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice whereCompanyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice whereLike($column, $value)
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice whereUpdatedAt($value)
@@ -256,11 +311,11 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $company_id
- * @property int $brand_id
+ * @property int|null $brand_id
  * @property int $unit_id
  * @property string|null $code
  * @property string $name
- * @property string $image
+ * @property string|null $image
  * @property int $quantity
  * @property string $price
  * @property string $higher_price
@@ -268,7 +323,7 @@ namespace App\Models{
  * @property int $state
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Brand $brand
+ * @property-read \App\Models\Brand|null $brand
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
  * @property-read int|null $categories_count
  * @property-read \App\Models\Company $company
@@ -588,35 +643,39 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\BranchOffice|null $branch_office
  * @property-read \App\Models\Company|null $company
- * @property-read string $full_name
- * @property-read string|null $role_name
- * @property-read string $state_name
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ * @method static \App\Models\Base\Builder|User active()
+ * @method static \App\Models\Base\Builder|User apiPaginate($perPage = 10, $columns = [], $pageName = 'page', $page = null)
  * @method static \Database\Factories\UserFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereBranchOfficeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCompanyId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereDni($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereNick($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereState($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \App\Models\Base\Builder|User forPage($page, $perPage = 15)
+ * @method static \App\Models\Base\Builder|User newModelQuery()
+ * @method static \App\Models\Base\Builder|User newQuery()
+ * @method static \App\Models\Base\Builder|User orWhereLike($column, $value)
+ * @method static \App\Models\Base\Builder|User own()
+ * @method static \App\Models\Base\Builder|User ownCompany()
+ * @method static \App\Models\Base\Builder|User query()
+ * @method static \App\Models\Base\Builder|User whereAddress($value)
+ * @method static \App\Models\Base\Builder|User whereBranchOfficeId($value)
+ * @method static \App\Models\Base\Builder|User whereCompanyId($value)
+ * @method static \App\Models\Base\Builder|User whereCreatedAt($value)
+ * @method static \App\Models\Base\Builder|User whereDni($value)
+ * @method static \App\Models\Base\Builder|User whereEmail($value)
+ * @method static \App\Models\Base\Builder|User whereEmailVerifiedAt($value)
+ * @method static \App\Models\Base\Builder|User whereFirstName($value)
+ * @method static \App\Models\Base\Builder|User whereId($value)
+ * @method static \App\Models\Base\Builder|User whereImage($value)
+ * @method static \App\Models\Base\Builder|User whereLastName($value)
+ * @method static \App\Models\Base\Builder|User whereLike($column, $value)
+ * @method static \App\Models\Base\Builder|User whereNick($value)
+ * @method static \App\Models\Base\Builder|User wherePassword($value)
+ * @method static \App\Models\Base\Builder|User wherePhone($value)
+ * @method static \App\Models\Base\Builder|User whereRememberToken($value)
+ * @method static \App\Models\Base\Builder|User whereRole($value)
+ * @method static \App\Models\Base\Builder|User whereState($value)
+ * @method static \App\Models\Base\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\GlobalScopes;
 use App\Models\Base\Model;
@@ -10,11 +11,6 @@ class Company extends Model
 {
     use HasFactory, GlobalScopes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'ruc',
         'name',
@@ -23,28 +19,18 @@ class Company extends Model
         'state',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
 
-    /**
-     * The attributes that should add.
-     *
-     * @var array<int, string>
-     */
     protected $appends = [
         'state_name'
     ];
 
-    public function getStateNameAttribute(): string
+    protected function stateName(): Attribute
     {
-        return $this->attributes['state'] ? 'Activo' : 'Inactivo';
+        return Attribute::get(fn($value, $attributes) => $attributes['state'] === 1 ? 'Activo' : 'Inactivo');
     }
 
     public function branchOffices()
@@ -72,7 +58,7 @@ class Company extends Model
         return $this->hasMany(Customer::class);
     }
 
-    public function provider()
+    public function providers()
     {
         return $this->hasMany(Provider::class);
     }

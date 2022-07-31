@@ -35,13 +35,13 @@ class ProductPolicy
         return $user->company_id === $product->company_id;
     }
 
-    public function restore(User $user, Product $product)
+    public function restore(User $user, Product $product): bool
     {
-        //
+        return false;
     }
 
-    public function forceDelete(User $user, Product $product)
+    public function forceDelete(User $user, Product $product): bool
     {
-        //
+        return false;
     }
 }

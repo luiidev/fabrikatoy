@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
         User::find(1)
             ->update([
                 'nick' => 'admin',
-                'password' => bcrypt('password'),
+                'password' => 'password',
                 'first_name' => 'Fabrika Toy',
                 'last_name' => 'Administrador',
                 'role' => 1,

@@ -1,13 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\api\SaleController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\ProviderController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\BranchOfficeController;
+use App\Http\Controllers\Api\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +36,9 @@ Route::group(['middleware' => 'api'], function ($router) {
         $router->resource('companies', CompanyController::class)->only(['index', 'store', 'update']);
         $router->resource('providers', ProviderController::class)->only(['index', 'store', 'update']);
         $router->resource('brands', BrandController::class)->only(['index', 'store', 'update']);
+        $router->resource('users', UserController::class)->only(['index', 'show', 'store', 'update']);
+        $router->resource('branch-offices', BranchOfficeController::class)->only(['index']);
+        $router->resource('customers', CustomerController::class)->only(['index', 'store', 'update']);
         $router->resource('sale', SaleController::class)->only(['store']);
 
         $router->get('products-for-sale', [ProductController::class, 'listForSale']);

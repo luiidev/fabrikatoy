@@ -10,11 +10,6 @@ class PurchaseDetail extends Model
 {
     use HasFactory, GlobalScopes;
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'created_at',
         'updated_at',

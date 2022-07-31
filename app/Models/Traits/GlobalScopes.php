@@ -3,6 +3,7 @@
 namespace App\Models\Traits;
 
 use Illuminate\Support\Facades\Auth;
+use JetBrains\PhpStorm\ArrayShape;
 
 trait GlobalScopes {
     public function scopeOwn($query)
@@ -40,7 +41,8 @@ trait GlobalScopes {
         return $query->where('state', 1);
     }
 
-    public function scopeApiPaginate($query, $perPage = 10, $columns = ['*'], $pageName = 'page', $page = null)
+    #[ArrayShape(['items' => "mixed", 'page' => "mixed", 'pages' => "mixed", 'per_page' => "mixed", 'total' => "mixed"])]
+    public function scopeApiPaginate($query, $perPage = 10, $columns = ['*'], $pageName = 'page', $page = null): array
     {
         $request = request();
 
