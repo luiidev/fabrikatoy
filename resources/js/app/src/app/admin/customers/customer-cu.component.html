@@ -1,0 +1,89 @@
+<spinner *ngIf="isLoadingResults"></spinner>
+<div class="card m-0">
+  <div class="card-header bg-light">
+    <h4 class="card-title">
+      <span *ngIf="!customer.id">Creación de nuevo</span>
+      <span *ngIf="customer.id">Edición de </span>
+      cliente
+    </h4>
+    <span class="btn-close-2" (click)="activeModal.dismiss()"></span>
+  </div>
+  <div class="card-body">
+    <div class="form-body">
+      <div class="row" *ngIf="isSuper">
+        <div class="col-12">
+          <div class="mb-3">
+            <label>Empresa <span class="text-sm font-medium text-muted pointer ml-15" (click)="searchCompany()">Cambiar</span></label>
+            <label class="d-block">{{ customer.company?.name }}</label>
+            <label class="d-block text-secondary" *ngIf="!customer.company">-</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="document_type">Tipo documento</label>
+            <select name="document_type" class="form-control" [(ngModel)]="customer.document_type">
+              <option [ngValue]="null" selected="true">Ninguno</option>
+              <option *ngFor="let type of ['DNI', 'RUC']" [ngValue]="type">{{ type }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="document_number">Número de documento</label>
+            <input type="text" name="document_number" class="form-control" placeholder="Número de documento" [(ngModel)]="customer.document_number">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="mb-3">
+            <label for="name">Nombres</label>
+            <input type="text" name="name" class="form-control" placeholder="Nombre" [(ngModel)]="customer.name">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="mb-3">
+            <label for="address">Dirección</label>
+            <input type="text" name="address" class="form-control" placeholder="Dirección" [(ngModel)]="customer.address">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="text" name="email" class="form-control" placeholder="Email" [(ngModel)]="customer.email">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="phone">Teléfono</label>
+            <input type="text" name="phone" class="form-control" placeholder="Teléfono" [(ngModel)]="customer.phone">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <div class="mb-3"><label class="control-label">Estado</label>
+              <div class="form-check">
+                <input type="radio" id="customer-active" name="customer-state" class="form-check-input" [value]="1" [(ngModel)]="customer.state">
+                <label for="customer-active" class="form-check-label">Activo</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" id="customer-inactive" name="customer-state" class="form-check-input" [value]="0" [(ngModel)]="customer.state">
+                <label for="customer-inactive" class="form-check-label">Inactivo</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <span class="btn btn-info" (click)="save()">Guardar</span>
+    </div>
+  </div>
+</div>

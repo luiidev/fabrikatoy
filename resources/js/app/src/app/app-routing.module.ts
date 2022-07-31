@@ -1,4 +1,3 @@
-import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
@@ -10,6 +9,7 @@ import { CompaniesComponent } from './admin/companies/companies.component';
 import { BrandsComponent } from './admin/brands/brands.component';
 import { PointOfSaleComponent } from './admin/sales/sales.component';
 import { UsersComponent } from './admin/users/users.component';
+import { CustomersComponent } from './admin/customers/customer.component';
 
 export const AppRoutes: Routes = [
   {
@@ -50,6 +50,10 @@ export const AppRoutes: Routes = [
 				component: BrandsComponent
 			},
       {
+				path: 'clientes',
+				component: CustomersComponent
+			},
+      {
 				path: 'punto-de-venta',
 				component: PointOfSaleComponent
 			},
@@ -57,6 +61,6 @@ export const AppRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/starter'
+    redirectTo: '/perfil'
   }
 ];

@@ -38,6 +38,8 @@ import { BrandsComponent, BrandsStoreOrUpdateComponent } from './admin/brands/br
 import { UsersComponent, UsersStoreOrUpdateComponent } from './admin/users/users.component';
 import { RoleuserInterceptor } from './interceptors/roleuser.interceptor';
 import { CustomerVoucherComponent, PointOfSaleComponent } from './admin/sales/sales.component';
+import { CustomersComponent } from './admin/customers/customer.component';
+import { CustomersStoreOrUpdateComponent } from './admin/customers/customer-cu.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -68,6 +70,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CustomerVoucherComponent,
     UsersComponent,
     UsersStoreOrUpdateComponent,
+    CustomersComponent,
+    CustomersStoreOrUpdateComponent
   ],
   imports: [
     CommonModule,
