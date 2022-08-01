@@ -23,17 +23,20 @@ class StoreProductRequest extends FormRequest
                 'nullable',
                 !Auth::user()->isSuper() ?
                 Rule::exists('companies', 'id')
-                    ->where('id', request()->user()->company_id) : null
+                    ->where('id', request()->user()->company_id) : ''
             ],
             'brand_id' => [
                 'nullable',
                 Rule::exists('brands', 'id')
                     ->where('company_id', request()->user()->company_id)
             ],
-            'provider' => 'array',
-            'provider.*' => [
-                Rule::exists('providers', 'id')
-                    ->where('company_id', request()->user()->company_id)
+            'providers_id' => 'present|array',
+            'providers_id.*' => [
+                'nullable',
+                'integer',
+                !Auth::user()->isSuper() ?
+                    Rule::exists('providers', 'id')
+                        ->where('company_id', request()->user()->company_id) : ''
             ]
         ];
     }

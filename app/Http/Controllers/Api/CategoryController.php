@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginationRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -13,11 +14,16 @@ class CategoryController extends Controller
         $this->authorizeResource(Category::class);
     }
 
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
+        $request->validated([
+            'sort' => 'in:name'
+        ]);
+
         $items = Category::query()
-            ->ownCompany()
-            ->get();
+            ->own()
+            ->whereLike('name', $request->input('search'))
+            ->ApiPaginate();
 
         return response()->json(['message' => '', 'data' => ['items' => $items]]);
     }

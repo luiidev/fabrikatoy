@@ -21,7 +21,7 @@ class UpdateBrandRequest extends FormRequest
                 'nullable',
                 !Auth::user()->isSuper() ?
                     Rule::exists('companies', 'id')
-                        ->where('id', request()->user()->company_id) : null
+                        ->where('id', request()->user()->company_id) : ''
             ],
             'state' => 'required|in:0,1',
         ];
