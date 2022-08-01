@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge } from 'rxjs';
 import { catchError, map, switchMap, startWith } from 'rxjs/operators';
-import { Pagination } from 'src/app/models/pagination.model';
 import { TableFilter } from 'src/app/helpers/table.util';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +10,8 @@ import HttpUtils from 'src/app/helpers/http.util';
 import Utils from 'src/app/helpers/utils';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/customer.service';
-import { CustomersStoreOrUpdateComponent } from './customer-cu.component';
+import { CustomersStoreOrUpdateComponent } from './customers-cu.component';
+import { CustomerPaginationResponse } from 'src/app/models/response.model';
 
 @Component({
   selector: 'app-customers',
@@ -19,8 +19,14 @@ import { CustomersStoreOrUpdateComponent } from './customer-cu.component';
 })
 export class CustomersComponent {
   @Input() isModal = false;
-  @ViewChild(MatPaginator, {static: false}) paginator: any;
-  @ViewChild(MatSort, {static: false}) sort: any;
+  @ViewChild(MatPaginator, {static: false})
+  set matPaginator(value: MatPaginator) {
+    this.tableFilter.paginator = value;
+  }
+  @ViewChild(MatSort, {static: false})
+  set matSort(value: MatSort) {
+    this.tableFilter.sort = value;
+  }
 
   displayedColumns: string[] = ['document_type', 'document_number', 'name', 'contacto', 'state_name', 'actions'];
   resultsLength = 0;
@@ -37,10 +43,13 @@ export class CustomersComponent {
   }
 
   ngAfterViewInit() {
-    this.sort.sortChange.subscribe(() => (this.paginator.firstPage()));
-    this.tableFilter.startWith(this.sort, this.paginator);
+    this.tableFilter.sort.sortChange.subscribe(() => this.tableFilter.paginator.firstPage());
 
-    merge(this.sort.sortChange, this.paginator.page, this.tableFilter.filter.search)
+    merge(
+      this.tableFilter.sort.sortChange,
+      this.tableFilter.paginator.page,
+      this.tableFilter.filter.search
+      )
       .pipe(
         startWith({}),
         switchMap(() => {
@@ -51,7 +60,7 @@ export class CustomersComponent {
               catchError(HttpUtils.paginationCatchError)
             );
         }),
-        map((response: Pagination) => {
+        map((response: CustomerPaginationResponse) => {
           this.isLoadingResults = false;
           this.resultsLength = response.data.total;
 
@@ -65,7 +74,7 @@ export class CustomersComponent {
     const modalRef = this.ngbModal.open(CustomersStoreOrUpdateComponent, this.isModal ? Utils.modalIndex3 : {});
 
     if (customer) {
-      modalRef.componentInstance.customer = Object.assign({}, customer);
+      modalRef.componentInstance.customer = { ...customer };
     }
 
     modalRef.result

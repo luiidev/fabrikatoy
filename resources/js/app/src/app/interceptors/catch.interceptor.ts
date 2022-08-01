@@ -9,31 +9,32 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { WarnModalComponent } from '../helpers/modals/modals.component';
-import { Router } from '@angular/router';
+import { WarnModalComponent } from '../helpers/modals/alerts.component';
+import Utils from '../helpers/utils';
+import { AuthService } from '../services/auth.service.';
 
 @Injectable()
 export class CatchInterceptor implements HttpInterceptor {
 
   constructor(
     private ngbModal: NgbModal,
-    private router: Router,
+    private authService: AuthService,
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request)
       .pipe(
-        catchError((err: any) => {
-            if(err instanceof HttpErrorResponse && !err.url?.includes('/login')) {
-              const modalRef = this.ngbModal.open(WarnModalComponent, { centered: true, backdropClass: 'z-index-backdrop-warn', windowClass: 'z-index-window-warn' });
-              modalRef.componentInstance.message = err.error.message;
+        catchError((event: HttpEvent<unknown>) => {
+            if(event instanceof HttpErrorResponse && !event.url?.includes('/login')) {
+              const modalRef = this.ngbModal.open(WarnModalComponent, Utils.modalCenterIndex3);
+              modalRef.componentInstance.message = event.error.message;
 
-              if (err.status === 401) {
-                this.router.navigate(['/login']);
+              if (event.status === 401) {
+                this.authService.logout();
               }
             }
 
-            return throwError(err);
+            return throwError(() => event);
         }),
       );
   }

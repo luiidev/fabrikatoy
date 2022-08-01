@@ -1,4 +1,4 @@
-export interface User {
+export interface Login {
   nick: string;
   password: string;
   device_name: string;

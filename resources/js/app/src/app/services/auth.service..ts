@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { zip } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/login.model';
+import { Login } from '../models/login.model';
+import { AuthUserResponse } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,10 @@ export class AuthService {
     private router: Router
   ) { }
 
-  login(user: User) {
+  login(user: Login) {
     return zip(
       this.http.get<void>(`${environment.API_URL}/csrf-cookie`),
-      this.http.post<any>(`${environment.API_URL}/login`, user)
+      this.http.post<AuthUserResponse>(`${environment.API_URL}/login`, user)
     )
   }
 

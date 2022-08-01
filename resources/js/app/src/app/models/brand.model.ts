@@ -5,24 +5,6 @@ export interface Brand {
   company_id?: number;
   name: string;
   state: number;
+  state_name?: string;
   company?: Company;
-}
-
-export default class BrandRequest {
-  static data(brand: Brand) {
-    let data:any = {
-      name: brand.name,
-      state: brand.state,
-    };
-
-    if (brand.company_id) {
-      data.company_id = brand.company_id;
-    }
-
-    if (brand.id) {
-      data.id = brand.id;
-    }
-
-    return data;
-  }
 }

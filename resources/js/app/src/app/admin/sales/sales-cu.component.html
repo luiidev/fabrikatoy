@@ -1,0 +1,82 @@
+<spinner *ngIf="isLoadingResults"></spinner>
+<div class="card m-0">
+  <div class="card-header bg-light">
+    <h4 class="card-title">
+      Información del cliente
+    </h4>
+    <span class="btn-close-2" (click)="activeModal.dismiss()"></span>
+  </div>
+  <div class="card-body">
+    <div class="form-body">
+      <div class="d-flex mb-3" [class.not-events]="customer.id">
+        <div class="p-3 flex-grow-1 text-center pointer" [class.text-white]="customer.type === 'BOLETA'" [class.bg-light]="customer.type === 'BOLETA'" (click)="selectVoucherType('BOLETA')">
+          Boleta
+        </div>
+        <div class="p-3 flex-grow-1 text-center pointer" [class.text-white]="customer.type === 'FACTURA'" [class.bg-light]="customer.type === 'FACTURA'" (click)="selectVoucherType('FACTURA')">
+          Factura
+        </div>
+      </div>
+      <div class="customer" *ngIf="customer.type">
+        <div class="row" [class.not-events]="customer.id">
+          <div class="col-6">
+            <div class="mb-3" *ngIf="customer.type === 'BOLETA'">
+              <label for="dni" class="control-label"><i class="fa fa-asterisk mr-5 text-danger"></i>DNI</label>
+              <input type="text" name="dni" class="form-control" placeholder="DNI" [(ngModel)]="customer.document_number">
+            </div>
+            <div class="mb-3" *ngIf="customer.type === 'FACTURA'">
+              <label for="ruc" class="control-label"><i class="fa fa-asterisk mr-5 text-danger"></i>RUC</label>
+              <input type="text" name="ruc" class="form-control" placeholder="RUC" [(ngModel)]="customer.document_number">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label class="control-label">&nbsp;</label>
+              <span class="btn btn-info d-block" (click)="searchUser()" *ngIf="!customer.id">Buscar</span>
+            </div>
+          </div>
+        </div>
+        <div class="info" *ngIf="customer.searched" [class.not-events]="customer.id">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3" *ngIf="customer.type === 'BOLETA'">
+                <label for="name"><i class="fa fa-asterisk mr-5 text-danger"></i>Nombres completos</label>
+                <input type="text" name="name" class="form-control" placeholder="Nombre" [(ngModel)]="customer.name">
+              </div>
+              <div class="mb-3" *ngIf="customer.type === 'FACTURA'">
+                <label for="name"><i class="fa fa-asterisk mr-5 text-danger"></i>Razon social</label>
+                <input type="text" name="name" class="form-control" placeholder="Nombre" [(ngModel)]="customer.name">
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="customer.type === 'FACTURA'">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="address"><i class="fa fa-asterisk mr-5 text-danger"></i>Dirección</label>
+                <input type="text" name="address" class="form-control" placeholder="Dirección" [(ngModel)]="customer.address">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="email">Correo</label>
+                <input type="text" name="email" class="form-control" placeholder="Correo" [(ngModel)]="customer.email">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="phone">Teléfono</label>
+                <input type="text" name="phone" class="form-control" placeholder="Teléfono" [(ngModel)]="customer.phone">
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="d-block pointer text-end text-info" *ngIf="customer.id" (click)="removeCustomer()">Elegir otro cliente</span>
+      </div>
+      <hr>
+      <span class="btn btn-info d-block" (click)="save()" [class.not-events]="customerIsInvalid()">Guardar</span>
+    </div>
+  </div>
+</div>

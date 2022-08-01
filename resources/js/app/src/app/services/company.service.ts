@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { TableFilter } from '../helpers/table.util';
 import { Observable } from 'rxjs';
-import { Pagination } from '../models/pagination.model';
 import { environment } from 'src/environments/environment';
 import { Company } from '../models/company.model';
+import { CompanyPaginationResponse, CompanyResponse } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +14,15 @@ export class CompanyService {
     private http: HttpClient
   ) { }
 
-  getAll(params: HttpParams): Observable<any> {
-    return this.http.get<Pagination>(`${environment.API_URL}/companies`, { params: params });
+  getAll(params: HttpParams): Observable<CompanyPaginationResponse> {
+    return this.http.get<CompanyPaginationResponse>(`${environment.API_URL}/companies`, { params: params });
   }
 
-  store(company: Company) {
-    return this.http.post<any>(`${environment.API_URL}/companies`, company);
+  store(company: Company): Observable<CompanyResponse> {
+    return this.http.post<CompanyResponse>(`${environment.API_URL}/companies`, company);
   }
 
-  update(company: Company) {
-    return this.http.put<any>(`${environment.API_URL}/companies/${company.id}`, company);
+  update(company: Company): Observable<CompanyResponse> {
+    return this.http.put<CompanyResponse>(`${environment.API_URL}/companies/${company.id}`, company);
   }
 }

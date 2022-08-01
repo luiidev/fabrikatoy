@@ -18,7 +18,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   `
 })
 export class WarnModalComponent {
-  @Input() message: string = '';
+  @Input() message = '';
 
   constructor(public activeModal: NgbActiveModal) {}
 }
@@ -40,7 +40,7 @@ export class WarnModalComponent {
   `
 })
 export class SuccsessModalComponent {
-  @Input() message: string = '';
+  @Input() message = '';
 
   constructor(public activeModal: NgbActiveModal) {}
 }

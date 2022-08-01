@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/login.model';
+import { Login } from 'src/app/models/login.model';
 import { AuthService } from 'src/app/services/auth.service.';
 
 @Component({
@@ -8,16 +8,16 @@ import { AuthService } from 'src/app/services/auth.service.';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  user: User = {
-    nick: "",
-    password: "",
-    device_name: "web-app",
+  user: Login = {
+    nick: '',
+    password: '',
+    device_name: 'web-app',
     remenber: false,
   };
 
-  errorMessage: string = '';
+  errorMessage = '';
   isLoadingResults = false;
 
   constructor(
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.isLoadingResults = true;
     this.authService.login(this.user)
       .subscribe(response => {
-        const [CsrfResponse, AuthResponse] = response;
+        const AuthResponse = response[1];
         this.authService.setToken(AuthResponse.token);
         this.authService.setUser(JSON.stringify(AuthResponse.data));
 
@@ -39,8 +39,5 @@ export class LoginComponent implements OnInit {
         this.isLoadingResults = false;
         this.errorMessage = response.error.message;
       });
-  }
-
-  ngOnInit() {
   }
 }

@@ -11,6 +11,7 @@
         <div class="position-relative">
           <spinner *ngIf="isLoadingResults"></spinner>
 
+          <company-search></company-search>
           <search (searchTerm)="tableFilter.filter.search.emit($event)" [createButton]="true" (create)="createOrEdit()"></search>
 
           <div class="table-responsive">

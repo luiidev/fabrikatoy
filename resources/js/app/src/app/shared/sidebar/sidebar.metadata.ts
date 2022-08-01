@@ -3,8 +3,9 @@ export interface RouteInfo {
   path: string;
   title: string;
   icon: string;
-  class: string;
+  itemClass: string;
+  linkClass: string;
   extralink: boolean;
   submenu: RouteInfo[];
-  super: boolean;
+  role: string;
 }

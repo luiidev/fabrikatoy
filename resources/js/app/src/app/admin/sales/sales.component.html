@@ -38,8 +38,7 @@
       <div class="right-sale bg-white" [class.show-panel]="showPanel">
         <div class="d-flex flex-column h-100 position-relative">
           <div class="d-flex align-items-center p-3 border-bottom">
-            <div class="flex-grow-1 pointer" (click)="voucher('ticket')" *ngIf="!sale.customer.document_number"><i class="fa fa-user mr-10"></i>Agregar cliente</div>
-            <!-- <div class="flex-grow-1 pointer" (click)="voucher('ticket')" *ngIf="sale.customer.document_number"><i class="fa fa-user mr-10"></i>{{ sale.customer.name }}</div> -->
+            <div class="flex-grow-1 pointer" (click)="setCustomer()" *ngIf="!sale.customer.document_number"><i class="fa fa-user mr-10"></i>Agregar cliente</div>
             <a href="javascript:void(0)" class="flex-grow-1" *ngIf="sale.customer.document_number">
               <h5 class="message-title">{{ sale.customer.name }}</h5>
               <span class="d-block fs-3 text-muted">{{ sale.customer.document_number }}</span>

@@ -1,21 +1,19 @@
 import { Component, Input } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { SuccsessModalComponent } from "src/app/helpers/modals/modals.component";
+import { SuccsessModalComponent } from "src/app/helpers/modals/alerts.component";
 import Utils from "src/app/helpers/utils";
+import { Brand } from "src/app/models/brand.model";
 import { Company } from "src/app/models/company.model";
-import CustomerRequest, { Customer } from "src/app/models/customer.model";
-import { CustomerService } from "src/app/services/customer.service";
+import { BrandService } from "src/app/services/brand.service";
 import { environment } from "src/environments/environment";
 import { CompaniesComponent } from "../companies/companies.component";
 
 @Component({
   selector: 'app-card-warn',
-  templateUrl: './customer-cu.component.html'
+  templateUrl: './brands-cu.component.html'
 })
-export class CustomersStoreOrUpdateComponent {
-  @Input() customer: Customer = {
-    document_type: null,
-    document_number: null,
+export class BrandsStoreOrUpdateComponent {
+  @Input() brand: Brand = {
     name: '',
     state: 1
   };
@@ -25,19 +23,17 @@ export class CustomersStoreOrUpdateComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private customerService: CustomerService,
+    private brandService: BrandService,
     private ngbModal: NgbModal
   ) {}
 
   save() {
     this.isLoadingResults = true;
-    // const data = CustomerRequest.data(this.customer);
-    const data = this.customer;
-    const service = !this.customer.id ? this.customerService.store(data) : this.customerService.update(data);
+    const service = !this.brand.id ? this.brandService.store(this.brand) : this.brandService.update(this.brand);
 
     service
       .subscribe(response => {
-        const modalRef  = this.ngbModal.open(SuccsessModalComponent, { centered: true });
+        const modalRef = this.ngbModal.open(SuccsessModalComponent, Utils.modalCenter);
         modalRef.componentInstance.message = response.message;
 
         this.isLoadingResults = true;
@@ -47,12 +43,12 @@ export class CustomersStoreOrUpdateComponent {
   }
 
   searchCompany() {
-    const modalRef  = this.ngbModal.open(CompaniesComponent, { size: 'xl', backdropClass: 'z-index-backdrop-level-2', windowClass: 'z-index-window-level-2' });
+    const modalRef = this.ngbModal.open(CompaniesComponent, Utils.modalXlIndex2);
     modalRef.componentInstance.isModal = true;
 
     modalRef.result.then((company: Company) => {
-      this.customer.company = company;
-      this.customer.company_id = company.id;
+      this.brand.company = company;
+      this.brand.company_id = company.id;
     }, Utils.none);
   }
 }

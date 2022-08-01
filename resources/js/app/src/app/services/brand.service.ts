@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Brand } from '../models/brand.model';
-import { Pagination } from '../models/pagination.model';
+import { BrandPaginationResponse, BrandResponse } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,15 @@ export class BrandService {
     private http: HttpClient
   ) { }
 
-  getAll(params: HttpParams): Observable<any> {
-    return this.http.get<Pagination>(`${environment.API_URL}/brands`, { params: params });
+  getAll(params: HttpParams): Observable<BrandPaginationResponse> {
+    return this.http.get<BrandPaginationResponse>(`${environment.API_URL}/brands`, { params: params });
   }
 
-  store(brand: Brand) {
-    return this.http.post<any>(`${environment.API_URL}/brands`, brand);
+  store(brand: Brand): Observable<BrandResponse> {
+    return this.http.post<BrandResponse>(`${environment.API_URL}/brands`, brand);
   }
 
-  update(brand: Brand) {
-    return this.http.put<any>(`${environment.API_URL}/brands/${brand.id}`, brand);
+  update(brand: Brand): Observable<BrandResponse> {
+    return this.http.put<BrandResponse>(`${environment.API_URL}/brands/${brand.id}`, brand);
   }
 }

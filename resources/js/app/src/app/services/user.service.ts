@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
-import { Pagination } from '../models/pagination.model';
+import { UserPaginationResponse, UserResponse } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +14,19 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  getAll(params: HttpParams): Observable<any> {
-    return this.http.get<Pagination>(`${environment.API_URL}/users`, { params: params });
+  getAll(params: HttpParams): Observable<UserPaginationResponse> {
+    return this.http.get<UserPaginationResponse>(`${environment.API_URL}/users`, { params: params });
   }
 
-  get(id: number): Observable<any> {
-    return this.http.get<Pagination>(`${environment.API_URL}/users/${id}`);
+  get(id: number): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${environment.API_URL}/users/${id}`);
   }
 
-  store(user: User): Observable<any> {
-    return this.http.post<any>(`${environment.API_URL}/users`, user);
+  store(user: User): Observable<UserResponse> {
+    return this.http.post<UserResponse>(`${environment.API_URL}/users`, user);
   }
 
-  update(user: User): Observable<any> {
-    return this.http.put<any>(`${environment.API_URL}/users/${user.id}`, user);
+  update(user: User): Observable<UserResponse> {
+    return this.http.put<UserResponse>(`${environment.API_URL}/users/${user.id}`, user);
   }
 }

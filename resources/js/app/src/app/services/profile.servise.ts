@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
+import { Response } from '../models/response.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ProfileService {
     private http: HttpClient
   ) { }
 
-  getProfile() {
-    return this.http.get<any>(`${environment.API_URL}/me`);
+  getProfile(): Observable<Response> {
+    return this.http.get<Response>(`${environment.API_URL}/me`);
   }
 }

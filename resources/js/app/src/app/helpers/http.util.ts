@@ -1,9 +1,8 @@
 import { of } from "rxjs";
-import { Pagination } from "../models/pagination.model";
 
 export default class HttpUtils {
-  static paginationCatchError(response: Pagination) {
-    const pagination: Pagination = {
+  static paginationCatchError() {
+    const pagination = {
       message: '',
       data: {
         items: [],

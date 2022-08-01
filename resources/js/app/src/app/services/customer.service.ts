@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Customer } from '../models/customer.model';
-import { Pagination } from '../models/pagination.model';
+import { CustomerPaginationResponse, CustomerResponse } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,15 @@ export class CustomerService {
     private http: HttpClient
   ) { }
 
-  getAll(params: HttpParams): Observable<any> {
-    return this.http.get<Pagination>(`${environment.API_URL}/customers`, { params });
+  getAll(params: HttpParams): Observable<CustomerPaginationResponse> {
+    return this.http.get<CustomerPaginationResponse>(`${environment.API_URL}/customers`, { params });
   }
 
-  store(customer: Customer): Observable<any> {
-    return this.http.post(`${environment.API_URL}/customers`, customer);
+  store(customer: Customer): Observable<CustomerResponse> {
+    return this.http.post<CustomerResponse>(`${environment.API_URL}/customers`, customer);
   }
 
-  update(customer: Customer): Observable<any> {
-    return this.http.put(`${environment.API_URL}/customers/${customer.id}`, customer);
+  update(customer: Customer): Observable<CustomerResponse> {
+    return this.http.put<CustomerResponse>(`${environment.API_URL}/customers/${customer.id}`, customer);
   }
 }

@@ -5,90 +5,100 @@ export const ROUTES: RouteInfo[] = [
   //   path: '/dashboard',
   //   title: 'Dashboard',
   //   icon: 'fa fa-chart-pie',
-  //   class: '',
+  //   itemClass: '',
+  //   linkClass: '',
   //   extralink: false,
   //   submenu: [],
-  //   super: false
+  //   role: false
   // },
   {
     path: '/empresas',
     title: 'Empresas',
     icon: 'fa fa-shop',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: true
+    role: 'Super'
   },
   {
     path: '/usuarios',
     title: 'Usuarios',
     icon: 'fa fa-user-friends',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: false
+    role: 'Admin'
   },
   {
     path: '/proveedores',
     title: 'Proveedores',
     icon: 'fa fa-box',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: false
+    role: 'Admin'
   },
   {
     path: '/productos',
     title: 'Productos',
     icon: 'fa fa-bag-shopping',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: false
+    role: 'Admin'
   },
   {
     path: '/marcas',
     title: 'Marcas',
     icon: 'fa fa-spell-check',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: false
+    role: 'Admin'
   },
   {
     path: '/clientes',
     title: 'Clientes',
     icon: 'fa fa-users',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: false
+    role: 'Admin'
   },
   {
     path: '/punto-de-venta',
     title: 'Punto de venta',
     icon: 'fa fa-credit-card',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: false
+    role: 'User'
   },
   {
     path: '/ventas',
     title: 'Reporte de ventas',
     icon: 'fa fa-chart-line',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: false
+    role: 'Admin'
   },
   {
     path: '/compras',
     title: 'Reporte de compras',
     icon: 'fa fa-chart-pie',
-    class: '',
+    itemClass: '',
+    linkClass: '',
     extralink: false,
     submenu: [],
-    super: false
+    role: 'Admin'
   },
 ];

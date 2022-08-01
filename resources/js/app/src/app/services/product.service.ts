@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Pagination } from '../models/pagination.model';
-import { Product } from '../models/product.model';
+import { Product, ProductFilter } from '../models/product.model';
+import { ProductArrayResponse, ProductPaginationResponse, ProductResponse } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,11 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
-  getAll(params: HttpParams): Observable<any> {
-    return this.http.get<Pagination>(`${environment.API_URL}/products`, { params });
+  getAll(params: HttpParams): Observable<ProductPaginationResponse> {
+    return this.http.get<ProductPaginationResponse>(`${environment.API_URL}/products`, { params });
   }
 
-  getForSale(params: any): Observable<any> {
+  getForSale(params: ProductFilter): Observable<ProductArrayResponse> {
     let httpParams = new HttpParams();
 
     if (params.search) {
@@ -29,18 +29,14 @@ export class ProductService {
       httpParams = httpParams.set('category_id', params.category_id);
     }
 
-    return this.http.get<any>(`${environment.API_URL}/products-for-sale`, { params: httpParams });
+    return this.http.get<ProductArrayResponse>(`${environment.API_URL}/products-for-sale`, { params: httpParams });
   }
 
-  getCategories(): Observable<any> {
-    return this.http.get<any>(`${environment.API_URL}/categories`);
+  store(product: Product): Observable<ProductResponse> {
+    return this.http.post<ProductResponse>(`${environment.API_URL}/products`, product);
   }
 
-  store(product: Product): Observable<any> {
-    return this.http.post<any>(`${environment.API_URL}/products`, product);
-  }
-
-  update(product: Product): Observable<any> {
-    return this.http.put<any>(`${environment.API_URL}/products/${product.id}`, product);
+  update(product: Product): Observable<ProductResponse> {
+    return this.http.put<ProductResponse>(`${environment.API_URL}/products/${product.id}`, product);
   }
 }

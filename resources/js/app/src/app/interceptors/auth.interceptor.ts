@@ -8,8 +8,6 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service.';
-import { MenuEventService } from '../shared/sidebar/sidebar.component';
-
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,7 +16,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private tokenXsrf: HttpXsrfTokenExtractor,
     private authService: AuthService,
-    private menuEventService: MenuEventService
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

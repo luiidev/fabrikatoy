@@ -22,24 +22,30 @@ export class SidebarComponent implements OnInit {
   }
 
   constructor(
-    private menuEventService: MenuEventService
+    private menuEventService: SidebarEventService
   ) {}
 
   // End open close
   ngOnInit() {
-    this.menuEventService.events.subscribe((isSuper: boolean) => {
-      this.sidebarnavItems = isSuper ? ROUTES : ROUTES.filter(item => item.super === false);
+    this.menuEventService.events.subscribe((role: string) => {
+      if (role === 'Super') {
+        this.sidebarnavItems = ROUTES.filter(item => ['Super', 'Admin', 'User'].indexOf(item.role) !== -1);
+      } else if (role === 'Admin') {
+        this.sidebarnavItems = ROUTES.filter(item => ['Admin', 'User'].indexOf(item.role) !== -1);
+      } else {
+        this.sidebarnavItems = ROUTES.filter(item => ['User'].indexOf(item.role) !== -1);
+      }
     });
 
-    this.sidebarnavItems = ROUTES.filter(item => item.super === false);
+    this.sidebarnavItems = ROUTES.filter(item => ['User'].indexOf(item.role) !== -1);
   }
 }
 
-export class MenuEventService {
-  protected _eventSubject = new Subject<boolean>();
-  public events = this._eventSubject.asObservable();
+export class SidebarEventService {
+  protected eventSubject = new Subject<string>();
+  public events = this.eventSubject.asObservable();
 
-  dispathEvent(isSuper: boolean) {
-     this._eventSubject.next(isSuper);
+  dispathEvent(role: string) {
+     this.eventSubject.next(role);
   }
 }

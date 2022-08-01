@@ -17,7 +17,12 @@ export class AppComponent {
             this.router.navigate(['/login']);
           }
         }
-        if (event instanceof NavigationEnd) {}
+        if (event instanceof NavigationEnd) {
+          //
+        }
+        if (event instanceof NavigationError) {
+          //
+        }
     });
   }
 }

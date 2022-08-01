@@ -29,17 +29,32 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { CatchInterceptor } from './interceptors/catch.interceptor';
 
+import { RoleuserInterceptor } from './interceptors/roleuser.interceptor';
+
 import { SearchComponent } from './helpers/search/search.component';
 import { LoginComponent } from './admin/login/login.component';
-import { ProductsComponent, ProductStoreOrUpdateComponent } from './admin/products/products.component';
-import { ProvidersComponent, ProviderStoreOrUpdateComponent } from './admin/providers/providers.component';
-import { CompaniesComponent, SearchComponent as CompanySearchComponent, CompaniesStoreOrUpdateComponent } from './admin/companies/companies.component'
-import { BrandsComponent, BrandsStoreOrUpdateComponent } from './admin/brands/brands.component';
-import { UsersComponent, UsersStoreOrUpdateComponent } from './admin/users/users.component';
-import { RoleuserInterceptor } from './interceptors/roleuser.interceptor';
-import { CustomerVoucherComponent, PointOfSaleComponent } from './admin/sales/sales.component';
-import { CustomersComponent } from './admin/customers/customer.component';
-import { CustomersStoreOrUpdateComponent } from './admin/customers/customer-cu.component';
+
+import { ProductsComponent } from './admin/products/products.component';
+import { ProductStoreOrUpdateComponent } from './admin/products/products-cu.component';
+
+import { ProvidersComponent } from './admin/providers/providers.component';
+import { ProviderStoreOrUpdateComponent } from './admin/providers/providers-cu.component';
+
+import { CompaniesComponent } from './admin/companies/companies.component';
+import { CompaniesStoreOrUpdateComponent } from './admin/companies/companies-cu.component';
+import { CompaniesSearchComponent } from './admin/companies/companies-search.component';
+
+import { BrandsComponent } from './admin/brands/brands.component';
+import { BrandsStoreOrUpdateComponent } from './admin/brands/brands-cu.component';
+
+import { UsersComponent } from './admin/users/users.component';
+import { UsersStoreOrUpdateComponent } from './admin/users/users-cu.component';
+
+import { PointOfSaleComponent } from './admin/sales/sales.component';
+import { CustomerVoucherComponent } from './admin/sales/sales-cu.component';
+
+import { CustomersComponent } from './admin/customers/customers.component';
+import { CustomersStoreOrUpdateComponent } from './admin/customers/customers-cu.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -61,7 +76,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProductStoreOrUpdateComponent,
     ProvidersComponent,
     ProviderStoreOrUpdateComponent,
-    CompanySearchComponent,
+    CompaniesSearchComponent,
     CompaniesComponent,
     CompaniesStoreOrUpdateComponent,
     BrandsComponent,

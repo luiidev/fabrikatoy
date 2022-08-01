@@ -1,4 +1,5 @@
 import { Brand } from "./brand.model";
+import { Category } from "./category.model";
 import { Company } from "./company.model";
 import { Provider } from "./provider.model";
 
@@ -11,7 +12,8 @@ export interface Product {
   image?: string;
   quantity?: number;
   quantity_sale?: number;
-  price?: string;
+  subtotal?: number;
+  price?: number;
   higher_price?: string;
   average_price?: string;
   state: number;
@@ -19,29 +21,14 @@ export interface Product {
   unit?: {
     name: string;
   },
-  providers: Provider[],
+  providers?: Provider[],
+  categories?: Category[],
   company?: Company,
   brand?: Brand,
+  providers_id?: number[],
 }
 
-export default class ProductRequest {
-  static data(product: Product) {
-    let data:any = {
-      brand_id: product.brand_id,
-      code: product.code,
-      name: product.name,
-      state: product.state,
-      providers: product.providers.map((p) => p.id),
-    };
-
-    if (product.company_id) {
-      data.company_id = product.company_id;
-    }
-
-    if (product.id) {
-      data.id = product.id;
-    }
-
-    return data;
-  }
+export interface ProductFilter {
+  search: string | null,
+  category_id: number | null
 }

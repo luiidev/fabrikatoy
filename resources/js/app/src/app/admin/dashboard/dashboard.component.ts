@@ -10,5 +10,7 @@ export class DashboardComponent implements AfterViewInit {
     this.subtitle = 'This is some text within a card block.';
   }
 
-  ngAfterViewInit() { }
+  ngAfterViewInit() {
+    //
+  }
 }

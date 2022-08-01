@@ -9,7 +9,7 @@ import { CompaniesComponent } from './admin/companies/companies.component';
 import { BrandsComponent } from './admin/brands/brands.component';
 import { PointOfSaleComponent } from './admin/sales/sales.component';
 import { UsersComponent } from './admin/users/users.component';
-import { CustomersComponent } from './admin/customers/customer.component';
+import { CustomersComponent } from './admin/customers/customers.component';
 
 export const AppRoutes: Routes = [
   {
@@ -19,7 +19,7 @@ export const AppRoutes: Routes = [
       { path: '', redirectTo: '/perfil', pathMatch: 'full' },
       {
         path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./admin/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
 				path: 'login',
