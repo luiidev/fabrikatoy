@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service.';
@@ -7,9 +7,9 @@ import { AuthService } from 'src/app/services/auth.service.';
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })
-export class NavigationComponent implements AfterViewInit {
-  @Input() sidebartype:string = '';
-  @Input() sidebartheme:string = '';
+export class NavigationComponent implements OnInit {
+  @Input() sidebartype = '';
+  @Input() sidebartheme = '';
   @Output() toggleSidebar = new EventEmitter<void>();
   @Output() toggleTheme = new EventEmitter<void>();
 
@@ -24,7 +24,7 @@ export class NavigationComponent implements AfterViewInit {
     private authService: AuthService
   ) {}
 
-  public selectedLanguage: any = {
+  public selectedLanguage: unknown = {
     language: 'Español',
     code: 'es',
     type: 'ES',
@@ -39,7 +39,7 @@ export class NavigationComponent implements AfterViewInit {
     this.toggleTheme.emit();
   }
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
     const user = this.authService.getUser();
     if (user) {
       this.user = JSON.parse(user);

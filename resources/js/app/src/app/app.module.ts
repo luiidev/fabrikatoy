@@ -15,7 +15,8 @@ import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FullComponent } from './layouts/full/full.component';
 
 import { NavigationComponent } from './shared/header/navigation.component';
-import { MenuEventService, SidebarComponent } from './shared/sidebar/sidebar.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { VerticalSidebarService } from './shared/sidebar/sidebar.service';
 
 import { AppRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -130,7 +131,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: NgbActiveModal
     },
     {
-      provide: MenuEventService
+      provide: VerticalSidebarService
     }
   ],
   bootstrap: [AppComponent]

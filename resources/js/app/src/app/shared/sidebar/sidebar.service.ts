@@ -8,15 +8,25 @@ import { ROUTES } from './menu-items';
     providedIn: 'root'
 })
 export class VerticalSidebarService {
-
-    public screenWidth: any;
-    public collapseSidebar: boolean = false;
-    public fullScreen: boolean = false;
-
     MENUITEMS: RouteInfo[] = ROUTES;
 
-    items = new BehaviorSubject<RouteInfo[]>(this.MENUITEMS);
+    private menuItemsObservablePrivate: BehaviorSubject<RouteInfo[]> = new BehaviorSubject<RouteInfo[]>(this.routesFilterByRole('User'));
 
-    constructor() {
+    get menuItemsObservable() {
+      return this.menuItemsObservablePrivate.asObservable();
+    }
+
+    set menuItemsRole(role: string) {
+      this.menuItemsObservablePrivate.next(this.routesFilterByRole(role));
+    }
+
+    private routesFilterByRole(role: string): RouteInfo[] {
+      if (role === 'Super') {
+        return this.MENUITEMS.filter(item => ['Super', 'Admin', 'User'].indexOf(item.role) !== -1);
+      } else if (role === 'Administrador') {
+        return this.MENUITEMS.filter(item => ['Admin', 'User'].indexOf(item.role) !== -1);
+      }
+
+      return this.MENUITEMS.filter(item => ['User'].indexOf(item.role) !== -1);
     }
 }

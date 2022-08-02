@@ -8,13 +8,14 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SidebarEventService } from '../shared/sidebar/sidebar.component';
+import { VerticalSidebarService } from '../shared/sidebar/sidebar.service';
+
 
 @Injectable()
 export class RoleuserInterceptor implements HttpInterceptor {
 
   constructor(
-    private menuEventService: SidebarEventService
+    private verticalSidebarService: VerticalSidebarService
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -25,7 +26,7 @@ export class RoleuserInterceptor implements HttpInterceptor {
             const role = event.headers.get('Role-user');
 
             if (role) {
-              this.menuEventService.dispathEvent(role);
+              this.verticalSidebarService.menuItemsRole = role;
             }
           }
         })

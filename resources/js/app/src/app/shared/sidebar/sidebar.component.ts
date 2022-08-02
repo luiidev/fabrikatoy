@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTES } from './menu-items';
 import { RouteInfo } from './sidebar.metadata';
-import { Subject } from 'rxjs';
+import { VerticalSidebarService } from './sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,30 +21,13 @@ export class SidebarComponent implements OnInit {
   }
 
   constructor(
-    private menuEventService: SidebarEventService
+    private verticalSidebarService: VerticalSidebarService
   ) {}
 
   // End open close
   ngOnInit() {
-    this.menuEventService.events.subscribe((role: string) => {
-      if (role === 'Super') {
-        this.sidebarnavItems = ROUTES.filter(item => ['Super', 'Admin', 'User'].indexOf(item.role) !== -1);
-      } else if (role === 'Admin') {
-        this.sidebarnavItems = ROUTES.filter(item => ['Admin', 'User'].indexOf(item.role) !== -1);
-      } else {
-        this.sidebarnavItems = ROUTES.filter(item => ['User'].indexOf(item.role) !== -1);
-      }
+    this.verticalSidebarService.menuItemsObservable.subscribe((items: RouteInfo[]) => {
+      this.sidebarnavItems = items;
     });
-
-    this.sidebarnavItems = ROUTES.filter(item => ['User'].indexOf(item.role) !== -1);
-  }
-}
-
-export class SidebarEventService {
-  protected eventSubject = new Subject<string>();
-  public events = this.eventSubject.asObservable();
-
-  dispathEvent(role: string) {
-     this.eventSubject.next(role);
   }
 }

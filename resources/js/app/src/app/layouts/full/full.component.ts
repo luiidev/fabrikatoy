@@ -12,10 +12,10 @@ import { User } from '../../models/user.model';
 })
 export class FullComponent implements OnInit {
 
-  public showHeaderAndAside: boolean = true;
+  public showHeaderAndAside = true;
   public isCollapsed = false;
-  public innerWidth: number = 0;
-  public defaultSidebar: string = "";
+  public innerWidth = 0;
+  public defaultSidebar = "";
   public showMobileMenu = false;
   public expandLogo = false;
   public sidebartype = "full";
