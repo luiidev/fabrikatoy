@@ -19,9 +19,9 @@ import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 export class SearchComponent {
   @Output() searchTerm = new EventEmitter<string>();
   @Output() create = new EventEmitter<string>();
-  @Input() createButton: boolean = false;
+  @Input() createButton = false;
 
-  term: string = '';
+  term = '';
   modelSearchChanged: Subject<string> = new Subject<string>();
 
   constructor() {

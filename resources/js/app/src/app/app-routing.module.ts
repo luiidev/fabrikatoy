@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { FullComponent } from './layouts/full/full.component';
 import { ProfileComponent } from './admin/profile/profile.component';
 import { LoginComponent } from './admin/login/login.component';
 import { ProductsComponent } from './admin/products/products.component';
@@ -10,6 +9,7 @@ import { BrandsComponent } from './admin/brands/brands.component';
 import { PointOfSaleComponent } from './admin/sales/sales.component';
 import { UsersComponent } from './admin/users/users.component';
 import { CustomersComponent } from './admin/customers/customers.component';
+import { FullComponent } from './shared/components/full/full.component';
 
 export const AppRoutes: Routes = [
   {

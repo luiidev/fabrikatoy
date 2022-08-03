@@ -1,9 +1,7 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
+import { User } from "src/app/models/user.model";
 import { AuthService } from "src/app/services/auth.service.";
-import { User } from '../../models/user.model';
-
-//declare var $: any;
 
 @Component({
   selector: "app-full-layout",

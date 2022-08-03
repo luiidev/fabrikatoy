@@ -8,7 +8,8 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { VerticalSidebarService } from '../shared/sidebar/sidebar.service';
+import { VerticalSidebarService } from '../components/sidebar/sidebar.service';
+
 
 
 @Injectable()

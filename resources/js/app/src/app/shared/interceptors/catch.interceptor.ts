@@ -9,9 +9,9 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { WarnModalComponent } from '../helpers/modals/alerts.component';
-import Utils from '../helpers/utils';
-import { AuthService } from '../services/auth.service.';
+import { WarnModalComponent } from '../../helpers/modals/alerts.component';
+import Utils from '../../helpers/utils';
+import { AuthService } from '../../services/auth.service.';
 
 @Injectable()
 export class CatchInterceptor implements HttpInterceptor {
