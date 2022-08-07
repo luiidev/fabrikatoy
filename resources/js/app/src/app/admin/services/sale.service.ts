@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Response } from '../../shared/models/response.model';
+import { Response, SalePaginationResponse, SaleResponse } from '../../shared/models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +10,18 @@ import { Response } from '../../shared/models/response.model';
 export class SaleService {
 
   constructor(
-    private httpClient: HttpClient
+    private http: HttpClient
   ){ }
 
-  store(params: any): Observable<Response> {
-    return this.httpClient.post<Response>(`${environment.API_URL}/sale`, params);
+  getAll(params: HttpParams): Observable<SalePaginationResponse> {
+    return this.http.get<SalePaginationResponse>(`${environment.API_URL}/sales`, { params });
+  }
+
+  store(params: any): Observable<SaleResponse> {
+    return this.http.post<SaleResponse>(`${environment.API_URL}/sales`, params);
   }
 
   getCustomer(params: any): Observable<Response> {
-    return this.httpClient.get<Response>(`${environment.API_URL}/sale/customer`, { params });
+    return this.http.get<Response>(`${environment.API_URL}/sales/customer`, { params });
   }
 }

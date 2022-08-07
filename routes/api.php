@@ -39,7 +39,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         $router->resource('users', UserController::class)->only(['index', 'show', 'store', 'update']);
         $router->resource('branch-offices', BranchOfficeController::class)->only(['index']);
         $router->resource('customers', CustomerController::class)->only(['index', 'store', 'update']);
-        $router->resource('sale', SaleController::class)->only(['store']);
+        $router->resource('sales', SaleController::class)->only(['index', 'store']);
 
         $router->get('products-for-sale', [ProductController::class, 'listForSale']);
         $router->get('sale/customer', [SaleController::class, 'getCustomer']);

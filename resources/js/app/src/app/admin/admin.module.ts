@@ -17,6 +17,7 @@ import { ProductsComponent } from './components/products/list/products.component
 import { ProviderStoreOrUpdateComponent } from './components/providers/create-or-update/create-or-update-providers.component';
 import { ProvidersComponent } from './components/providers/list/providers.component';
 import { CustomerVoucherComponent } from './components/sales/customer-voucher/customer-voucher.component';
+import { SalesComponent } from './components/sales/list/sales.component';
 import { PointOfSaleComponent } from './components/sales/point-of-sale/point-of-sale.component';
 import { UsersStoreOrUpdateComponent } from './components/users/create-or-update/create-or-update-users.component';
 import { UsersComponent } from './components/users/list/users.component';
@@ -27,6 +28,7 @@ import { UsersComponent } from './components/users/list/users.component';
     SharedModule
   ],
   declarations: [
+    SpinnerComponent,
     FullComponent,
     NavigationComponent,
     SidebarComponent,
@@ -45,7 +47,7 @@ import { UsersComponent } from './components/users/list/users.component';
     UsersStoreOrUpdateComponent,
     CustomersComponent,
     CustomersStoreOrUpdateComponent,
-    SpinnerComponent
+    SalesComponent,
   ],
   exports: [],
   providers: []

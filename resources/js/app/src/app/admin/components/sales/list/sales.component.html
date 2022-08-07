@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-0">
+      <div class="card-header">
+        <h4 class="card-title">Ventas</h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Reporte de ventas</p>
+
+        <div class="position-relative">
+          <spinner *ngIf="isLoadingResults"></spinner>
+
+          <search (searchTerm)="tableFilter.filter.search.emit($event)"></search>
+
+          <div class="table-responsive">
+            <table cdk-table [dataSource]="sales" class="table table-hover mb-0"
+                   matSort
+                   matSortActive="date"
+                   matSortDisableClear
+                   matSortDirection="desc"
+                   multiTemplateDataRows>
+
+              <ng-container cdkColumnDef="user">
+                <th cdk-header-cell *cdkHeaderCellDef>Usuario</th>
+                <td cdk-cell *cdkCellDef="let sale" [class.line-height-1]="sale.company">
+                  <span>{{ sale?.user?.full_name }}</span>
+                  <span class="d-block text-secondary">{{ sale?.branch_office.name }}</span>
+                  <h6 class="d-block m-0" *ngIf="sale.company">{{ sale.company.name }}</h6>
+                </td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="document">
+                <th cdk-header-cell *cdkHeaderCellDef>Comprobante</th>
+                <td cdk-cell *cdkCellDef="let sale" class="line-height-1">
+                  <span class="d-block mb-1">{{ sale?.customer?.name }}</span>
+                  <span class="text-secondary" *ngIf="sale.type">{{ sale.type }}: </span>
+                  <span>{{ sale.number }}</span>
+                </td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="subtotal">
+                <th cdk-header-cell *cdkHeaderCellDef class="text-right">Subtotal</th>
+                <td cdk-cell *cdkCellDef="let sale" class="text-right">
+                  {{ sale.subtotal }}
+                </td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="igv">
+                <th cdk-header-cell *cdkHeaderCellDef class="text-right">IGV</th>
+                <td cdk-cell *cdkCellDef="let sale" class="text-right">
+                  {{ sale.igv }}
+                </td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="total">
+                <th cdk-header-cell *cdkHeaderCellDef class="text-right">Total</th>
+                <td cdk-cell *cdkCellDef="let sale" class="text-right">
+                  {{ sale.total }}
+                </td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="date">
+                <th cdk-header-cell *cdkHeaderCellDef mat-sort-header class="d-flex justify-content-center">Fecha</th>
+                <td cdk-cell *cdkCellDef="let sale" class="text-center">
+                  {{ sale.date | date: 'dd-MM-Y, h:mm a' }}
+                </td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="state_name">
+                <th cdk-header-cell *cdkHeaderCellDef class="text-center w100">Estado</th>
+                <td cdk-cell *cdkCellDef="let sale" class="text-center">{{ sale.state_name }}</td>
+              </ng-container>
+
+              <ng-container cdkColumnDef="actions">
+                <th cdk-header-cell *cdkHeaderCellDef class="text-center w100">Acciones</th>
+                <td cdk-cell *cdkCellDef="let sale" class="text-center">
+                  <span class="text-info pointer" (click)="detail(sale)">Detalle</span>
+                </td>
+              </ng-container>
+
+              <tr cdk-header-row *cdkHeaderRowDef="displayedColumns" class="bg-light"></tr>
+              <tr cdk-row *cdkRowDef="let product; columns: displayedColumns;" class="row-border-bottom-0"></tr>
+            </table>
+            <div class="text-center my-3" *ngIf="sales.length === 0">No se encontraron resultados.</div>
+          </div>
+          <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

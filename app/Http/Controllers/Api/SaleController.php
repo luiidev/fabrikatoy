@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginationRequest;
 use App\Http\Requests\StoreSaleRequest;
 use App\Models\Product;
 use App\Models\Sale;
@@ -10,13 +11,33 @@ use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
     public function __construct()
     {
         $this->authorizeResource(Sale::class);
+    }
+
+    public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'sort' => 'in:date'
+        ]);
+
+        $data = Sale::query()
+            ->with(['user', 'customer', 'branch_office'])
+            ->own()
+            ->where(function($query) use ($request) {
+                $query
+                    ->whereLike('date', $request->input('search'))
+                    ->orWhereLike('number', $request->input('search'))
+                    ->orWhereHas('user', fn($q) => $q->whereLikeFullName($request->input('search')))
+                    ->orWhereHas('customer', fn($q) => $q->whereLike('name', $request->input('search')));
+            })
+            ->apiPaginate();
+
+        return response()->json(['message' => '', 'data' => $data]);
     }
 
     public function getCustomer(Request $request): \Illuminate\Http\JsonResponse

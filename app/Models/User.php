@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Base\User as Authenticatable;
 use App\Models\Traits\GlobalScopes;
@@ -135,6 +136,11 @@ class User extends Authenticatable
     public function branch_office()
     {
         return $this->belongsTo(BranchOffice::class);
+    }
+
+    public function scopeWhereLikeFullName($query, $value)
+    {
+        return $query->whereLike(DB::raw("concat_ws(' ', `first_name`, `last_name`)"), $value);
     }
 
     /**

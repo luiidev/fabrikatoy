@@ -20,7 +20,7 @@ class UserController extends Controller
             ->select(['id', 'branch_office_id', 'company_id', 'first_name', 'last_name', 'nick', 'role', 'state'])
             ->with('branch_office')
             ->own()
-            ->whereLike('first_name', $request->input('search'))
+            ->whereLikeFullName($request->input('search'))
             ->where('role', '<>', 1) // Super
             ->apiPaginate();
 
