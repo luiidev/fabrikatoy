@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { RouteInfo } from './sidebar.metadata';
 import { ROUTES } from './menu-items';
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -17,7 +16,9 @@ export class VerticalSidebarService {
     }
 
     set menuItemsRole(role: string) {
-      this.menuItemsObservablePrivate.next(this.routesFilterByRole(role));
+      const routes: RouteInfo[] = this.routesFilterByRole(role);
+
+      this.menuItemsObservablePrivate.next(routes);
     }
 
     private routesFilterByRole(role: string): RouteInfo[] {

@@ -2,17 +2,17 @@ import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
   // {
-  //   path: '/dashboard',
+  //   path: 'dashboard',
   //   title: 'Dashboard',
   //   icon: 'fa fa-chart-pie',
   //   itemClass: '',
   //   linkClass: '',
   //   extralink: false,
   //   submenu: [],
-  //   role: false
+  //   role: 'Super'
   // },
   {
-    path: '/empresas',
+    path: 'empresas',
     title: 'Empresas',
     icon: 'fa fa-shop',
     itemClass: '',
@@ -22,7 +22,7 @@ export const ROUTES: RouteInfo[] = [
     role: 'Super'
   },
   {
-    path: '/usuarios',
+    path: 'usuarios',
     title: 'Usuarios',
     icon: 'fa fa-user-friends',
     itemClass: '',
@@ -32,7 +32,7 @@ export const ROUTES: RouteInfo[] = [
     role: 'Admin'
   },
   {
-    path: '/proveedores',
+    path: 'proveedores',
     title: 'Proveedores',
     icon: 'fa fa-box',
     itemClass: '',
@@ -42,7 +42,7 @@ export const ROUTES: RouteInfo[] = [
     role: 'Admin'
   },
   {
-    path: '/productos',
+    path: 'productos',
     title: 'Productos',
     icon: 'fa fa-bag-shopping',
     itemClass: '',
@@ -52,7 +52,7 @@ export const ROUTES: RouteInfo[] = [
     role: 'Admin'
   },
   {
-    path: '/marcas',
+    path: 'marcas',
     title: 'Marcas',
     icon: 'fa fa-spell-check',
     itemClass: '',
@@ -62,7 +62,7 @@ export const ROUTES: RouteInfo[] = [
     role: 'Admin'
   },
   {
-    path: '/clientes',
+    path: 'clientes',
     title: 'Clientes',
     icon: 'fa fa-users',
     itemClass: '',
@@ -72,7 +72,7 @@ export const ROUTES: RouteInfo[] = [
     role: 'Admin'
   },
   {
-    path: '/punto-de-venta',
+    path: 'punto-de-venta',
     title: 'Punto de venta',
     icon: 'fa fa-credit-card',
     itemClass: '',
@@ -82,7 +82,7 @@ export const ROUTES: RouteInfo[] = [
     role: 'User'
   },
   {
-    path: '/ventas',
+    path: 'reporte-de-ventas',
     title: 'Reporte de ventas',
     icon: 'fa fa-chart-line',
     itemClass: '',
@@ -92,7 +92,7 @@ export const ROUTES: RouteInfo[] = [
     role: 'Admin'
   },
   {
-    path: '/compras',
+    path: 'reporte-de-compras',
     title: 'Reporte de compras',
     icon: 'fa fa-chart-pie',
     itemClass: '',

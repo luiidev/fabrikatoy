@@ -5,41 +5,19 @@ import {
   PathLocationStrategy
 } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
-import { AppRoutes } from './app-routing.module';
-import { AppComponent } from './app.component';
-
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
-import { SearchComponent } from './helpers/search/search.component';
-import { LoginComponent } from './admin/login/login.component';
+import { AuthorizationInterceptor } from './public/interceptors/authorization.interceptor';
+import { CatchInterceptor } from './public/interceptors/catch.interceptor';
+import { RoleuserInterceptor } from './public/interceptors/role-user.interceptor';
 
-import { ProductsComponent } from './admin/products/products.component';
-import { ProductStoreOrUpdateComponent } from './admin/products/products-cu.component';
-
-import { ProvidersComponent } from './admin/providers/providers.component';
-import { ProviderStoreOrUpdateComponent } from './admin/providers/providers-cu.component';
-
-import { CompaniesComponent } from './admin/companies/companies.component';
-import { CompaniesStoreOrUpdateComponent } from './admin/companies/companies-cu.component';
-import { CompaniesSearchComponent } from './admin/companies/companies-search.component';
-
-import { BrandsComponent } from './admin/brands/brands.component';
-import { BrandsStoreOrUpdateComponent } from './admin/brands/brands-cu.component';
-
-import { UsersComponent } from './admin/users/users.component';
-import { UsersStoreOrUpdateComponent } from './admin/users/users-cu.component';
-
-import { PointOfSaleComponent } from './admin/sales/sales.component';
-import { CustomerVoucherComponent } from './admin/sales/sales-cu.component';
-
-import { CustomersComponent } from './admin/customers/customers.component';
-import { CustomersStoreOrUpdateComponent } from './admin/customers/customers-cu.component';
-import { SharedModule } from './shared/shared.module';
+import { PublicModule } from './public/public.module';
+import { AppRoutes } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -51,33 +29,31 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent,
-    LoginComponent,
-    ProductsComponent,
-    ProductStoreOrUpdateComponent,
-    ProvidersComponent,
-    ProviderStoreOrUpdateComponent,
-    CompaniesSearchComponent,
-    CompaniesComponent,
-    CompaniesStoreOrUpdateComponent,
-    BrandsComponent,
-    BrandsStoreOrUpdateComponent,
-    PointOfSaleComponent,
-    CustomerVoucherComponent,
-    UsersComponent,
-    UsersStoreOrUpdateComponent,
-    CustomersComponent,
-    CustomersStoreOrUpdateComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule,
     HttpClientModule,
     RouterModule.forRoot(AppRoutes, { useHash: false, relativeLinkResolution: 'legacy' }),
     PerfectScrollbarModule,
+    PublicModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CatchInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RoleuserInterceptor,
+      multi: true
+    },
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy

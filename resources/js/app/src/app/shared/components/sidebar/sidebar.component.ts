@@ -24,7 +24,6 @@ export class SidebarComponent implements OnInit {
     private verticalSidebarService: VerticalSidebarService
   ) {}
 
-  // End open close
   ngOnInit() {
     this.verticalSidebarService.menuItemsObservable.subscribe((items: RouteInfo[]) => {
       this.sidebarnavItems = items;

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { User } from 'src/app/models/user.model';
-import { AuthService } from 'src/app/services/auth.service.';
+import { User } from 'src/app/admin/models/user.model';
+import { AuthenticationService } from 'src/app/public/services/authentication.service.';
 
 @Component({
   selector: 'app-navigation',
@@ -21,7 +21,7 @@ export class NavigationComponent implements OnInit {
   };
 
   constructor(
-    private authService: AuthService
+    private authenticationService: AuthenticationService
   ) {}
 
   public selectedLanguage: unknown = {
@@ -40,13 +40,13 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const user = this.authService.getUser();
+    const user = this.authenticationService.getUser();
     if (user) {
       this.user = JSON.parse(user);
     }
   }
 
   logout() {
-    this.authService.logout();
+    this.authenticationService.logout();
   }
 }

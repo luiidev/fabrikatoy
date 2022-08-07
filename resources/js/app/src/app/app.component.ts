@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { AuthService } from './services/auth.service.';
+import { AuthenticationService } from './public/services/authentication.service.';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +9,19 @@ import { AuthService } from './services/auth.service.';
 export class AppComponent {
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authenticationService: AuthenticationService
   ) {
     this.router.events.subscribe((event: Event) => {
         if (event instanceof NavigationStart) {
-          if (!this.authService.getToken() && !event.url.includes('/login')) {
+          if (!this.authenticationService.getToken() && !event.url.includes('/login')) {
             this.router.navigate(['/login']);
           }
         }
+
         if (event instanceof NavigationEnd) {
           //
         }
+
         if (event instanceof NavigationError) {
           //
         }

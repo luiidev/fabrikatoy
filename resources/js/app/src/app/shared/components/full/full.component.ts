@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
-import { User } from "src/app/models/user.model";
-import { AuthService } from "src/app/services/auth.service.";
+import { User } from "src/app/admin/models/user.model";
+import { AuthenticationService } from "src/app/public/services/authentication.service.";
 
 @Component({
   selector: "app-full-layout",
@@ -26,7 +26,7 @@ export class FullComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private authService: AuthService
+    private authenticationService: AuthenticationService
   ) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -92,7 +92,7 @@ export class FullComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    const user = this.authService.getUser();
+    const user = this.authenticationService.getUser();
     if (user) {
       this.user = JSON.parse(user);
     }
