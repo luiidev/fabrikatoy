@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { finalize } from 'rxjs';
 import { Sale } from 'src/app/admin/models/sale.model';
 import { SaleService } from 'src/app/admin/services/sale.service';
 
@@ -28,13 +28,9 @@ export class SaleDetailComponent {
 
   getSaleDetail(uuid: string): void {
     this.saleService.get(uuid)
-      .subscribe({
-        next: response => {
-          this.sale = response.data;
-        },
-        complete: () => {
-          this.isLoadingResults = false;
-        }
+      .pipe(finalize(() => this.isLoadingResults = false))
+      .subscribe(response => {
+        this.sale = response.data;
       });
   }
 

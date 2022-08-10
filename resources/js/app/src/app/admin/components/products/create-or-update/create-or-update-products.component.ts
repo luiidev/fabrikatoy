@@ -11,6 +11,7 @@ import { environment } from "src/environments/environment";
 import { BrandsComponent } from "../../brands/list/brands.component";
 import { CompaniesComponent } from "../../companies/list/companies.component";
 import { ProvidersComponent } from "../../providers/list/providers.component";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-card-warn',
@@ -37,29 +38,30 @@ export class ProductStoreOrUpdateComponent {
   save() {
     this.isLoadingResults = true;
 
-    const { company, brand, providers, average_price, higher_price, image, price, quantity, state_name, unit, ...data } = this.product;
-    data.providers_id = this.product.providers?.map(p => p.id ?? 0) || [];
-
-    // const data: Product = {
-    //   brand_id: this.product.brand_id,
-    //   company_id: this.product.company_id;
-    //   code: this.product.code,
-    //   name: this.product.name,
-    //   state: this.product.state,
-    //   providers: this.product.providers.map((p) => p.id),
-    // };
+    const data = this.cloneProduct(this.product);
 
     const service = !this.product.id ? this.productService.store(data) : this.productService.update(data);
 
     service
+      .pipe(finalize(() => this.isLoadingResults = false))
       .subscribe(response => {
         const modalRef = this.ngbModal.open(SuccsessModalComponent, Utils.modalCenter);
         modalRef.componentInstance.message = response.message;
 
-        this.isLoadingResults = true;
-
         this.activeModal.close();
-      }, () =>  this.isLoadingResults = false);
+      });
+  }
+
+  cloneProduct({brand_id, code, name , providers, state}: Product): Product {
+    const product: Product = {
+      brand_id: brand_id,
+      code: code,
+      name: name ,
+      providers_id: providers?.map((p: Provider) => p.id ?? 0) || [],
+      state: state
+    };
+
+    return product;
   }
 
   del(provider: Provider) {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { Login } from 'src/app/public/models/login.model';
 import { AuthenticationService } from 'src/app/public/services/authentication.service.';
 
@@ -29,6 +30,7 @@ export class LoginComponent {
     this.errorMessage = '';
     this.isLoadingResults = true;
     this.authenticationService.login(this.user)
+      .pipe(finalize(() => this.isLoadingResults = false))
       .subscribe({
         next: response => {
           const AuthResponse = response[1];
@@ -40,9 +42,6 @@ export class LoginComponent {
         },
         error: response => {
           this.errorMessage = response.error.message;
-        },
-        complete: () => {
-          this.isLoadingResults = false;
         }
       })
   }

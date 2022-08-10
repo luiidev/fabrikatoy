@@ -7,6 +7,7 @@ import { Company } from "src/app/admin/models/company.model";
 import { BrandService } from "src/app/admin/services/brand.service";
 import { environment } from "src/environments/environment";
 import { CompaniesComponent } from "../../companies/list/companies.component";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-card-warn',
@@ -32,14 +33,13 @@ export class BrandsStoreOrUpdateComponent {
     const service = !this.brand.id ? this.brandService.store(this.brand) : this.brandService.update(this.brand);
 
     service
+      .pipe(finalize(() => this.isLoadingResults = false))
       .subscribe(response => {
         const modalRef = this.ngbModal.open(SuccsessModalComponent, Utils.modalCenter);
         modalRef.componentInstance.message = response.message;
 
-        this.isLoadingResults = true;
-
         this.activeModal.close();
-      }, () =>  this.isLoadingResults = false);
+      });
   }
 
   searchCompany() {

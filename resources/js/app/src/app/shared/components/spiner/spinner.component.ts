@@ -16,14 +16,15 @@ import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'spinner',
-  template: `<div class="preloader" *ngIf="isSpinnerVisible || isLoading">
+  template: `
+    <div class="preloader" *ngIf="isSpinnerVisible || isLoading">
         <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>`,
   encapsulation: ViewEncapsulation.None
 })
 export class SpinnerComponent implements OnDestroy {
   @Input() isLoading = false;
-  public isSpinnerVisible = true;
+  public isSpinnerVisible = false;
 
   constructor(private router: Router, @Inject(DOCUMENT) private document: Document) {
     this.router.events.subscribe({

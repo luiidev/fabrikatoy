@@ -4,6 +4,7 @@ import { SuccsessModalComponent } from "src/app/shared/helpers/modals/alerts.com
 import Utils from "src/app/shared/helpers/utils";
 import { Company } from "src/app/admin/models/company.model";
 import { CompanyService } from "src/app/admin/services/company.service";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-card-warn',
@@ -31,13 +32,12 @@ export class CompaniesStoreOrUpdateComponent {
     const service = !this.company.id ? this.companyService.store(this.company) : this.companyService.update(this.company);
 
     service
+      .pipe(finalize(() => this.isLoadingResults = false))
       .subscribe(response => {
         const modalRef = this.ngbModal.open(SuccsessModalComponent, Utils.modalCenter);
         modalRef.componentInstance.message = response.message;
 
-        this.isLoadingResults = true;
-
         this.activeModal.close();
-      }, () =>  this.isLoadingResults = false);
+      });
   }
 }

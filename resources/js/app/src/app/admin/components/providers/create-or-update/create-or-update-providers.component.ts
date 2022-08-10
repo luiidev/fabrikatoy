@@ -7,6 +7,7 @@ import ProviderRequest, { Provider } from "src/app/admin/models/provider.model";
 import { ProviderService } from "src/app/admin/services/provider.service";
 import { environment } from "src/environments/environment";
 import { CompaniesComponent } from "../../companies/list/companies.component";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-card-warn',
@@ -35,14 +36,13 @@ export class ProviderStoreOrUpdateComponent {
     const service = !this.provider.id ? this.providerService.store(data) : this.providerService.update(data);
 
     service
+      .pipe(finalize(() => this.isLoadingResults = false))
       .subscribe(response => {
         const modalRef = this.ngbModal.open(SuccsessModalComponent, Utils.modalCenter);
         modalRef.componentInstance.message = response.message;
 
-        this.isLoadingResults = true;
-
         this.activeModal.close();
-      }, () =>  this.isLoadingResults = false);
+      });
   }
 
   searchCompany() {

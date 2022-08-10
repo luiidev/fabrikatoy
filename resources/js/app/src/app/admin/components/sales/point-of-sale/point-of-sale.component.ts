@@ -73,7 +73,7 @@ export class PointOfSaleComponent implements OnInit {
     this.isLoadingResults = true;
     this.productService.getForSale(this.productFilter)
       .pipe(finalize(() => this.isLoadingResults = false))
-      .subscribe((response) => {
+      .subscribe(response => {
         this.products = response.data.items;
         // this.taxes_included = response.data.taxes_included === 1;
         this.taxes_included = true;
@@ -167,7 +167,7 @@ export class PointOfSaleComponent implements OnInit {
     this.isLoadingResults = true;
     this.saleService.store(this.sale)
       .pipe(finalize(() => this.isLoadingResults = false))
-      .subscribe((response) => {
+      .subscribe(response => {
         const modalRef = this.ngbModal.open(SuccsessModalComponent, Utils.modalCenterIndex1)
         modalRef.componentInstance.message = response.message;
 

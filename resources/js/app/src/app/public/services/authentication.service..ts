@@ -26,7 +26,9 @@ export class AuthenticationService {
 
   logout(): void {
     this.http.post<void>(`${environment.API_URL}/logout`, {})
-      .subscribe(this.clearStorage)
+      .subscribe(() => {
+        this.clearStorage();
+      });
   }
 
   logoutExpired = this.clearStorage;

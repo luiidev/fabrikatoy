@@ -7,6 +7,7 @@ import { Customer } from "src/app/admin/models/customer.model";
 import { CustomerService } from "src/app/admin/services/customer.service";
 import { environment } from "src/environments/environment";
 import { CompaniesComponent } from "../../companies/list/companies.component";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-card-warn',
@@ -34,14 +35,13 @@ export class CustomersStoreOrUpdateComponent {
     const service = !this.customer.id ? this.customerService.store(this.customer) : this.customerService.update(this.customer);
 
     service
+      .pipe(finalize(() => this.isLoadingResults = false))
       .subscribe(response => {
         const modalRef = this.ngbModal.open(SuccsessModalComponent, Utils.modalCenter);
         modalRef.componentInstance.message = response.message;
 
-        this.isLoadingResults = true;
-
         this.activeModal.close();
-      }, () =>  this.isLoadingResults = false);
+      });
   }
 
   searchCompany() {

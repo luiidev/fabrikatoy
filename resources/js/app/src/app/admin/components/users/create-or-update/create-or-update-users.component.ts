@@ -10,6 +10,7 @@ import { BranchOfficeService } from "src/app/admin/services/branch-office.servic
 import { UserService } from "src/app/admin/services/user.service";
 import { environment } from "src/environments/environment";
 import { CompaniesComponent } from "../../companies/list/companies.component";
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-card-warn',
@@ -50,6 +51,7 @@ export class UsersStoreOrUpdateComponent implements OnInit {
     const service = !this.user.id ? this.userService.store(this.user) : this.userService.update(this.user);
 
     service
+      .pipe(finalize(() => this.isLoadingResults = false))
       .subscribe(response => {
         const modalRef = this.ngbModal.open(SuccsessModalComponent, Utils.modalCenter);
         modalRef.componentInstance.message = response.message;
@@ -57,7 +59,7 @@ export class UsersStoreOrUpdateComponent implements OnInit {
         this.isLoadingResults = true;
 
         this.activeModal.close();
-      }, () =>  this.isLoadingResults = false);
+      });
   }
 
   searchCompany() {
