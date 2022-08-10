@@ -138,7 +138,7 @@ class User extends Authenticatable
         return $this->belongsTo(BranchOffice::class);
     }
 
-    public function scopeWhereLikeFullName($query, $value)
+    public function scopeSearch($query, $value)
     {
         return $query->whereLike(DB::raw("concat_ws(' ', `first_name`, `last_name`)"), $value);
     }

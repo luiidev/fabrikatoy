@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { RouteInfo } from './sidebar.metadata';
 import { ROUTES } from './menu-items';
 
@@ -9,16 +9,16 @@ import { ROUTES } from './menu-items';
 export class VerticalSidebarService {
     MENUITEMS: RouteInfo[] = ROUTES;
 
-    private menuItemsObservablePrivate: BehaviorSubject<RouteInfo[]> = new BehaviorSubject<RouteInfo[]>(this.routesFilterByRole('User'));
+    private menuItemsBehaviorSubject: BehaviorSubject<RouteInfo[]> = new BehaviorSubject<RouteInfo[]>(this.routesFilterByRole('User'));
 
-    get menuItemsObservable() {
-      return this.menuItemsObservablePrivate.asObservable();
+    get menuItemsObservable(): Observable<RouteInfo[]> {
+      return this.menuItemsBehaviorSubject.asObservable();
     }
 
     set menuItemsRole(role: string) {
       const routes: RouteInfo[] = this.routesFilterByRole(role);
 
-      this.menuItemsObservablePrivate.next(routes);
+      this.menuItemsBehaviorSubject.next(routes);
     }
 
     private routesFilterByRole(role: string): RouteInfo[] {

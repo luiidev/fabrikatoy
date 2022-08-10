@@ -16,19 +16,18 @@ import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'spinner',
-  template: `<div class="preloader" *ngIf="isSpinnerVisible">
+  template: `<div class="preloader" *ngIf="isSpinnerVisible || isLoading">
         <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>`,
   encapsulation: ViewEncapsulation.None
 })
 export class SpinnerComponent implements OnDestroy {
+  @Input() isLoading = false;
   public isSpinnerVisible = true;
 
-  @Input() public backgroundColor = 'rgba(0, 115, 170, 0.69)';
-
   constructor(private router: Router, @Inject(DOCUMENT) private document: Document) {
-    this.router.events.subscribe(
-      event => {
+    this.router.events.subscribe({
+      next: (event) => {
         if (event instanceof NavigationStart) {
           this.isSpinnerVisible = true;
         }
@@ -36,10 +35,10 @@ export class SpinnerComponent implements OnDestroy {
           this.isSpinnerVisible = false;
         }
       },
-      () => {
+      error: () => {
         this.isSpinnerVisible = false;
       }
-    );
+    });
   }
 
   ngOnDestroy(): void {

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 import { merge } from 'rxjs';
 import { catchError, map, switchMap, startWith } from 'rxjs/operators';
 import { Sale } from 'src/app/admin/models/sale.model';
@@ -32,8 +32,7 @@ export class SalesComponent {
 
   constructor(
     private saleService: SaleService,
-    private ngbModal: NgbModal,
-    public activeModal: NgbActiveModal
+    private router: Router
   ) {
     this.tableFilter = new TableFilter();
   }
@@ -67,6 +66,6 @@ export class SalesComponent {
   }
 
   detail(sale: Sale) {
-    console.log("🚀 ~ file: sales.component.ts ~ line 70 ~ detail ~ sale", sale)
+    this.router.navigate(['/admin/reporte-de-ventas', sale.uuid]);
   }
 }

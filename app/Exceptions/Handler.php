@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -47,6 +48,14 @@ class Handler extends ExceptionHandler
         $this->renderable(function (NotFoundHttpException $e, $request) {
             if (!$request->isJson()) {
                 return response()->view('app.index');
+            }
+
+            return $e;
+        });
+
+        $this->renderable(function (AuthenticationException $e, $request) {
+            if ($request->isJson()) {
+                return response()->json(['message' => 'Sesion expirada. Vuelva a iniciar sesion nuevamente.'], 401);
             }
 
             return $e;

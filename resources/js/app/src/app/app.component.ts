@@ -13,8 +13,12 @@ export class AppComponent {
   ) {
     this.router.events.subscribe((event: Event) => {
         if (event instanceof NavigationStart) {
-          if (!this.authenticationService.getToken() && !event.url.includes('/login')) {
+          if (!this.authenticationService.token && event.url !== '/login') {
             this.router.navigate(['/login']);
+          }
+
+          if (this.authenticationService.token && event.url === '/') {
+            this.router.navigate(['/admin/perfil']);
           }
         }
 

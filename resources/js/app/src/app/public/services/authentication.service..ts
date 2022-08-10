@@ -5,6 +5,7 @@ import { Observable, zip } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Login } from '../models/login.model';
 import { AuthUserResponse } from '../../shared/models/response.model';
+import { User } from 'src/app/admin/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,27 +26,41 @@ export class AuthenticationService {
 
   logout(): void {
     this.http.post<void>(`${environment.API_URL}/logout`, {})
-      .subscribe(() => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-
-        this.router.navigate(['/login']);
-      })
+      .subscribe(this.clearStorage)
   }
 
-  getUser(): string | null {
-    return localStorage.getItem('user');
+  logoutExpired = this.clearStorage;
+
+  clearStorage() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    this.router.navigate(['/login']);
   }
 
-  setUser(user: string): void {
-    localStorage.setItem('user', user);
+  get user(): User | null {
+    const user = localStorage.getItem('user');
+
+    if (user) {
+      return JSON.parse(user);
+    }
+
+    return null;
   }
 
-  getToken(): string | null {
+  set user(user: User | null) {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user))
+    }
+  }
+
+  get token(): string | null {
     return localStorage.getItem('token');
   }
 
-  setToken(token: string): void {
-    localStorage.setItem('token', token);
+  set token(token: string | null) {
+    if (token) {
+      localStorage.setItem('token', token);
+    }
   }
 }

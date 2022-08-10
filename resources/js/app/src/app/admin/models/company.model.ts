@@ -1,5 +1,3 @@
-type Nullable<T> = T | null;
-
 export interface Company {
   id?: number;
   state?: number;

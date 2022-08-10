@@ -22,11 +22,14 @@ class AuthController extends Controller
             'device_name' => 'required|string|max:32',
         ]);
 
-        $user = User::with('company')->where('nick', $request->input('nick'))->first();
+        $user = User::query()
+            ->with('company')
+            ->where('nick', $request->input('nick'))
+            ->first();
 
         if (! $user || ! Hash::check($request->input('password'), $user->password)) {
             throw ValidationException::withMessages([
-                'nick' => [/*'The provided credentials are incorrect.'*/ 'Usuario y/o contraseña incorrecta.'],
+                'nick' => ['Usuario y/o contraseña incorrecta.'],
             ]);
         }
 

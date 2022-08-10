@@ -11,6 +11,7 @@ use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
@@ -32,12 +33,19 @@ class SaleController extends Controller
                 $query
                     ->whereLike('date', $request->input('search'))
                     ->orWhereLike('number', $request->input('search'))
-                    ->orWhereHas('user', fn($q) => $q->whereLikeFullName($request->input('search')))
-                    ->orWhereHas('customer', fn($q) => $q->whereLike('name', $request->input('search')));
+                    ->orWhereHas('user', fn($q) => $q->search($request->input('search')))
+                    ->orWhereHas('customer', fn($q) => $q->search($request->input('search')));
             })
             ->apiPaginate();
 
         return response()->json(['message' => '', 'data' => $data]);
+    }
+
+    public function show(Sale $sale): \Illuminate\Http\JsonResponse
+    {
+        $sale->load(['detail' => fn($q) => $q->with(['product', 'unit']), 'company', 'branch_office', 'customer', 'user']);
+
+        return response()->json(['message' => '', 'data' => $sale]);
     }
 
     public function getCustomer(Request $request): \Illuminate\Http\JsonResponse

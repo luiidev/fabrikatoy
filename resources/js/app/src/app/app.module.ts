@@ -2,9 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   LocationStrategy,
-  PathLocationStrategy
+  PathLocationStrategy,
+  registerLocaleData
 } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import localeEsPe from '@angular/common/locales/es-PE';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -25,6 +27,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true,
   minScrollbarLength: 20
 };
+
+registerLocaleData(localeEsPe);
 
 @NgModule({
   declarations: [
@@ -61,7 +65,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    {provide: LOCALE_ID, useValue: 'es-PE' }
   ],
   bootstrap: [AppComponent]
 })

@@ -80,7 +80,7 @@ namespace App\Models{
  * @property int $state
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read string $state_name
+ * @property-read \App\Models\Company|null $company
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice active()
  * @method static \Illuminate\Database\Eloquent\Builder|BranchOffice apiPaginate($perPage = 10, $columns = [], $pageName = 'page', $page = null)
  * @method static \Database\Factories\BranchOfficeFactory factory(...$parameters)
@@ -112,7 +112,6 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Company $company
- * @property-read string $state_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @method static \App\Models\Base\Builder|Brand active()
@@ -147,7 +146,6 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Company $company
- * @property-read string $state_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @method static \App\Models\Base\Builder|Category active()
@@ -196,11 +194,10 @@ namespace App\Models{
  * @property-read int|null $contacts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Customer[] $customers
  * @property-read int|null $customers_count
- * @property-read string $state_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Provider[] $provider
- * @property-read int|null $provider_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Provider[] $providers
+ * @property-read int|null $providers_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Unit[] $units
  * @property-read int|null $units_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
@@ -279,6 +276,7 @@ namespace App\Models{
  * @property int $state
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company $company
  * @method static \App\Models\Base\Builder|Customer active()
  * @method static \App\Models\Base\Builder|Customer apiPaginate($perPage = 10, $columns = [], $pageName = 'page', $page = null)
  * @method static \Database\Factories\CustomerFactory factory(...$parameters)
@@ -327,7 +325,6 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
  * @property-read int|null $categories_count
  * @property-read \App\Models\Company $company
- * @property-read string $state_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Provider[] $providers
  * @property-read int|null $providers_count
  * @property-read \App\Models\Unit $unit
@@ -376,7 +373,6 @@ namespace App\Models{
  * @property-read \App\Models\Company $company
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Contact[] $contacts
  * @property-read int|null $contacts_count
- * @property-read string $state_name
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @method static \App\Models\Base\Builder|Provider active()
@@ -512,8 +508,12 @@ namespace App\Models{
  * @property int $state
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\BranchOffice|null $branch_office
+ * @property-read \App\Models\Company $company
+ * @property-read \App\Models\Customer|null $customer
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SaleDetail[] $detail
  * @property-read int|null $detail_count
+ * @property-read \App\Models\User $user
  * @method static \App\Models\Base\Builder|Sale active()
  * @method static \App\Models\Base\Builder|Sale apiPaginate($perPage = 10, $columns = [], $pageName = 'page', $page = null)
  * @method static \App\Models\Base\Builder|Sale forPage($page, $perPage = 15)
@@ -669,6 +669,7 @@ namespace App\Models{
  * @method static \App\Models\Base\Builder|User whereImage($value)
  * @method static \App\Models\Base\Builder|User whereLastName($value)
  * @method static \App\Models\Base\Builder|User whereLike($column, $value)
+ * @method static \App\Models\Base\Builder|User whereLikeFullName($value)
  * @method static \App\Models\Base\Builder|User whereNick($value)
  * @method static \App\Models\Base\Builder|User wherePassword($value)
  * @method static \App\Models\Base\Builder|User wherePhone($value)

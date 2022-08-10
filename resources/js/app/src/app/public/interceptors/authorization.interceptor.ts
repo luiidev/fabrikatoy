@@ -32,7 +32,7 @@ export class AuthorizationInterceptor implements HttpInterceptor {
         .set('Accept', 'application/json')
     })
 
-    const token = this.authenticationService.getToken();
+    const token = this.authenticationService.token;
     const tokenXsrf = this.tokenXsrf.getToken();
 
     if (token !== null) {

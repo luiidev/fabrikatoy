@@ -14,7 +14,7 @@
   <!-- ============================================================== -->
   <!-- Topbar header - style you can find in topbar.scss -->
   <!-- ============================================================== -->
-  <header class="topbar" data-navbarbg="skin2" *ngIf="showHeaderAndAside">
+  <header class="topbar" data-navbarbg="skin2">
     <nav class="d-flex top-navbar navbar-expand-lg navbar-dark">
       <div
         class="navbar-header"
@@ -32,19 +32,19 @@
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
-        <a class="navbar-brand" [routerLink]="'/punto-de-venta'">
+        <a class="navbar-brand" [routerLink]="'/admin/punto-de-venta'">
           <!-- Logo icon -->
           <b class="logo-icon">
             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
             <!-- Dark Logo icon -->
             <img
-            [src]="user.company?.short_logo ?? 'assets/img/logo/logo-min.png'"
+            [src]="user?.company?.short_logo ?? 'assets/img/logo/logo-min.png'"
             alt=""
             class="dark-logo"
             />
             <!-- Light Logo icon -->
             <img
-              [src]="user.company?.short_logo ?? 'assets/img/logo/logo-min.png'"
+              [src]="user?.company?.short_logo ?? 'assets/img/logo/logo-min.png'"
               alt=""
               class="dark-light"
             />
@@ -54,13 +54,13 @@
           <span class="logo-text" *ngIf="user?.company?.logo">
             <!-- Dark Logo icon -->
             <img
-            [src]="user.company?.logo ?? 'assets/img/logo/logo-min.png'"
+            [src]="user?.company?.logo ?? 'assets/img/logo/logo-min.png'"
             class="dark-logo"
             alt=""
             />
             <!-- Light Logo text -->
             <img
-              [src]="user.company?.logo ?? 'assets/img/logo/logo-min.png'"
+              [src]="user?.company?.logo ?? 'assets/img/logo/logo-min.png'"
               class="light-logo"
               alt=""
             />
@@ -95,12 +95,7 @@
         data-navbarbg="skin3"
         [ngbCollapse]="!isCollapsed"
       >
-        <app-navigation
-          [sidebartype]="sidebartype"
-          [sidebartheme]="sidebartheme"
-          (toggleSidebar)="toggleSidebarType()"
-          (toggleTheme)="toggleThemeType()"
-          class="w-100"
+        <app-navigation class="w-100"
         ></app-navigation>
       </div>
     </nav>
@@ -113,7 +108,6 @@
     data-sidebarbg="skin2"
     (mouseover)="Logo()"
     (mouseout)="Logo()"
-    *ngIf="showHeaderAndAside"
   >
       <app-sidebar></app-sidebar>
   </aside>
@@ -123,7 +117,7 @@
   <!-- ============================================================== -->
   <!-- Page wrapper  -->
   <!-- ============================================================== -->
-  <div class="" [class.page-wrapper]="showHeaderAndAside">
+  <div class="page-wrapper">
     <!-- ============================================================== -->
     <!-- Container fluid  -->
     <!-- ============================================================== -->

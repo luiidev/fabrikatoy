@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('branch_office_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('customer_id')->nullable()->constrained();
+            $table->uuid();
             $table->enum('type', ['BOLETA', 'FACTURA'])->nullable();
             $table->string('number', 25)->nullable();
             $table->string('document')->nullable();

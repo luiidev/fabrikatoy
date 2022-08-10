@@ -3,8 +3,10 @@
 <!-- ============================================================== -->
 <ul class="navbar-nav float-start me-auto">
   <li class="nav-item d-none d-md-block">
-    <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" (click)="toggleSidebarType()">
-      <i class="bi" [class.bi-arrow-left-circle]="sidebartype == 'full'" [class.bi-arrow-right-circle]="sidebartype == 'mini-sidebar'"></i>
+    <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" (click)="sidebartypeToggle()">
+      <i class="bi bi-arrow-left-circle"></i>
+      <i class="bi bi-arrow-right-circle"></i>
+      <!-- <i class="bi" [class.bi-arrow-left-circle]="sidebartype == 'full'" [class.bi-arrow-right-circle]="sidebartype == 'mini-sidebar'"></i> -->
     </a>
   </li>
   <!-- <li class="nav-item">
@@ -31,27 +33,27 @@
       aria-expanded="false"
     >
       <img
-        [src]="user.image ?? 'assets/img/logo/logo-min.png'"
+        [src]="user?.image ?? 'assets/img/logo/logo-min.png'"
         alt="user"
         class="rounded-circle"
         width="35"
       />
-      <span class="ms-2">{{ user.full_name }}</span>
+      <span class="ms-2">{{ user?.full_name }}</span>
     </a>
     <div ngbDropdownMenu class="dropdown-menu-end user-dd dropdown-menu-animate-up dropdown-menu pb-0 shadow">
       <div class="d-flex no-block align-items-center p-3 bg-info text-white">
         <div>
-           <img [src]="user.image ?? 'assets/img/logo/logo-min.png'" alt="user" width="60" class="rounded-circle">
+           <img [src]="user?.image ?? 'assets/img/logo/logo-min.png'" alt="user" width="60" class="rounded-circle">
         </div>
         <div class="ms-2">
-          <h4 class="mb-0 text-white">{{ user.full_name }}</h4>
-          <p class="mb-0">{{ user.email }}</p>
+          <h4 class="mb-0 text-white">{{ user?.full_name }}</h4>
+          <p class="mb-0">{{ user?.email }}</p>
         </div>
       </div>
-      <a href="javascript:void(0)" class="dropdown-item" [routerLink]="'/perfil'">
+      <a href="javascript:void(0)" class="dropdown-item" [routerLink]="'/admin/perfil'">
         <i class="fa fa-user-alt mx-1"></i> Mi Perfil
       </a>
-      <a href="javascript:void(0)" class="dropdown-item" (click)="toggleThemeType()">
+      <a href="javascript:void(0)" class="dropdown-item" (click)="sidebarthemeToggle()">
         <i class="fa fa-moon mx-1"
           [class.fa-moon]="sidebartheme == ''"
           [class.fa-sun]="sidebartheme == 'dark'">

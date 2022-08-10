@@ -33,8 +33,8 @@ export class LoginComponent {
         next: response => {
           const AuthResponse = response[1];
 
-          this.authenticationService.setToken(AuthResponse.token);
-          this.authenticationService.setUser(JSON.stringify(AuthResponse.data));
+          this.authenticationService.token = AuthResponse.token;
+          this.authenticationService.user = AuthResponse.data;
 
           this.router.navigate(['/admin/productos']);
         },

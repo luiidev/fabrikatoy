@@ -4,6 +4,7 @@ import { finalize } from "rxjs";
 import { WarnModalComponent } from "src/app/shared/helpers/modals/alerts.component";
 import Utils from "src/app/shared/helpers/utils";
 import { SaleService } from "src/app/admin/services/sale.service";
+import { SearchCustomer } from "src/app/admin/models/customer.model";
 
 @Component({
   selector: 'app-card-warn',
@@ -44,7 +45,7 @@ export class CustomerVoucherComponent {
       }
     }
 
-    const params = {
+    const params: SearchCustomer = {
       document_type: this.customer.type === 'BOLETA' ? 'DNI' : 'RUC',
       document_number: this.customer.document_number
     };
@@ -55,7 +56,7 @@ export class CustomerVoucherComponent {
       .subscribe((response) => {
           this.customer.searched = true;
 
-          this.customer = Object.assign(this.customer, response.data);
+          Object.assign(this.customer, response.data);
       });
   }
 

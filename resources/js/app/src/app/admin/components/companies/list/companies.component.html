@@ -9,7 +9,7 @@
         <p class="card-text">Listado de empresas</p>
 
         <div class="position-relative">
-          <spinner *ngIf="isLoadingResults"></spinner>
+          <spinner [isLoading]="isLoadingResults"></spinner>
 
           <company-search></company-search>
           <search (searchTerm)="tableFilter.filter.search.emit($event)" [createButton]="true" (create)="createOrEdit()"></search>

@@ -541,6 +541,32 @@ Footer
 }
 
 /*******************
+Header
+*******************/
+
+#main-wrapper[data-layout=vertical] {
+  &[data-sidebartype=mini-sidebar] {
+    flex-direction: column;
+    .topbar {
+      .top-navbar {
+        .bi.bi-arrow-left-circle {
+          display: none;
+        }
+      }
+    }
+  }
+  &[data-sidebartype=full] {
+    .topbar {
+      .top-navbar {
+        .bi.bi-arrow-right-circle {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+/*******************
 Vertical layout
 *******************/
 
@@ -685,7 +711,7 @@ Vertical responsive layout
 
 ::-webkit-scrollbar {
   width: 2px;
-  height: 5px;
+  height: 2px;
 }
 ::-webkit-scrollbar-button {
   width: 0px;

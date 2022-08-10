@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <spinner *ngIf="isLoadingResults"></spinner>
+    <spinner [isLoading]="isLoadingResults"></spinner>
     <a href="javascript:void(0)" class="btn btn-lg mb-3 text-white show-left-part d-block d-md-none fa fa-list" [class.fa-close]="showPanel" (click)="showPanelToggle()"></a>
     <div class="main-sale">
       <div class="left-sale bg-white fixed-left-sale d-flex flex-column">
@@ -22,7 +22,7 @@
               <div class="card">
                 <div class="el-card-item pointer" (click)="add(product)">
                   <div class="el-overlay-1 mb-3">
-                    <img width="100%" height="auto" [src]="product.image" alt="user">
+                    <img loading="lazy" width="100%" height="auto" [src]="product.image" alt="user">
                   </div>
                   <div class="px-2">
                     <h5 class="mb-0">{{ product.name }}</h5>
@@ -52,7 +52,9 @@
               <div class="line-height-1 flex-grow-1">
                 <span class="font-medium">{{ product.name }}</span>
                 <span class="text-muted text-sm my-1 d-block">{{ product.brand?.name }}</span>
-                <span class="text-secondary text-sm d-block">{{ product.quantity_sale }} x 1 {{ product.unit?.name }} {{ product.price | currency:'S/' }}</span>
+                <span class="text-secondary text-sm d-block">
+                  {{ product.quantity_sale }} x 1 {{ product.unit?.name }} {{ product.price | currency:'S/' }}
+                </span>
                 <span class="text-secondary text-sm d-block">{{ product.subtotal | currency:'S/' }}</span>
               </div>
               <div class="font-medium d-flex gap-2 justify-content-between">

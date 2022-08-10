@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { RouterModule } from '@angular/router';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SuccsessModalComponent, WarnModalComponent } from './helpers/modals/alerts.component';
@@ -18,6 +19,7 @@ import { SearchComponent } from './helpers/search/search.component';
     CdkTableModule,
     MatSortModule,
     MatPaginatorModule,
+    RouterModule
   ],
   declarations: [
     SuccsessModalComponent,

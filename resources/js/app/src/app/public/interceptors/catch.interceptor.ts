@@ -25,16 +25,18 @@ export class CatchInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((event: HttpEvent<unknown>) => {
-            if(event instanceof HttpErrorResponse && !event.url?.includes('/login')) {
+          if (event instanceof HttpErrorResponse) {
+            if (!event.url?.includes('/login')) {
               const modalRef = this.ngbModal.open(WarnModalComponent, Utils.modalCenterIndex3);
               modalRef.componentInstance.message = event.error.message;
-
-              if (event.status === 403) {
-                this.authenticationService.logout();
-              }
             }
 
-            return throwError(() => event);
+            if (event.status === 401) {
+              this.authenticationService.logoutExpired();
+            }
+          }
+
+          return throwError(() => event);
         }),
       );
   }

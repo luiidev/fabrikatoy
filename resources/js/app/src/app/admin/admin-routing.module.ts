@@ -7,6 +7,7 @@ import { CustomersComponent } from './components/customers/list/customers.compon
 import { ProductsComponent } from './components/products/list/products.component';
 import { ProfileComponent } from './components/profile/card/profile.component';
 import { ProvidersComponent } from './components/providers/list/providers.component';
+import { SaleDetailComponent } from './components/sales/detail/sale-detail.component';
 import { SalesComponent } from './components/sales/list/sales.component';
 import { PointOfSaleComponent } from './components/sales/point-of-sale/point-of-sale.component';
 import { UsersComponent } from './components/users/list/users.component';
@@ -56,6 +57,10 @@ const routes: Routes = [
       {
         path: 'reporte-de-ventas',
         component: SalesComponent
+      },
+      {
+        path: 'reporte-de-ventas/:uuid',
+        component: SaleDetailComponent
       },
     ]
   },

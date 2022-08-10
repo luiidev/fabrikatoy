@@ -13,3 +13,9 @@ export interface Customer {
   company?: Company;
   searched?: boolean;
 }
+
+
+export interface SearchCustomer {
+  document_type: string,
+  document_number: string
+}

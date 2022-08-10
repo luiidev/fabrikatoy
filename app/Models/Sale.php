@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\GlobalScopes;
 use App\Models\Base\Model;
+use Illuminate\Support\Str;
 
 class Sale extends Model
 {
@@ -48,5 +49,15 @@ class Sale extends Model
     public function branch_office()
     {
         return $this->belongsTo(BranchOffice::class);
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        // auto-sets values on creation
+        static::creating(function ($model) {
+            if (!$model->uuid) $model->uuid = Str::uuid();
+        });
     }
 }
