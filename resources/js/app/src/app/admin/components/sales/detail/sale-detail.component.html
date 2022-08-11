@@ -10,22 +10,22 @@
       <div class="float-start">
         <address>
           <h3>
-            <b class="text-danger">{{ sale?.company?.name }}</b>
+            <b class="text-danger">{{ sale.company?.name }}</b>
           </h3>
-          <p class="text-muted ms-1">RUC: {{ sale?.company?.ruc }}<br>{{ sale?.company?.address }}</p>
+          <p class="text-muted ms-1">RUC: {{ sale.company?.ruc }}<br>{{ sale.company?.address }}</p>
         </address>
       </div>
       <div class="float-end text-end">
         <address>
           <h3>Para,</h3>
-          <h4 class="fw-bold">{{ sale?.customer?.name }}</h4>
+          <h4 class="fw-bold">{{ sale.customer?.name }}</h4>
           <p class="text-muted m-l-30">
             <span>
-              {{ sale?.customer?.document_type ?? 'DNI' }}:
+              {{ sale.customer?.document_type ?? 'DNI' }}:
             </span>
-            {{ sale?.customer?.document_number }}<br>
-            Dirección: {{ sale?.customer?.address ?? '-' }}<br>
-            Télefono: {{ sale?.customer?.phone ?? '-' }}<br>
+            {{ sale.customer?.document_number }}<br>
+            Dirección: {{ sale.customer?.address ?? '-' }}<br>
+            Télefono: {{ sale.customer?.phone ?? '-' }}<br>
           </p>
           <p class="mt-4">
             <b>Fecha :</b>
