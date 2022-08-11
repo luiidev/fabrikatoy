@@ -44,10 +44,12 @@
               <span class="d-block fs-3 text-muted">{{ sale.customer.document_number }}</span>
               <span class="fs-2 d-block text-muted" *ngIf="sale.customer.document_type === 'RUC'">{{ sale.customer.address }}</span>
             </a>
-            <span class="font-medium ml-15" (click)="removeCustomer()" *ngIf="sale.customer.document_number"><i class="fa fa-trash pointer"></i></span>
+            <span class="font-medium ml-15" (click)="removeCustomer()" *ngIf="sale.customer.document_number">
+              <i class="fa fa-trash pointer"></i>
+            </span>
           </div>
           <ul class="contact-list list-style-none flex-grow-1 overflow-auto">
-            <li class="contact-item border-bottom px-3 py-2 d-flex gap-3 align-items-center" *ngFor="let product of sale.products">
+            <li class="contact-item border-bottom px-3 py-2 d-flex gap-3 align-items-center" *ngFor="let product of sale.products; trackBy:trackSaleProduct">
               <img height="35" width="35" class="rounded-circle" [src]="product.image">
               <div class="line-height-1 flex-grow-1">
                 <span class="font-medium">{{ product.name }}</span>

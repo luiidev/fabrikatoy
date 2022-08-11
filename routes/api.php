@@ -23,7 +23,6 @@ use App\Http\Controllers\Api\CustomerController;
 |
 */
 
-
 Route::group(['middleware' => 'api'], function ($router) {
     $router->post('login', [AuthController::class , 'login']);
 
@@ -45,8 +44,4 @@ Route::group(['middleware' => 'api'], function ($router) {
         $router->get('products-for-sale', [ProductController::class, 'listForSale']);
         $router->get('sales/customer', [SaleController::class, 'getCustomer']);
     });
-});
-
-Route::get('test', function () {
-   return \App\Models\Company::find(1)->branchOffices->random();
 });

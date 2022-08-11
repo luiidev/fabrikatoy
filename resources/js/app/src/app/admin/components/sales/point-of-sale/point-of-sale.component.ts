@@ -133,7 +133,9 @@ export class PointOfSaleComponent implements OnInit {
     });
 
     if (this.taxes_included) {
-      this.sale.total = this.sale.products.reduce((previousValue: number, currentValue: any) => previousValue + (currentValue.quantity_sale * currentValue.price), 0);
+      this.sale.total = this.sale.products.reduce((previousValue: number, currentValue: Product) => {
+        return previousValue + ((currentValue.quantity_sale ?? 9999) * (currentValue.price ?? 9999))
+      }, 0);
 
       this.sale.subtotal = this.sale.total * 0.82;
       this.sale.igv = this.sale.total * 0.18;
@@ -190,6 +192,10 @@ export class PointOfSaleComponent implements OnInit {
         searched: false
       }
     };
+  }
+
+  trackSaleProduct(index: number, product: Product) {
+    return product.id;
   }
 
   ngOnInit(): void {

@@ -12,6 +12,16 @@ export const ROUTES: RouteInfo[] = [
   //   role: 'Super'
   // },
   {
+    path: 'perfil',
+    title: 'Perfil',
+    icon: 'fa fa-user-alt',
+    itemClass: '',
+    linkClass: '',
+    extralink: false,
+    submenu: [],
+    role: 'User'
+  },
+  {
     path: 'empresas',
     title: 'Empresas',
     icon: 'fa fa-shop',

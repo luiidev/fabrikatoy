@@ -10,6 +10,11 @@ use App\Models\BranchOffice;
 
 class BranchOfficeController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(BranchOffice::class);
+    }
+
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([

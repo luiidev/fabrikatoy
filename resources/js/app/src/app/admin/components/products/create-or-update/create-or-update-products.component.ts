@@ -71,6 +71,10 @@ export class ProductStoreOrUpdateComponent {
     }
   }
 
+  trackProvider(index: number, provider: Provider) {
+    return provider.id;
+  }
+
   searchProvider() {
     const modalRef = this.ngbModal.open(ProvidersComponent, Utils.modalXlIndex2);
     modalRef.componentInstance.isModal = true;

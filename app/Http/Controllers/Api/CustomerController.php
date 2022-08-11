@@ -10,6 +10,11 @@ use App\Models\Customer;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Customer::class);
+    }
+
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
         $request->validated([

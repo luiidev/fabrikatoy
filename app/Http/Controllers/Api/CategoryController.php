@@ -20,12 +20,12 @@ class CategoryController extends Controller
             'sort' => 'in:name'
         ]);
 
-        $items = Category::query()
+        $categories = Category::query()
             ->own()
             ->whereLike('name', $request->input('search'))
             ->ApiPaginate();
 
-        return response()->json(['message' => '', 'data' => ['items' => $items]]);
+        return response()->json(['message' => '', 'data' => $categories]);
     }
 
     public function store(Request $request)

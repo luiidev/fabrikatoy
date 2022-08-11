@@ -10,6 +10,11 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
     public function index(PaginationRequest $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
@@ -20,7 +25,7 @@ class UserController extends Controller
             ->select(['id', 'branch_office_id', 'company_id', 'first_name', 'last_name', 'nick', 'role', 'state'])
             ->with('branch_office')
             ->own()
-            ->whereLikeFullName($request->input('search'))
+            ->search($request->input('search'))
             ->where('role', '<>', 1) // Super
             ->apiPaginate();
 

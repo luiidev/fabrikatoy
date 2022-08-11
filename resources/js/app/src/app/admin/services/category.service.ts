@@ -14,6 +14,6 @@ export class CategoryService {
   ) { }
 
   getAll(): Observable<CategoryPaginationResponse> {
-    return this.http.get<CategoryPaginationResponse>(`${environment.API_URL}/customers`);
+    return this.http.get<CategoryPaginationResponse>(`${environment.API_URL}/categories`);
   }
 }

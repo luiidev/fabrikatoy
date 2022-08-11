@@ -38,7 +38,7 @@ export class LoginComponent {
           this.authenticationService.token = AuthResponse.token;
           this.authenticationService.user = AuthResponse.data;
 
-          this.router.navigate(['/admin/productos']);
+          this.router.navigate(['/admin/punto-de-venta']);
         },
         error: response => {
           this.errorMessage = response.error.message;

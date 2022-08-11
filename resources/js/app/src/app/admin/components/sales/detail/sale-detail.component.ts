@@ -34,6 +34,18 @@ export class SaleDetailComponent {
       });
   }
 
+  printInvoice() {
+    const printContent = document.getElementById("print-invoice");
+    const WindowPrt = window.open('', '', 'left=0,top=50,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+    if (printContent && WindowPrt) {
+      WindowPrt.document.write(printContent.innerHTML);
+      WindowPrt.document.close();
+      WindowPrt.focus();
+      WindowPrt.print();
+      WindowPrt.close();
+    }
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.getSaleDetail(params['uuid']);
