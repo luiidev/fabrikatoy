@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  API_URL: 'http://app.fabrikatoy.pe/api',
+  API_URL: 'https://fabrikatoy.pe/api',
   roleUser: '',
   isSuper: false,
 };
