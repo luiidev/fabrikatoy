@@ -48,26 +48,6 @@ class SaleController extends Controller
         return response()->json(['message' => '', 'data' => $sale]);
     }
 
-    public function getCustomer(Request $request): \Illuminate\Http\JsonResponse
-    {
-        $request->validate([
-            'document_type' => 'required|string|in:DNI,RUC',
-            'document_number' => 'required|string|between:8,12',
-        ]);
-
-        $customer = Customer::query()
-            ->ownCompany()
-            ->where('document_type', $request->input('document_type'))
-            ->where('document_number', $request->input('document_number'))
-            ->first();
-
-        if (is_null($customer)) {
-            // third party api
-        }
-
-        return response()->json(['message' => '', 'data' => $customer]);
-    }
-
     /**
      * @throws \Throwable
      */

@@ -155,14 +155,17 @@ export class PointOfSaleComponent implements OnInit {
       .then((customer: Customer) => this.sale.customer = customer, Utils.none);
   }
 
-  removeCustomer(): void {
-    this.sale.customer = {
+  cleanCustomer() {
+    return {
       document_type: null,
       document_number: null,
       name: '',
-      state: 1,
       searched: false
     };
+  }
+
+  removeCustomer(): void {
+    this.sale.customer = this.cleanCustomer();
   }
 
   save(): void {
@@ -184,13 +187,7 @@ export class PointOfSaleComponent implements OnInit {
       igv: 0.00,
       total: 0.00,
       products: [],
-      customer: {
-        document_type: null,
-        document_number: null,
-        name: '',
-        state: 1,
-        searched: false
-      }
+      customer: this.cleanCustomer()
     };
   }
 

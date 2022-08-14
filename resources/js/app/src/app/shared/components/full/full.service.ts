@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FullService {
-  private defaultSidebartype = 'mini-sidebar';
+  private defaultSidebartype = 'full';
   private defaultSidebartheme = 'dark';
   private privateSidebartype = this.defaultSidebartype;
   private privateSidebartheme = this.defaultSidebartheme;

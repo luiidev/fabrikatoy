@@ -38,10 +38,10 @@ Route::group(['middleware' => 'api'], function ($router) {
         $router->resource('users', UserController::class)->only(['index', 'show', 'store', 'update']);
         $router->resource('branch-offices', BranchOfficeController::class)->only(['index']);
         $router->resource('customers', CustomerController::class)->only(['index', 'store', 'update']);
+        $router->get('customer-for-sale', [CustomerController::class, 'getForSale']);
         $router->resource('sales', SaleController::class)->only(['index', 'store']);
         $router->get('sales/{sale:uuid}', [SaleController::class, 'show']);
 
         $router->get('products-for-sale', [ProductController::class, 'listForSale']);
-        $router->get('sales/customer', [SaleController::class, 'getCustomer']);
     });
 });

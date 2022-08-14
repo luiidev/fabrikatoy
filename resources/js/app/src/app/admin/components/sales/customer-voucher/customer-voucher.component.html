@@ -9,21 +9,21 @@
   <div class="card-body">
     <div class="form-body">
       <div class="d-flex mb-3" [class.not-events]="customer.id">
-        <div class="p-3 flex-grow-1 text-center pointer" [class.text-white]="customer.type === 'BOLETA'" [class.bg-light]="customer.type === 'BOLETA'" (click)="selectVoucherType('BOLETA')">
+        <div class="p-3 flex-grow-1 text-center pointer" [class.text-white]="customer.document_type === 'DNI'" [class.bg-light]="customer.document_type === 'DNI'" (click)="selectVoucherType('DNI')">
           Boleta
         </div>
-        <div class="p-3 flex-grow-1 text-center pointer" [class.text-white]="customer.type === 'FACTURA'" [class.bg-light]="customer.type === 'FACTURA'" (click)="selectVoucherType('FACTURA')">
+        <div class="p-3 flex-grow-1 text-center pointer" [class.text-white]="customer.document_type === 'RUC'" [class.bg-light]="customer.document_type === 'RUC'" (click)="selectVoucherType('RUC')">
           Factura
         </div>
       </div>
-      <div class="customer" *ngIf="customer.type">
+      <div class="customer" *ngIf="customer.document_type">
         <div class="row" [class.not-events]="customer.id">
           <div class="col-6">
-            <div class="mb-3" *ngIf="customer.type === 'BOLETA'">
+            <div class="mb-3" *ngIf="customer.document_type === 'DNI'">
               <label for="dni" class="control-label"><i class="fa fa-asterisk mr-5 text-danger"></i>DNI</label>
               <input type="text" name="dni" class="form-control" placeholder="DNI" [(ngModel)]="customer.document_number">
             </div>
-            <div class="mb-3" *ngIf="customer.type === 'FACTURA'">
+            <div class="mb-3" *ngIf="customer.document_type === 'RUC'">
               <label for="ruc" class="control-label"><i class="fa fa-asterisk mr-5 text-danger"></i>RUC</label>
               <input type="text" name="ruc" class="form-control" placeholder="RUC" [(ngModel)]="customer.document_number">
             </div>
@@ -38,17 +38,17 @@
         <div class="info" *ngIf="customer.searched" [class.not-events]="customer.id">
           <div class="row">
             <div class="col-12">
-              <div class="mb-3" *ngIf="customer.type === 'BOLETA'">
+              <div class="mb-3" *ngIf="customer.document_type === 'DNI'">
                 <label for="name"><i class="fa fa-asterisk mr-5 text-danger"></i>Nombres completos</label>
                 <input type="text" name="name" class="form-control" placeholder="Nombre" [(ngModel)]="customer.name">
               </div>
-              <div class="mb-3" *ngIf="customer.type === 'FACTURA'">
+              <div class="mb-3" *ngIf="customer.document_type === 'RUC'">
                 <label for="name"><i class="fa fa-asterisk mr-5 text-danger"></i>Razon social</label>
                 <input type="text" name="name" class="form-control" placeholder="Nombre" [(ngModel)]="customer.name">
               </div>
             </div>
           </div>
-          <div class="row" *ngIf="customer.type === 'FACTURA'">
+          <div class="row" *ngIf="customer.document_type === 'RUC'">
             <div class="col-12">
               <div class="mb-3">
                 <label for="address"><i class="fa fa-asterisk mr-5 text-danger"></i>Dirección</label>

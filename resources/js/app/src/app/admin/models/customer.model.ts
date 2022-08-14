@@ -6,10 +6,10 @@ export interface Customer {
   document_type: string | null;
   document_number: string | null;
   name: string;
-  address?: string;
-  email?: string;
-  phone?: string;
-  state: number;
+  address?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  state?: number;
   company?: Company;
   searched?: boolean;
 }
