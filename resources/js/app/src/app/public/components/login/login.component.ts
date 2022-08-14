@@ -12,8 +12,8 @@ import { AuthenticationService } from 'src/app/public/services/authentication.se
 export class LoginComponent {
 
   user: Login = {
-    nick: 'admin',
-    password: 'password',
+    nick: '',
+    password: '',
     device_name: 'web-app',
     remenber: false,
   };

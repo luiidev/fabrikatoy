@@ -12,12 +12,12 @@ class BranchOfficePolicy
 
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
-    public function view(User $user, BranchOffice $company): bool
+    public function view(User $user, BranchOffice $branchOffice): bool
     {
-        return false;
+        return $user->company_id === $branchOffice->company_id;
     }
 
     public function create(User $user): bool
@@ -25,22 +25,22 @@ class BranchOfficePolicy
         return false;
     }
 
-    public function update(User $user, BranchOffice $company): bool
+    public function update(User $user, BranchOffice $branchOffice): bool
     {
         return false;
     }
 
-    public function delete(User $user, BranchOffice $company): bool
+    public function delete(User $user, BranchOffice $branchOffice): bool
     {
         return false;
     }
 
-    public function restore(User $user, BranchOffice $company): bool
+    public function restore(User $user, BranchOffice $branchOffice): bool
     {
         return false;
     }
 
-    public function forceDelete(User $user, BranchOffice $company): bool
+    public function forceDelete(User $user, BranchOffice $branchOffice): bool
     {
         return false;
     }

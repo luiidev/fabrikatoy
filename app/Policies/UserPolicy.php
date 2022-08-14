@@ -14,9 +14,9 @@ class UserPolicy
         return true;
     }
 
-    public function view(User $user, User $model)
+    public function view(User $user, User $model): bool
     {
-        $user->company_id === $model->company_id;
+        return $user->company_id === $model->company_id;
     }
 
     public function create(User $user): bool
