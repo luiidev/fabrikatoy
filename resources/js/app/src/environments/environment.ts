@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   API_URL: 'http://localhost/api',
-  roleUser: '',
   isSuper: false
 };
 

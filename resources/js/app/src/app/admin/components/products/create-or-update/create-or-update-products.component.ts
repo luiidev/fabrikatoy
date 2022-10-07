@@ -52,8 +52,10 @@ export class ProductStoreOrUpdateComponent {
       });
   }
 
-  cloneProduct({brand_id, code, name , providers, state}: Product): Product {
+  cloneProduct({id, company_id, brand_id, code, name , providers, state}: Product): Product {
     const product: Product = {
+      id: id,
+      company_id: company_id,
       brand_id: brand_id,
       code: code,
       name: name ,
