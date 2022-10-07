@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { User } from 'src/app/admin/models/user.model';
 import { AuthenticationService } from 'src/app/public/services/authentication.service.';
 import { FullService } from '../full/full.service';
@@ -11,7 +10,6 @@ import { FullService } from '../full/full.service';
 export class NavigationComponent implements OnInit {
   sidebartheme = '';
 
-  public config: PerfectScrollbarConfigInterface = {};
   public user: User | null;
 
   constructor(
