@@ -1,7 +1,4 @@
 const mix = require('laravel-mix');
-const del = require('del');
-
-require('laravel-mix-copy-watched');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,10 +10,3 @@ require('laravel-mix-copy-watched');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
-del('public/*.{js,css,ico,woff,woff2,txt}');
-del('public/assets');
-mix
-    .copyWatched('resources/js/app/dist/*.{js,css,ico,woff,woff2,txt}', 'public')
-    .copyWatched('resources/js/app/dist/assets', 'public/assets', { base: 'resources/js/app/dist/assets' })
-    .copyWatched('resources/js/app/dist/index.html', 'resources/views/app/index.blade.php');
