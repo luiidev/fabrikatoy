@@ -21,7 +21,7 @@ class ProductFactory extends Factory
         return [
             'code' => $this->faker->isbn10(),
             'name' => $this->faker->sentence(3),
-            'image' => $this->faker->imageUrl(512, 512, 'products', true),
+            'image' => 'https://source.unsplash.com/random/250x250?sig='.rand(1, 99),
             'quantity' => $this->faker->randomNumber(2),
             'unit_id' => 1,
             'price' => $price,
