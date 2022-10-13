@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  selector:
+    matchLabels:
+      component: api
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        component: api
+    spec:
+      containers:
+        - name: api
+          image: luiidev/fabrikatoy-api
+          ports:
+            - containerPort: 9000
+          env:
+            - name: APP_KEY
+              valueFrom: 
+                secretKeyRef:
+                  name: fabrikatoy-api
+                  key: APP_KEY
+            - name: SESSION_DRIVER
+              value: database
+            - name: DB_HOST
+              value: mariadb-cluster-ip-service
+            - name: DB_PORT
+              value: '3306'
+            - name: DB_DATABASE
+              value: fabrikatoy
+            - name: DB_USERNAME
+              value: root
+            - name: DB_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: fabrikatoy-db
+                  key: PASSWORD
+            - name: DNI_KEY
+              valueFrom: 
+                secretKeyRef:
+                  name: fabrikatoy-api
+                  key: DNI_KEY

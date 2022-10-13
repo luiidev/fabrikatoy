@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  selector:
+    matchLabels:
+      component: app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: app
+    spec:
+      containers:
+        - name: app
+          image: luiidev/fabrikatoy-app
+          ports:
+            - containerPort: 4200

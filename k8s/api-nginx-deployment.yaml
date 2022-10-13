@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      component: api-nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: api-nginx
+    spec:
+      volumes:
+        - name: api-nginx-config-map-volume
+          configMap:
+            name: api-nginx-config-map
+            items:
+              - key: default.conf
+                path: default.conf
+      containers:
+        - name: api-nginx
+          image: nginx
+          volumeMounts:
+            - name: api-nginx-config-map-volume
+              mountPath: /etc/nginx/conf.d
+          ports:
+            - containerPort: 8000

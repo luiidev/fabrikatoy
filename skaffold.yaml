@@ -1,0 +1,36 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: luiidev/fabrikatoy-app
+      context: app
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          - src: "src/**/*.js"
+            dest: .
+          - src: "src/**/*.css"
+            dest: .
+          - src: "src/**/*.html"
+            dest: .
+    - image: luiidev/fabrikatoy-api
+      context: api
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        manual:
+          - src: "app/**/*.php"
+            dest: .
+          - src: "config/*.php"
+            dest: .
+          - src: "lang/**/*.php"
+            dest: .
+          - src: "routes/*.php"
+            dest: .
