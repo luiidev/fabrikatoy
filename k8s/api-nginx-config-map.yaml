@@ -5,7 +5,6 @@ metadata:
 data:
   default.conf: |
     server {
-        # test
         listen 8000;
 
         server_tokens off;
@@ -19,39 +18,20 @@ data:
         charset utf-8;
 
         location / {
-            index  index.html index.php;
+            index index.php;
             try_files $uri $uri/ /index.php?$args;
-        }
-
-        location ~ ^/(protected|framework|themes/\w+/views) {
-            deny all;
-        }
-
-        location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
-            try_files $uri = 404;
         }
 
         location ~ \.php {
             fastcgi_split_path_info  ^(.+\.php)(.*)$;
 
-            set $fsn /index.php;
-            if (-f $document_root$fastcgi_script_name){
-                set $fsn $fastcgi_script_name;
-            }
-
+            fastcgi_index index.php;
             fastcgi_pass api-cluster-ip-service:9000;
-            include fastcgi_params;
             fastcgi_buffering off;
 
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fsn;
-
+            include fastcgi_params;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
             fastcgi_param  PATH_INFO        $fastcgi_path_info;
-            fastcgi_param  PATH_TRANSLATED  $document_root$fsn;
-        }
-
-        location ~ /\. {
-            deny all;
-            access_log off;
-            log_not_found off;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
         }
     }

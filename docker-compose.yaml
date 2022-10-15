@@ -1,0 +1,41 @@
+version: '3'
+services:
+  nginx:
+    networks:
+      - default
+    depends_on:
+      - api
+      - app
+    links:
+      - api
+      - app
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '127.0.0.1:88:80'
+    restart: always
+  api:
+    networks:
+      - default
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./api
+    volumes:
+      - /var/www/html/vendor
+      - ./api:/var/www/html/
+    restart: always
+  app:
+    networks:
+      - default
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./app
+    volumes:
+      - /app/node_modules
+      - ./app:/app
+    restart: always
+networks:
+  default:
+    driver: bridge
