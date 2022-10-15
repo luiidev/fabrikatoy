@@ -34,10 +34,10 @@ export class FullComponent implements OnInit {
   }
 
   handleSidebar() {
-    // this.innerWidth = window.innerWidth;
-    // if (this.innerWidth < 1170) {
-    //   this.sidebartype = "full";
-    // }
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 1170) {
+      this.sidebartype = "mini-sidebar";
+    }
   }
 
   ngOnInit() {
