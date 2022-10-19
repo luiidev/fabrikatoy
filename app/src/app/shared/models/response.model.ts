@@ -1,4 +1,5 @@
 import { Sale } from "src/app/admin/models/sale.model";
+import { Purchase } from "src/app/admin/models/purchase.model";
 import { BranchOffice } from "../../admin/models/branch-office.model";
 import { Brand } from "../../admin/models/brand.model";
 import { Category } from "../../admin/models/category.model";
@@ -50,6 +51,9 @@ interface UserItems {
 interface SaleItems {
   items: Sale[];
 }
+interface PurchaseItems {
+  items: Purchase[];
+}
 
 /**
  * Estructura para respuesta de modelos con paginacion
@@ -63,6 +67,7 @@ interface ProductPagination extends Pagination, ProductItems {}
 interface ProviderPagination extends Pagination, ProviderItems {}
 interface UserPagination extends Pagination, UserItems {}
 interface SalePagination extends Pagination, SaleItems {}
+interface PurchasePagination extends Pagination, PurchaseItems {}
 
 /**
  * Implementacion de respuesta de modelos sin paginacion
@@ -122,6 +127,9 @@ export interface UserPaginationResponse extends Response {
 export interface SalePaginationResponse extends Response {
   data: SalePagination;
 }
+export interface PurchasePaginationResponse extends Response {
+  data: PurchasePagination;
+}
 
 /**
  * Implementacion de respuesta de creacion y actualizacion de modelos
@@ -152,6 +160,9 @@ export interface UserResponse extends Response {
 }
 export interface SaleResponse extends Response {
   data: Sale;
+}
+export interface PurchaseResponse extends Response {
+  data: Purchase;
 }
 export interface AuthUserResponse extends Response {
   data: User;

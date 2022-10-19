@@ -2,11 +2,13 @@ import { Brand } from "./brand.model";
 import { Category } from "./category.model";
 import { Company } from "./company.model";
 import { Provider } from "./provider.model";
+import { Unit } from "./unit.model";
 
 export interface Product {
   id?: number;
   company_id?: number;
   brand_id?: number;
+  unit_id?: number;
   code: string;
   name: string;
   image?: string;
@@ -18,9 +20,7 @@ export interface Product {
   average_price?: string;
   state: number;
   state_name?: string;
-  unit?: {
-    name: string;
-  },
+  unit?: Unit,
   providers?: Provider[],
   categories?: Category[],
   company?: Company,

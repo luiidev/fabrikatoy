@@ -1,11 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { TableFilter } from 'src/app/shared/helpers/table.util';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import HttpUtils from 'src/app/shared/helpers/http.util';
 import Utils from 'src/app/shared/helpers/utils';
 import { ProductService } from 'src/app/admin/services/product.service';
@@ -25,6 +25,7 @@ import { ProductStoreOrUpdateComponent } from '../create-or-update/create-or-upd
   ],
 })
 export class ProductsComponent {
+  @Input() isModal = false;
   @ViewChild(MatPaginator, {static: false})
   set matPaginator(value: MatPaginator) {
     this.tableFilter.paginator = value;
@@ -43,7 +44,8 @@ export class ProductsComponent {
 
   constructor(
     private productService: ProductService,
-    private ngbModal: NgbModal
+    private ngbModal: NgbModal,
+    private activeModal: NgbActiveModal
   ) {
     this.tableFilter = new TableFilter();
   }
@@ -77,12 +79,16 @@ export class ProductsComponent {
   }
 
   createOrEdit(product?: Product) {
-    const modalRef = this.ngbModal.open(ProductStoreOrUpdateComponent);
+    const modalRef = this.ngbModal.open(ProductStoreOrUpdateComponent, this.isModal ? Utils.modalIndex3 : {});
 
     if (product) {
       modalRef.componentInstance.product = { ...product };
     }
 
     modalRef.result.then(() => this.tableFilter.filter.search.emit(), Utils.none);
+  }
+
+  add(product: Product) {
+    this.activeModal.close(product)
   }
 }

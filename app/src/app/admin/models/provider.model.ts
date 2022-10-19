@@ -13,7 +13,7 @@ export interface Provider {
 
 export default class ProviderRequest {
   static data(provider: Provider) {
-    let data:any = {
+    let data: any = {
       ruc: provider.ruc,
       name: provider.name,
       address: provider.address,

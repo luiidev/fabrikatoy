@@ -41,13 +41,6 @@ class SaleController extends Controller
         return response()->json(['message' => '', 'data' => $data]);
     }
 
-    public function show(Sale $sale): \Illuminate\Http\JsonResponse
-    {
-        $sale->load(['detail' => fn($q) => $q->with(['product', 'unit']), 'company', 'branch_office', 'customer', 'user']);
-
-        return response()->json(['message' => '', 'data' => $sale]);
-    }
-
     /**
      * @throws \Throwable
      */
@@ -109,6 +102,13 @@ class SaleController extends Controller
 
             throw $e;
         }
+    }
+
+    public function show(Sale $sale): \Illuminate\Http\JsonResponse
+    {
+        $sale->load(['detail' => fn($q) => $q->with(['product', 'unit']), 'company', 'branch_office', 'customer', 'user']);
+
+        return response()->json(['message' => '', 'data' => $sale]);
     }
 
     private function getCustomerId(Request $request): int|null

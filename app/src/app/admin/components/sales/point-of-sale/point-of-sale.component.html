@@ -27,7 +27,7 @@
                   <div class="px-2">
                     <h5 class="mb-0">{{ product.name }}</h5>
                     <span class="text-muted text-sm line-height-1 mt-1 d-block">{{ product.brand?.name }}</span>
-                    <span class="d-block mt-1">S/{{ product.price }}</span>
+                    <span class="d-block mt-1">{{ product.price }}</span>
                   </div>
                 </div>
               </div>
@@ -55,9 +55,9 @@
                 <span class="font-medium">{{ product.name }}</span>
                 <span class="text-muted text-sm my-1 d-block">{{ product.brand?.name }}</span>
                 <span class="text-secondary text-sm d-block">
-                  {{ product.quantity_sale }} x 1 {{ product.unit?.name }} {{ product.price | currency:'S/' }}
+                  {{ product.quantity_sale }} x 1 {{ product.unit?.name }} {{ product.price | currency }}
                 </span>
-                <span class="text-secondary text-sm d-block">{{ product.subtotal | currency:'S/' }}</span>
+                <span class="text-secondary text-sm d-block">{{ product.subtotal | currency }}</span>
               </div>
               <div class="font-medium d-flex gap-2 justify-content-between">
                 <i class="fa fa-minus pointer" (click)="minus(product)"></i>
@@ -68,10 +68,10 @@
             </li>
           </ul>
           <div class="p-3">
-            <p class="mb-1">Subtotal: <span class="float-end">{{ sale.subtotal | currency:'S/' }}</span></p>
-            <p class="mb-1">IGV (18%): <span class="float-end">{{ sale.igv | currency:'S/' }}</span></p>
+            <p class="mb-1">Subtotal: <span class="float-end">{{ sale.subtotal | currency }}</span></p>
+            <p class="mb-1">IGV (18%): <span class="float-end">{{ sale.igv | currency }}</span></p>
             <hr>
-            <h3><b>Total :</b><span class="float-end">{{ sale.total | currency:'S/' }}</span></h3>
+            <h3><b>Total :</b><span class="float-end">{{ sale.total | currency }}</span></h3>
             <hr>
             <button type="button" class="btn btn-info w-100" (click)="save()" [disabled]="!sale.products.length">Vender</button>
           </div>

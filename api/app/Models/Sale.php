@@ -21,6 +21,11 @@ class Sale extends Model
         'state_name'
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
+
     protected function stateName(): Attribute
     {
         return Attribute::get(fn($value, $attributes) => $attributes['state'] === 1 ? 'Activo' : 'Inactivo');

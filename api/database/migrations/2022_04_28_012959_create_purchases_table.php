@@ -19,10 +19,11 @@ return new class extends Migration
             $table->foreignId('branch_office_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('provider_id')->constrained();
+            $table->uuid();
             $table->enum('type', ['BOLETA', 'FACTURA'])->nullable();
-            $table->string('number', 25);
+            $table->string('number', 25)->nullable();
             $table->string('document')->nullable();
-            $table->timestamp('date');
+            $table->date('date');
             $table->decimal('subtotal');
             $table->decimal('igv');
             $table->decimal('total');

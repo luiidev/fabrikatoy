@@ -16,6 +16,9 @@ import { ProductStoreOrUpdateComponent } from './components/products/create-or-u
 import { ProductsComponent } from './components/products/list/products.component';
 import { ProviderStoreOrUpdateComponent } from './components/providers/create-or-update/create-or-update-providers.component';
 import { ProvidersComponent } from './components/providers/list/providers.component';
+import { PurchasesStoreOrUpdateComponent } from './components/purchases/create-or-update/create-or-update-purchases.component';
+import { PurchaseDetailComponent } from './components/purchases/detail/purchase-detail.component';
+import { PurchasesComponent } from './components/purchases/list/purchases.component';
 import { CustomerVoucherComponent } from './components/sales/customer-voucher/customer-voucher.component';
 import { SaleDetailComponent } from './components/sales/detail/sale-detail.component';
 import { SalesComponent } from './components/sales/list/sales.component';
@@ -49,7 +52,10 @@ import { UsersComponent } from './components/users/list/users.component';
     CustomersComponent,
     CustomersStoreOrUpdateComponent,
     SalesComponent,
-    SaleDetailComponent
+    SaleDetailComponent,
+    PurchasesComponent,
+    PurchaseDetailComponent,
+    PurchasesStoreOrUpdateComponent
   ],
   exports: [],
   providers: []

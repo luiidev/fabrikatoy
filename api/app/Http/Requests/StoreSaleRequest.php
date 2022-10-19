@@ -10,7 +10,7 @@ class StoreSaleRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Auth::check() && Auth::user()->isAdmin();
+        return Auth::check();
     }
 
     public function rules(): array
@@ -29,7 +29,7 @@ class StoreSaleRequest extends FormRequest
             'products.*.id' => ['required', Rule::exists('products', 'id')->where('company_id', $company_id)],
             'products.*.quantity_sale' => 'required|integer|min:0',
             'products.*.price_sale' => 'nullable|numeric|min:0',
-            'products.*.unit_id' => 'nullable|integer',
+            'products.*.unit_id' => ['nullable', 'integer', Rule::exists('units', 'id')->where('company_id', $company_id)],
             'products.*.observation' => 'nullable|string',
         ];
     }

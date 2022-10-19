@@ -5,7 +5,7 @@ import {
   PathLocationStrategy,
   registerLocaleData
 } from '@angular/common';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import localeEsPe from '@angular/common/locales/es-PE';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -51,7 +51,12 @@ registerLocaleData(localeEsPe);
       provide: LocationStrategy,
       useClass: PathLocationStrategy
     },
-    {provide: LOCALE_ID, useValue: 'es-PE' }
+    {
+      provide: DEFAULT_CURRENCY_CODE, useValue: 'S/'
+    },
+    {
+      provide: LOCALE_ID, useValue: 'es-PE'
+    }
   ],
   bootstrap: [AppComponent]
 })

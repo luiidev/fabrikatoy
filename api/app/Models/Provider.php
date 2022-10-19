@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\GlobalScopes;
 use App\Models\Base\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Provider extends Model
 {
@@ -34,6 +35,11 @@ class Provider extends Model
     protected function stateName(): Attribute
     {
         return Attribute::get(fn($value, $attributes) => $attributes['state'] === 1 ? 'Activo' : 'Inactivo');
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        return $query->whereLike(DB::raw("concat_ws(' ', `ruc`, `name`)"), $value);
     }
 
     public function company()

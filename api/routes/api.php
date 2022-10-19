@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\SaleController;
+use \App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CompanyController;
@@ -39,8 +40,8 @@ Route::group(['middleware' => 'api'], function ($router) {
         $router->resource('branch-offices', BranchOfficeController::class)->only(['index']);
         $router->resource('customers', CustomerController::class)->only(['index', 'store', 'update']);
         $router->get('customer-for-sale', [CustomerController::class, 'getForSale']);
-        $router->resource('sales', SaleController::class)->only(['index', 'store']);
-        $router->get('sales/{sale:uuid}', [SaleController::class, 'show']);
+        $router->resource('sales', SaleController::class)->only(['index', 'store', 'show']);
+        $router->resource('purchases', PurchaseController::class)->only(['index', 'store', 'show']);
 
         $router->get('products-for-sale', [ProductController::class, 'listForSale']);
     });

@@ -6,5 +6,5 @@ export interface Unit {
   unit_id?: number;
   unit?: Unit;
   state: number;
-  state_name: string;
+  state_name?: string;
 }

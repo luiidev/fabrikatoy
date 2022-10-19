@@ -4,8 +4,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SuccsessModalComponent, WarnModalComponent } from './helpers/modals/alerts.component';
 import { SearchComponent } from './helpers/search/search.component';
@@ -19,6 +25,11 @@ import { SearchComponent } from './helpers/search/search.component';
     CdkTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatSnackBarModule,
     RouterModule
   ],
   declarations: [
@@ -35,6 +46,11 @@ import { SearchComponent } from './helpers/search/search.component';
     CdkTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatSnackBarModule,
     SuccsessModalComponent,
     WarnModalComponent,
     SearchComponent

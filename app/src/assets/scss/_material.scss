@@ -264,6 +264,42 @@ $altTheme: (
   border-radius: 0px !important;
 }
 
+.cdk-overlay-container {
+  z-index: 2000 !important;
+}
+
+mat-form-field[floatlabel="never"] {
+  .mat-form-field-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    .mat-form-field-flex {
+      margin: 0 !important;
+      align-items: center;
+
+      .mat-form-field-outline,
+      .mat-form-field-suffix {
+        top: 0 !important;
+      }
+
+      .mat-form-field-infix {
+        padding: 0 !important;
+        border: 0;
+      }
+
+      .mat-form-field-suffix {
+        .mat-icon-button {
+          height: 38px !important;
+        }
+      }
+    }
+  }
+}
+
+[data-theme=dark] .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+
 // .mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
 //   background: $light-background;
 //   color: $light-text;
