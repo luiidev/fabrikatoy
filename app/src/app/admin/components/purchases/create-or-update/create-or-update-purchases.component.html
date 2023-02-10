@@ -38,7 +38,7 @@
         <div class="col-12 col-sm-4">
           <div class="mb-3">
             <label for="phone">Fecha</label>
-            <mat-form-field class="d-block" appearance="outline" floatLabel="never">
+            <mat-form-field class="d-block" appearance="outline" floatLabel="always">
               <input matInput [matDatepicker]="dp" disabled [(ngModel)]="purchase.date">
               <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
               <mat-datepicker #dp disabled="false"></mat-datepicker>

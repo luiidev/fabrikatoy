@@ -1,13 +1,7 @@
-/**
-* Generated theme by Material Theme Generator
-* https://materialtheme.arcsine.dev
-* Fork at: https://materialtheme.arcsine.dev/?c=YHBhbGV0dGU$YHByaW1hcnk$YF48I2ZmZmZmZiIsIj9lcjwjZmZmZmZmIiwiO2VyPCNmZmZmZmZ$LCIlPmBePCNmZmZmZmYiLCI~ZXI8I2ZmZmZmZiIsIjtlcjwjZmZmZmZmfiwid2Fybj5gXjwjZjYyZDUxIiwiP2VyPCNmY2MwY2IiLCI7ZXI8I2YyMWMzN34sIj9UZXh0PCMyYzJiMmUiLCI~PTwjZmZmZmZmIiwiO1RleHQ8I2IyYjliZiIsIjs9PCMyNzJiMzR$LCJmb250cz5bYEA8KC00fixgQDwoLTN$LGBAPCgtMn4sYEA8KC0xfixgQDxoZWFkbGluZX4sYEA8dGl0bGV$LGBAPHN1YiktMn4sYEA8c3ViKS0xfixgQDxib2R5LTJ$LGBAPGJvZHktMX4sYEA8YnV0dG9ufixgQDxjYXB0aW9ufixgQDxpbnB1dCIsInNpemU$bnVsbH1dLCJpY29uczxGaWxsZWQiLCI~bmVzcz5mYWxzZSwidmVyc2lvbj4xM30=
-*/
-
 @use '@angular/material' as mat;
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
+@include mat.core();
+mat.$theme-ignore-duplication-warnings: true;
 
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
@@ -142,8 +136,7 @@ $mat-dark-theme-background: (
   disabled-list-option:     $dark-bg-lighter-10,
 );
 
-// Compute font config
-@include mat.core($fontConfig);
+@include mat.all-component-typographies($fontConfig);
 
 // Theme Config
 
@@ -211,30 +204,39 @@ $mat-warn: (
   )
 );
 $theme-warn: mat.define-palette($mat-warn, main, lighter, darker);
-;
 
-$theme: (
-  primary: $theme-primary,
-  accent: $theme-accent,
-  warn: $theme-warn,
-  is-dark: false,
-  foreground: $mat-light-theme-foreground,
-  background: $mat-light-theme-background,
-);
-$altTheme: (
-  primary: $theme-primary,
-  accent: $theme-accent,
-  warn: $theme-warn,
-  is-dark: true,
-  foreground: $mat-dark-theme-foreground,
-  background: $mat-dark-theme-background,
-);
+// Define a dark theme
+$dark-theme: mat.define-dark-theme((
+  color: (
+      primary: $theme-primary,
+      accent: $theme-accent,
+      warn: $theme-warn,
+      is-dark: true,
+      foreground: $mat-dark-theme-foreground,
+      background: $mat-dark-theme-background,
+  ),
+  // Only include `typography` and `density` in the default dark theme.
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Define a light theme
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $theme-primary,
+    accent: $theme-accent,
+    warn: $theme-warn,
+    is-dark: false,
+    foreground: $mat-light-theme-foreground,
+    background: $mat-light-theme-background,
+  )
+));
 
 // Theme Init
-@include mat.all-component-themes($theme);
+@include mat.all-component-themes($light-theme);
 
 [data-theme=dark] {
-  @include mat.all-component-themes($altTheme);
+  @include mat.all-component-themes($dark-theme);
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
@@ -268,7 +270,7 @@ $altTheme: (
   z-index: 2000 !important;
 }
 
-mat-form-field[floatlabel="never"] {
+mat-form-field[floatlabel="always"] {
   .mat-form-field-wrapper {
     margin: 0 !important;
     padding: 0 !important;
