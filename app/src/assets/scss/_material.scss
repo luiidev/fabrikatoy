@@ -215,7 +215,6 @@ $dark-theme: mat.define-dark-theme((
       foreground: $mat-dark-theme-foreground,
       background: $mat-dark-theme-background,
   ),
-  // Only include `typography` and `density` in the default dark theme.
   typography: mat.define-typography-config(),
   density: 0,
 ));

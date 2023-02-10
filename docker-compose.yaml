@@ -15,7 +15,6 @@ services:
       context: ./nginx
     ports:
       - '127.0.0.1:88:80'
-    restart: always
   api:
     networks:
       - default
