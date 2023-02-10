@@ -50,7 +50,40 @@ class UserController extends Controller
     {
         $user->update($request->only(['company_id', 'branch_office_id', 'nick', 'password', 'first_name', 'last_name', 'dni', 'address', 'phone', 'role', 'email', 'state']));
 
+        $this->evalPermissions($user, $request->input('abilities', []));
+
         return response()->json(['message' => 'Se actualizo el usuario.', 'data' => $user]);
+    }
+
+    private function evalPermissions(User $user, array $abilities)
+    {
+        $allowedAbilities = [
+            'user:list',
+            'user:create',
+            'user:update',
+            'user:delete',
+            'product:list',
+            'product:create',
+            'product:update',
+            'product:delete',
+            'purchase:list',
+            'purchase:create',
+            'purchase:update',
+            'purchase:delete',
+            'sale:list',
+            'sale:create',
+            'sale:update',
+            'sale:delete'
+        ];
+
+        if ($user->isAdmin() || $user->isSuper()) {
+            $user->abilities = [];
+        } else {
+            $user->abilities = collect($abilities)
+                ->filter(fn($item) => in_array($item, $allowedAbilities));
+        }
+
+        $user->update();
     }
 
     public function destroy(User $user)

@@ -29,25 +29,27 @@ namespace App\Models\Base{
  * @property int $id
  * @property int|null $company_id
  * @property int|null $branch_office_id
- * @property string|null $nick
+ * @property string $nick
  * @property string $password
  * @property string|null $first_name
  * @property string|null $last_name
- * @property string|null $image
  * @property string|null $dni
+ * @property string|null $email
  * @property string|null $address
  * @property string|null $phone
- * @property int $state
+ * @property string|null $image
  * @property int $role
- * @property string|null $email
+ * @property int $state
  * @property string|null $email_verified_at
  * @property string|null $remember_token
+ * @property string|null $abilities
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \App\Models\Base\Builder|User forPage($page, $perPage = 15)
  * @method static \App\Models\Base\Builder|User newModelQuery()
  * @method static \App\Models\Base\Builder|User newQuery()
  * @method static \App\Models\Base\Builder|User query()
+ * @method static \App\Models\Base\Builder|User whereAbilities($value)
  * @method static \App\Models\Base\Builder|User whereAddress($value)
  * @method static \App\Models\Base\Builder|User whereBranchOfficeId($value)
  * @method static \App\Models\Base\Builder|User whereCompanyId($value)
@@ -287,6 +289,7 @@ namespace App\Models{
  * @method static \App\Models\Base\Builder|Customer own()
  * @method static \App\Models\Base\Builder|Customer ownCompany()
  * @method static \App\Models\Base\Builder|Customer query()
+ * @method static \App\Models\Base\Builder|Customer search($value)
  * @method static \App\Models\Base\Builder|Customer whereAddress($value)
  * @method static \App\Models\Base\Builder|Customer whereCompanyId($value)
  * @method static \App\Models\Base\Builder|Customer whereCreatedAt($value)
@@ -385,6 +388,7 @@ namespace App\Models{
  * @method static \App\Models\Base\Builder|Provider own()
  * @method static \App\Models\Base\Builder|Provider ownCompany()
  * @method static \App\Models\Base\Builder|Provider query()
+ * @method static \App\Models\Base\Builder|Provider search($value)
  * @method static \App\Models\Base\Builder|Provider whereAddress($value)
  * @method static \App\Models\Base\Builder|Provider whereCompanyId($value)
  * @method static \App\Models\Base\Builder|Provider whereCreatedAt($value)
@@ -408,8 +412,9 @@ namespace App\Models{
  * @property int|null $branch_office_id
  * @property int $user_id
  * @property int $provider_id
+ * @property string $uuid
  * @property string|null $type
- * @property string $number
+ * @property string|null $number
  * @property string|null $document
  * @property string $date
  * @property string $subtotal
@@ -418,8 +423,12 @@ namespace App\Models{
  * @property int $state
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\BranchOffice|null $branch_office
+ * @property-read \App\Models\Company $company
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PurchaseDetail[] $detail
  * @property-read int|null $detail_count
+ * @property-read \App\Models\Provider $provider
+ * @property-read \App\Models\User $user
  * @method static \App\Models\Base\Builder|Purchase active()
  * @method static \App\Models\Base\Builder|Purchase apiPaginate($perPage = 10, $columns = [], $pageName = 'page', $page = null)
  * @method static \App\Models\Base\Builder|Purchase forPage($page, $perPage = 15)
@@ -445,6 +454,7 @@ namespace App\Models{
  * @method static \App\Models\Base\Builder|Purchase whereType($value)
  * @method static \App\Models\Base\Builder|Purchase whereUpdatedAt($value)
  * @method static \App\Models\Base\Builder|Purchase whereUserId($value)
+ * @method static \App\Models\Base\Builder|Purchase whereUuid($value)
  */
 	class Purchase extends \Eloquent {}
 }
@@ -464,6 +474,9 @@ namespace App\Models{
  * @property int $state
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product|null $product
+ * @property-read \App\Models\Purchase|null $purchase
+ * @property-read \App\Models\Unit $unit
  * @method static \App\Models\Base\Builder|PurchaseDetail active()
  * @method static \App\Models\Base\Builder|PurchaseDetail apiPaginate($perPage = 10, $columns = [], $pageName = 'page', $page = null)
  * @method static \App\Models\Base\Builder|PurchaseDetail forPage($page, $perPage = 15)
@@ -498,6 +511,7 @@ namespace App\Models{
  * @property int|null $branch_office_id
  * @property int $user_id
  * @property int|null $customer_id
+ * @property string $uuid
  * @property string|null $type
  * @property string|null $number
  * @property string|null $document
@@ -539,6 +553,7 @@ namespace App\Models{
  * @method static \App\Models\Base\Builder|Sale whereType($value)
  * @method static \App\Models\Base\Builder|Sale whereUpdatedAt($value)
  * @method static \App\Models\Base\Builder|Sale whereUserId($value)
+ * @method static \App\Models\Base\Builder|Sale whereUuid($value)
  */
 	class Sale extends \Eloquent {}
 }
@@ -558,7 +573,9 @@ namespace App\Models{
  * @property int $state
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product|null $product
  * @property-read \App\Models\Sale|null $sale
+ * @property-read \App\Models\Unit $unit
  * @method static \App\Models\Base\Builder|SaleDetail active()
  * @method static \App\Models\Base\Builder|SaleDetail apiPaginate($perPage = 10, $columns = [], $pageName = 'page', $page = null)
  * @method static \App\Models\Base\Builder|SaleDetail forPage($page, $perPage = 15)
@@ -626,19 +643,20 @@ namespace App\Models{
  * @property int $id
  * @property int|null $company_id
  * @property int|null $branch_office_id
- * @property string|null $nick
+ * @property string $nick
  * @property string $password
  * @property string|null $first_name
  * @property string|null $last_name
- * @property string|null $image
  * @property string|null $dni
+ * @property string|null $email
  * @property string|null $address
  * @property string|null $phone
- * @property int $state
+ * @property string|null $image
  * @property int $role
- * @property string|null $email
+ * @property int $state
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string|null $remember_token
+ * @property string|null $abilities
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\BranchOffice|null $branch_office
@@ -657,6 +675,8 @@ namespace App\Models{
  * @method static \App\Models\Base\Builder|User own()
  * @method static \App\Models\Base\Builder|User ownCompany()
  * @method static \App\Models\Base\Builder|User query()
+ * @method static \App\Models\Base\Builder|User search($value)
+ * @method static \App\Models\Base\Builder|User whereAbilities($value)
  * @method static \App\Models\Base\Builder|User whereAddress($value)
  * @method static \App\Models\Base\Builder|User whereBranchOfficeId($value)
  * @method static \App\Models\Base\Builder|User whereCompanyId($value)
@@ -669,7 +689,6 @@ namespace App\Models{
  * @method static \App\Models\Base\Builder|User whereImage($value)
  * @method static \App\Models\Base\Builder|User whereLastName($value)
  * @method static \App\Models\Base\Builder|User whereLike($column, $value)
- * @method static \App\Models\Base\Builder|User whereLikeFullName($value)
  * @method static \App\Models\Base\Builder|User whereNick($value)
  * @method static \App\Models\Base\Builder|User wherePassword($value)
  * @method static \App\Models\Base\Builder|User wherePhone($value)

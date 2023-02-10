@@ -35,12 +35,25 @@ class AuthController extends Controller
 
         $user->makeHidden(['address', 'dni', 'phone', 'first_name', 'last_name']);
 
-        Auth::login($user);
+        /**
+         * Create a new token
+         */
+        $token = $user->createToken(
+            $request->input('device_name'),
+            $user->abilities ?? []
+        );
+
+        /**
+         * Delete others tokens
+         */
+        $user->tokens()
+            ->where('id', '<>', $token->accessToken->getAttribute('id'))
+            ->delete();
 
         return response()
             ->json([
                 'message' => 'Login',
-                'token' => $user->createToken($request->input('device_name'))->plainTextToken,
+                'token' => $token->plainTextToken,
                 'data' => $user,
             ]);
     }

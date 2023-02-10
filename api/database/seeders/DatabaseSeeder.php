@@ -82,11 +82,21 @@ class DatabaseSeeder extends Seeder
 
         User::find(1)
             ->update([
+                'nick' => 'super',
+                'password' => 'password',
+                'first_name' => 'Super',
+                'last_name' => 'Administrador',
+                'role' => 1,
+                'image' => null,
+            ]);
+
+        User::find(2)
+            ->update([
                 'nick' => 'admin',
                 'password' => 'password',
                 'first_name' => 'Fabrika Toy',
                 'last_name' => 'Administrador',
-                'role' => 1,
+                'role' => 2,
                 'image' => null,
             ]);
     }
