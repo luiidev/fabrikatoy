@@ -21,7 +21,7 @@ export class AuthorizationInterceptor implements HttpInterceptor {
       request = this.headers(request);
     }
 
-    return next.handle(request)
+    return next.handle(request);
   }
 
   headers(request: HttpRequest<unknown>) {
@@ -30,7 +30,7 @@ export class AuthorizationInterceptor implements HttpInterceptor {
       headers: request.headers
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
-    })
+    });
 
     const token = this.authenticationService.token;
     const tokenXsrf = this.tokenXsrf.getToken();
@@ -39,14 +39,16 @@ export class AuthorizationInterceptor implements HttpInterceptor {
       request = request.clone({
           headers: request.headers
             .set('Authorization', `Bearer ${token}`)
-      })
+      });
     }
 
     if (tokenXsrf !== null) {
       request = request.clone({
         headers: request.headers
           .set('X-XSRF-TOKEN', tokenXsrf)
-      })
+      });
+    } else {
+      console.error('X-XSRF-TOKEN is not present.');
     }
 
     return request;

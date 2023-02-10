@@ -18,4 +18,10 @@ export interface User {
     role_name?: string;
     state?: number;
     company?: Company;
+    abilities?: string[];
+}
+
+export interface ModuleAbility {
+  ability: string;
+  state: boolean;
 }

@@ -22,7 +22,7 @@ export class RoleuserInterceptor implements HttpInterceptor {
     .pipe(
         tap((event: HttpEvent<unknown>) => {
           if (event instanceof HttpResponse) {
-            const role = event.headers.get('Role-user');
+            const role = event.headers.get('Role-User');
 
             if (role) {
               this.verticalSidebarService.menuItemsRole = role;

@@ -71,7 +71,7 @@ export class UsersComponent {
   }
 
   createOrEdit(user?: User) {
-    const modalRef = this.ngbModal.open(UsersStoreOrUpdateComponent, this.isModal ? Utils.modalIndex3 : {});
+    const modalRef = this.ngbModal.open(UsersStoreOrUpdateComponent, Utils.modalIndex1);
 
     if (user) {
       modalRef.componentInstance.user = { ...user };

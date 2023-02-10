@@ -79,54 +79,81 @@
       <div class="row">
         <div class="col-12">
           <div class="mb-3">
-            <span class="text-sm font-medium text-muted pointer" (click)="showOtherFields = true" *ngIf="!showOtherFields">Mostrar más<i class="fa fa-downfa fa-angle-down ml-10"></i></span>
-            <span class="text-sm font-medium text-muted pointer" (click)="showOtherFields = false" *ngIf="showOtherFields">Mostrar menos<i class="fa fa-downfa fa-angle-up ml-10"></i></span>
+            <span class="text-sm font-medium text-muted pointer" (click)="togglePersonalInfo()" *ngIf="!showPersonalInfo">Mostrar información personal<i class="fa fa-downfa fa-angle-down ml-10"></i></span>
+            <span class="text-sm font-medium text-muted pointer" (click)="togglePersonalInfo()" *ngIf="showPersonalInfo">Ocultar información personal<i class="fa fa-downfa fa-angle-up ml-10"></i></span>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="showOtherFields">
-        <div class="col-12">
-          <div class="mb-3">
-            <label for="name">Nombre</label>
-            <input type="text" name="first_name" class="form-control" placeholder="Nombre" [(ngModel)]="user.first_name">
+      <div *ngIf="showPersonalInfo">
+        <div class="row" >
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="name">Nombre</label>
+              <input type="text" name="first_name" class="form-control" placeholder="Nombre" [(ngModel)]="user.first_name">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="name">Apelidos</label>
+              <input type="text" name="last_name" class="form-control" placeholder="Apellidos" [(ngModel)]="user.last_name">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-5">
+            <div class="mb-3">
+              <label for="name">DNI</label>
+              <input type="text" name="dni" class="form-control" placeholder="DNI" [(ngModel)]="user.dni">
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="mb-3">
+              <label for="name">Teléfono</label>
+              <input type="text" name="phone" class="form-control" placeholder="Teléfono" [(ngModel)]="user.phone">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="name">Correo</label>
+              <input type="text" name="email" class="form-control" placeholder="Correo" [(ngModel)]="user.email">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <label for="name">Dirección</label>
+              <input type="text" name="address" class="form-control" placeholder="Dirección" [(ngModel)]="user.address">
+            </div>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="showOtherFields">
-        <div class="col-12">
-          <div class="mb-3">
-            <label for="name">Apelidos</label>
-            <input type="text" name="last_name" class="form-control" placeholder="Apellidos" [(ngModel)]="user.last_name">
+      <div *ngIf="user.role === 3">
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <span class="text-sm font-medium text-muted pointer" (click)="toggleRoleAbilities()" *ngIf="!showRolePermission">Mostrar permisos<i class="fa fa-downfa fa-angle-down ml-10"></i></span>
+              <span class="text-sm font-medium text-muted pointer" (click)="toggleRoleAbilities()" *ngIf="showRolePermission">Ocultar permisos<i class="fa fa-downfa fa-angle-up ml-10"></i></span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row" *ngIf="showOtherFields">
-        <div class="col-5">
-          <div class="mb-3">
-            <label for="name">DNI</label>
-            <input type="text" name="dni" class="form-control" placeholder="DNI" [(ngModel)]="user.dni">
-          </div>
-        </div>
-        <div class="col-7">
-          <div class="mb-3">
-            <label for="name">Teléfono</label>
-            <input type="text" name="phone" class="form-control" placeholder="Teléfono" [(ngModel)]="user.phone">
-          </div>
-        </div>
-      </div>
-      <div class="row" *ngIf="showOtherFields">
-        <div class="col-12">
-          <div class="mb-3">
-            <label for="name">Correo</label>
-            <input type="text" name="email" class="form-control" placeholder="Correo" [(ngModel)]="user.email">
-          </div>
-        </div>
-      </div>
-      <div class="row" *ngIf="showOtherFields">
-        <div class="col-12">
-          <div class="mb-3">
-            <label for="name">Dirección</label>
-            <input type="text" name="address" class="form-control" placeholder="Dirección" [(ngModel)]="user.address">
+        <div class="row" *ngIf="showRolePermission">
+          <div class="col-6" *ngFor="let module of modulePermission">
+            <div class="border mb-3 p-3">
+              <div class="d-flex justify-content-between"
+                *ngFor="let ability of module; let index = index"
+                [ngClass]="index === 0 ? 'mb-3' : 'mb-1'">
+                <label for="name" [innerHtml]="ability.name"></label>
+                <label class="switch">
+                  <input type="checkbox" [(ngModel)]="ability.state" (change)="tooglePermission(ability, module)">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
