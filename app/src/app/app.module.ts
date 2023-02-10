@@ -28,7 +28,7 @@ registerLocaleData(localeEsPe);
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(AppRoutes, { useHash: false, relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(AppRoutes, { useHash: false }),
     PublicModule
   ],
   providers: [
