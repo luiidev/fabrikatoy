@@ -6,11 +6,11 @@
 @import "variable";
 
 // Import Bootstrap source files (Required file)
-@import "../../../node_modules/bootstrap/scss/bootstrap";
-@import "../../../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
-@import "../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "../../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
-@import "../../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
+@import "../../../node_modules/bootstrap/scss/bootstrap"; // 189 Kb
+@import "../../../node_modules/bootstrap-icons/font/bootstrap-icons.scss"; // 80 Kb
+@import "../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss"; // 82 Kb
+@import "../../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss"; // 584 bytes
+@import "../../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss"; // 19 Kb
 
 //This is for the components (Required file)
 @import "core/core";
@@ -26,4 +26,4 @@
 @import "form-inputs/swicth";
 
 // Material theme
-@import "material";
+@import "material"; // 67Kb
