@@ -1,7 +1,6 @@
 @use '@angular/material' as mat;
 
 @include mat.core();
-mat.$theme-ignore-duplication-warnings: true;
 
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
@@ -79,6 +78,7 @@ $mat-dark-theme-foreground: (
 );
 
 // Background config
+
 // Light bg
 $light-background:    #ffffff;
 $light-bg-darker-5:   darken($light-background, 5%);
@@ -205,22 +205,8 @@ $mat-warn: (
 );
 $theme-warn: mat.define-palette($mat-warn, main, lighter, darker);
 
-// Define a dark theme
-$dark-theme: mat.define-dark-theme((
-  color: (
-      primary: $theme-primary,
-      accent: $theme-accent,
-      warn: $theme-warn,
-      is-dark: true,
-      foreground: $mat-dark-theme-foreground,
-      background: $mat-dark-theme-background,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
-
 // Define a light theme
-$light-theme: mat.define-light-theme((
+$light-theme: (
   color: (
     primary: $theme-primary,
     accent: $theme-accent,
@@ -228,8 +214,22 @@ $light-theme: mat.define-light-theme((
     is-dark: false,
     foreground: $mat-light-theme-foreground,
     background: $mat-light-theme-background,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+);
+
+// Define a dark theme
+$dark-theme:(
+  color: (
+      primary: $theme-primary,
+      accent: $theme-accent,
+      warn: $theme-warn,
+      is-dark: true,
+      foreground: $mat-dark-theme-foreground,
+      background: $mat-dark-theme-background,
   )
-));
+);
 
 // Theme Init
 @include mat.all-component-themes($light-theme);
